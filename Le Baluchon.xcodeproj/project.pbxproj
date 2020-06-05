@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E592248A1C9500E31A2B /* AppDelegate.swift */; };
-		5CB7E595248A1C9500E31A2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E594248A1C9500E31A2B /* SceneDelegate.swift */; };
 		5CB7E597248A1C9500E31A2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E596248A1C9500E31A2B /* ViewController.swift */; };
 		5CB7E59A248A1C9500E31A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E598248A1C9500E31A2B /* Main.storyboard */; };
 		5CB7E59C248A1C9600E31A2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E59B248A1C9600E31A2B /* Assets.xcassets */; };
 		5CB7E59F248A1C9600E31A2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E59D248A1C9600E31A2B /* LaunchScreen.storyboard */; };
-		5CB7E5AA248A1C9700E31A2B /* Le_BaluchonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E5A9248A1C9700E31A2B /* Le_BaluchonTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,14 +27,12 @@
 /* Begin PBXFileReference section */
 		5CB7E58F248A1C9500E31A2B /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB7E592248A1C9500E31A2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5CB7E594248A1C9500E31A2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5CB7E596248A1C9500E31A2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5CB7E599248A1C9500E31A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5CB7E59B248A1C9600E31A2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CB7E59E248A1C9600E31A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CB7E5A0248A1C9600E31A2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CB7E5A5248A1C9700E31A2B /* Le BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Le BaluchonTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CB7E5A9248A1C9700E31A2B /* Le_BaluchonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Le_BaluchonTests.swift; sourceTree = "<group>"; };
 		5CB7E5AB248A1C9700E31A2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,12 +75,11 @@
 		5CB7E591248A1C9500E31A2B /* Le Baluchon */ = {
 			isa = PBXGroup;
 			children = (
-				5CB7E592248A1C9500E31A2B /* AppDelegate.swift */,
-				5CB7E594248A1C9500E31A2B /* SceneDelegate.swift */,
-				5CB7E596248A1C9500E31A2B /* ViewController.swift */,
-				5CB7E598248A1C9500E31A2B /* Main.storyboard */,
-				5CB7E59B248A1C9600E31A2B /* Assets.xcassets */,
-				5CB7E59D248A1C9600E31A2B /* LaunchScreen.storyboard */,
+				5CB7E5B4248A233300E31A2B /* Modele */,
+				5CB7E5B6248A235200E31A2B /* View */,
+				5CB7E5B5248A234600E31A2B /* Controller */,
+				5CB7E5BB248A23DA00E31A2B /* AppDelegate */,
+				5CB7E5B7248A235E00E31A2B /* Ressouce */,
 				5CB7E5A0248A1C9600E31A2B /* Info.plist */,
 			);
 			path = "Le Baluchon";
@@ -93,10 +88,57 @@
 		5CB7E5A8248A1C9700E31A2B /* Le BaluchonTests */ = {
 			isa = PBXGroup;
 			children = (
-				5CB7E5A9248A1C9700E31A2B /* Le_BaluchonTests.swift */,
 				5CB7E5AB248A1C9700E31A2B /* Info.plist */,
 			);
 			path = "Le BaluchonTests";
+			sourceTree = "<group>";
+		};
+		5CB7E5B4248A233300E31A2B /* Modele */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modele;
+			sourceTree = "<group>";
+		};
+		5CB7E5B5248A234600E31A2B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7E596248A1C9500E31A2B /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CB7E5B6248A235200E31A2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7E5BC248A240700E31A2B /* Storyboards */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CB7E5B7248A235E00E31A2B /* Ressouce */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7E59B248A1C9600E31A2B /* Assets.xcassets */,
+			);
+			path = Ressouce;
+			sourceTree = "<group>";
+		};
+		5CB7E5BB248A23DA00E31A2B /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7E592248A1C9500E31A2B /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		5CB7E5BC248A240700E31A2B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7E598248A1C9500E31A2B /* Main.storyboard */,
+				5CB7E59D248A1C9600E31A2B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,7 +244,6 @@
 			files = (
 				5CB7E597248A1C9500E31A2B /* ViewController.swift in Sources */,
 				5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */,
-				5CB7E595248A1C9500E31A2B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CB7E5AA248A1C9700E31A2B /* Le_BaluchonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF2Q637UQ4;
 				INFOPLIST_FILE = "Le Baluchon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -372,7 +413,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mabayon.Le-Baluchon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -383,6 +424,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF2Q637UQ4;
 				INFOPLIST_FILE = "Le Baluchon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -390,7 +432,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mabayon.Le-Baluchon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
