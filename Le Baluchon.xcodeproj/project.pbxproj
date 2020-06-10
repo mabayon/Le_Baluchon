@@ -20,6 +20,10 @@
 		5CB7E59C248A1C9600E31A2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E59B248A1C9600E31A2B /* Assets.xcassets */; };
 		5CB7E59F248A1C9600E31A2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E59D248A1C9600E31A2B /* LaunchScreen.storyboard */; };
 		5CB7E5BE248A483100E31A2B /* ExchangeRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E5BD248A483100E31A2B /* ExchangeRatesViewController.swift */; };
+		5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCCA0D9248F7A450089178B /* ExchangeRatesViewModel.swift */; };
+		5CCCA0DD248F7ACC0089178B /* ExchangeRatesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCCA0DC248F7ACC0089178B /* ExchangeRatesViewModelTests.swift */; };
+		5CCCA0DF248F82540089178B /* TimeInterval+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCCA0DE248F82540089178B /* TimeInterval+Calendar.swift */; };
+		5CCCA0E32490EB170089178B /* Devise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCCA0E22490EB170089178B /* Devise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,12 @@
 		5CB7E5A5248A1C9700E31A2B /* Le BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Le BaluchonTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB7E5AB248A1C9700E31A2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CB7E5BD248A483100E31A2B /* ExchangeRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesViewController.swift; sourceTree = "<group>"; };
+		5CCCA0D9248F7A450089178B /* ExchangeRatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesViewModel.swift; sourceTree = "<group>"; };
+		5CCCA0DC248F7ACC0089178B /* ExchangeRatesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesViewModelTests.swift; sourceTree = "<group>"; };
+		5CCCA0DE248F82540089178B /* TimeInterval+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Calendar.swift"; sourceTree = "<group>"; };
+		5CCCA0E0248F871B0089178B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		5CCCA0E1248F871B0089178B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5CCCA0E22490EB170089178B /* Devise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,18 +83,19 @@
 		5C07F0AF248E7DF30022299E /* Cases */ = {
 			isa = PBXGroup;
 			children = (
-				5C07F0B0248E7DFB0022299E /* Modele */,
+				5C07F0B0248E7DFB0022299E /* Models */,
 				5C07F0B1248E7E060022299E /* Networking */,
+				5CCCA0DB248F7A4F0089178B /* ViewModels */,
 			);
 			path = Cases;
 			sourceTree = "<group>";
 		};
-		5C07F0B0248E7DFB0022299E /* Modele */ = {
+		5C07F0B0248E7DFB0022299E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5C07F0BA248E8BA70022299E /* ExchangeRatesTests.swift */,
 			);
-			path = Modele;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5C07F0B1248E7E060022299E /* Networking */ = {
@@ -132,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				5C07F0C3248E8D4C0022299E /* Data+JSONFile.swift */,
+				5CCCA0DE248F82540089178B /* TimeInterval+Calendar.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,10 +179,11 @@
 			children = (
 				5CB7E5BB248A23DA00E31A2B /* AppDelegate */,
 				5CB7E5B5248A234600E31A2B /* Controller */,
-				5CB7E5B4248A233300E31A2B /* Modele */,
+				5CB7E5B4248A233300E31A2B /* Models */,
 				5C07F0B4248E7EDB0022299E /* Networking */,
 				5CB7E5B7248A235E00E31A2B /* Resources */,
-				5CB7E5B6248A235200E31A2B /* View */,
+				5CCCA0D8248F79DE0089178B /* ViewModels */,
+				5CB7E5B6248A235200E31A2B /* Views */,
 			);
 			path = "Le Baluchon";
 			sourceTree = "<group>";
@@ -186,13 +199,14 @@
 			path = "Le BaluchonTests";
 			sourceTree = "<group>";
 		};
-		5CB7E5B4248A233300E31A2B /* Modele */ = {
+		5CB7E5B4248A233300E31A2B /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5C07F0B5248E7F390022299E /* ExchangeRatesPatchClient.swift */,
 				5C07F0B8248E8B700022299E /* ExchangeRates.swift */,
+				5CCCA0E22490EB170089178B /* Devise.swift */,
 			);
-			path = Modele;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5CB7E5B5248A234600E31A2B /* Controller */ = {
@@ -203,12 +217,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		5CB7E5B6248A235200E31A2B /* View */ = {
+		5CB7E5B6248A235200E31A2B /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				5CB7E5BC248A240700E31A2B /* Storyboards */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		5CB7E5B7248A235E00E31A2B /* Resources */ = {
@@ -235,6 +249,22 @@
 				5CB7E59D248A1C9600E31A2B /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		5CCCA0D8248F79DE0089178B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5CCCA0D9248F7A450089178B /* ExchangeRatesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5CCCA0DB248F7A4F0089178B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5CCCA0DC248F7ACC0089178B /* ExchangeRatesViewModelTests.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +332,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 5CB7E586248A1C9500E31A2B;
 			productRefGroup = 5CB7E590248A1C9500E31A2B /* Products */;
@@ -340,10 +371,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */,
 				5C07F0B6248E7F390022299E /* ExchangeRatesPatchClient.swift in Sources */,
 				5CB7E5BE248A483100E31A2B /* ExchangeRatesViewController.swift in Sources */,
 				5C07F0B9248E8B700022299E /* ExchangeRates.swift in Sources */,
 				5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */,
+				5CCCA0E32490EB170089178B /* Devise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +387,8 @@
 				5C07F0C7248EA5500022299E /* XCTAssertEqualToAny.swift in Sources */,
 				5C07F0B3248E7E670022299E /* ExchangeRatesPatchClientTests.swift in Sources */,
 				5C07F0C4248E8D4C0022299E /* Data+JSONFile.swift in Sources */,
+				5CCCA0DD248F7ACC0089178B /* ExchangeRatesViewModelTests.swift in Sources */,
+				5CCCA0DF248F82540089178B /* TimeInterval+Calendar.swift in Sources */,
 				5C07F0C1248E8D0C0022299E /* DecodableTestCase.swift in Sources */,
 				5C07F0BB248E8BA70022299E /* ExchangeRatesTests.swift in Sources */,
 			);
@@ -374,6 +409,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5CB7E599248A1C9500E31A2B /* Base */,
+				5CCCA0E0248F871B0089178B /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -382,6 +418,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5CB7E59E248A1C9600E31A2B /* Base */,
+				5CCCA0E1248F871B0089178B /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -393,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -453,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

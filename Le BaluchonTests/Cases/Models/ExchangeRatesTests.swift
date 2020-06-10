@@ -35,7 +35,7 @@ class ExchangeRatesTests: XCTestCase, DecodableTestCase {
     
     // MARK: - Decodable - Test
     func test_decodable_sets_date() throws {
-        try XCTAssertEqualToDate(sut.timestamp, dictionary["timestamp"])
+        try XCTAssertEqualToAny(sut.date, dictionary["date"])
     }
     
     func test_decodable_sets_base() throws {

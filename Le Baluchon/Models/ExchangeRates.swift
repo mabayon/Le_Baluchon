@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct ExchangeRates: Decodable {
+struct ExchangeRates: Decodable, Equatable {
     
     // MARK: - Instance Properties
-    let timestamp: Date
     let base: String
+    let date: String
     let rates: [String: Double]
 }
