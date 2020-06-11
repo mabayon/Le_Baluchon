@@ -1,5 +1,5 @@
 //
-//  CurrencyPatchClient.swift
+//  ExchangeRatesClient.swift
 //  Le Baluchon
 //
 //  Created by Mahieu Bayon on 08/06/2020.

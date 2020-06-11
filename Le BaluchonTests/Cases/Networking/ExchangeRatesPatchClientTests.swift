@@ -1,5 +1,5 @@
 //
-//  CurrencyPatchClient.swift
+//  ExchangeRatesClient.swift
 //  Le BaluchonTests
 //
 //  Created by Mahieu Bayon on 08/06/2020.
@@ -142,7 +142,7 @@ class ExchangeRatesClientTests: XCTestCase {
     }
     
     func test_getRates_givenError_callsCompletionWithError() throws {
-        let expectedError = NSError(domain: "com.RatesPatchTests", code: 42)
+        let expectedError = NSError(domain: "com.Le_BaluchonTests", code: 42)
         
         // When
         let result = whenGetRates(error: expectedError)
@@ -203,7 +203,7 @@ class ExchangeRatesClientTests: XCTestCase {
     
     func test_getRates_givenError_dispatchesToResponseQueue() {
         // Given
-        let error = NSError(domain: "com.RatesPatchTests", code: 42)
+        let error = NSError(domain: "com.Le_BaluchonTests", code: 42)
 
         // Then
         verifyGetRatesDispatchedToMain(error: error)
@@ -230,7 +230,7 @@ class MockURLSession: URLSession {
     var queue: DispatchQueue? = nil
     
     func givenDispatchQueue() {
-        queue = DispatchQueue(label: "com.RatesPatchTests.MockSession")
+        queue = DispatchQueue(label: "com.Le_BaluchonTests.MockSession")
     }
     override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         return MockURLSessionDataTask(completionHandler: completionHandler, url: url, queue: queue)
