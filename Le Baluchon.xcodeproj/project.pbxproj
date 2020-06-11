@@ -15,6 +15,7 @@
 		5C07F0C1248E8D0C0022299E /* DecodableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0C0248E8D0C0022299E /* DecodableTestCase.swift */; };
 		5C07F0C4248E8D4C0022299E /* Data+JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0C3248E8D4C0022299E /* Data+JSONFile.swift */; };
 		5C07F0C7248EA5500022299E /* XCTAssertEqualToAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0C6248EA5500022299E /* XCTAssertEqualToAny.swift */; };
+		5C9E17D12492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C9E17D02492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json */; };
 		5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E592248A1C9500E31A2B /* AppDelegate.swift */; };
 		5CB7E59A248A1C9500E31A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E598248A1C9500E31A2B /* Main.storyboard */; };
 		5CB7E59C248A1C9600E31A2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E59B248A1C9600E31A2B /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		5C07F0C0248E8D0C0022299E /* DecodableTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableTestCase.swift; sourceTree = "<group>"; };
 		5C07F0C3248E8D4C0022299E /* Data+JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+JSONFile.swift"; sourceTree = "<group>"; };
 		5C07F0C6248EA5500022299E /* XCTAssertEqualToAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAssertEqualToAny.swift; sourceTree = "<group>"; };
+		5C9E17D02492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GET_ExchangeRates_MissingValuesResponse.json; sourceTree = "<group>"; };
 		5CB7E58F248A1C9500E31A2B /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB7E592248A1C9500E31A2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CB7E599248A1C9500E31A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		5C07F0B4248E7EDB0022299E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				5C07F0B5248E7F390022299E /* ExchangeRatesPatchClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -117,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				5C07F0BC248E8C660022299E /* ExchangeRates.json */,
+				5C9E17D02492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -202,7 +206,6 @@
 		5CB7E5B4248A233300E31A2B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5C07F0B5248E7F390022299E /* ExchangeRatesPatchClient.swift */,
 				5C07F0B8248E8B700022299E /* ExchangeRates.swift */,
 				5CCCA0E22490EB170089178B /* Devise.swift */,
 			);
@@ -361,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C07F0BD248E8C660022299E /* ExchangeRates.json in Resources */,
+				5C9E17D12492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -532,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -589,7 +593,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF2Q637UQ4;
 				INFOPLIST_FILE = "Le BaluchonTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -613,7 +617,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF2Q637UQ4;
 				INFOPLIST_FILE = "Le BaluchonTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
