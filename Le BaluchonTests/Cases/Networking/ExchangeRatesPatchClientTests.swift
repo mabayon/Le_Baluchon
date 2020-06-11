@@ -9,12 +9,12 @@
 @testable import Le_Baluchon
 import XCTest
 
-class ExchangeRatesPatchClientTests: XCTestCase {
+class ExchangeRatesClientTests: XCTestCase {
 
     // MARK: - Instance Properties
     var baseURL: URL!
     var mockSession: MockURLSession!
-    var sut: ExchangeRatesPatchClient!
+    var sut: ExchangeRatesClient!
     var getRatesURL: URL {
         return URL(string: "rates", relativeTo: baseURL)!
     }
@@ -24,7 +24,7 @@ class ExchangeRatesPatchClientTests: XCTestCase {
         super.setUp()
         baseURL = URL(string: "https://example.com/api/v1/")!
         mockSession = MockURLSession()
-        sut = ExchangeRatesPatchClient(baseURL: baseURL, session: mockSession, responseQueue: nil)
+        sut = ExchangeRatesClient(baseURL: baseURL, session: mockSession, responseQueue: nil)
     }
 
     override func tearDown() {
@@ -67,7 +67,7 @@ class ExchangeRatesPatchClientTests: XCTestCase {
                                         line: UInt = #line) {
         // Given
         mockSession.givenDispatchQueue()
-        sut = ExchangeRatesPatchClient(baseURL: baseURL,
+        sut = ExchangeRatesClient(baseURL: baseURL,
                                        session: mockSession,
                                        responseQueue: .main)
         
@@ -106,7 +106,7 @@ class ExchangeRatesPatchClientTests: XCTestCase {
         let response = DispatchQueue.main
         
         // When
-        sut = ExchangeRatesPatchClient(baseURL: baseURL,
+        sut = ExchangeRatesClient(baseURL: baseURL,
                                        session: mockSession,
                                        responseQueue: response)
         XCTAssertEqual(sut.responseQueue, response)

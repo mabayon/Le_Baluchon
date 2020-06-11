@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ExchangeRatesPatchClient {
+class ExchangeRatesClient {
     
     let baseURL: URL
     let session: URLSession

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C07F0B3248E7E670022299E /* ExchangeRatesPatchClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0B2248E7E670022299E /* ExchangeRatesPatchClientTests.swift */; };
-		5C07F0B6248E7F390022299E /* ExchangeRatesPatchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0B5248E7F390022299E /* ExchangeRatesPatchClient.swift */; };
+		5C07F0B6248E7F390022299E /* ExchangeRatesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0B5248E7F390022299E /* ExchangeRatesClient.swift */; };
 		5C07F0B9248E8B700022299E /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0B8248E8B700022299E /* ExchangeRates.swift */; };
 		5C07F0BB248E8BA70022299E /* ExchangeRatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0BA248E8BA70022299E /* ExchangeRatesTests.swift */; };
 		5C07F0BD248E8C660022299E /* ExchangeRates.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C07F0BC248E8C660022299E /* ExchangeRates.json */; };
@@ -39,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		5C07F0B2248E7E670022299E /* ExchangeRatesPatchClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesPatchClientTests.swift; sourceTree = "<group>"; };
-		5C07F0B5248E7F390022299E /* ExchangeRatesPatchClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesPatchClient.swift; sourceTree = "<group>"; };
+		5C07F0B5248E7F390022299E /* ExchangeRatesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesClient.swift; sourceTree = "<group>"; };
 		5C07F0B8248E8B700022299E /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
 		5C07F0BA248E8BA70022299E /* ExchangeRatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesTests.swift; sourceTree = "<group>"; };
 		5C07F0BC248E8C660022299E /* ExchangeRates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ExchangeRates.json; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		5C07F0B4248E7EDB0022299E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				5C07F0B5248E7F390022299E /* ExchangeRatesPatchClient.swift */,
+				5C07F0B5248E7F390022299E /* ExchangeRatesClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -376,7 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */,
-				5C07F0B6248E7F390022299E /* ExchangeRatesPatchClient.swift in Sources */,
+				5C07F0B6248E7F390022299E /* ExchangeRatesClient.swift in Sources */,
 				5CB7E5BE248A483100E31A2B /* ExchangeRatesViewController.swift in Sources */,
 				5C07F0B9248E8B700022299E /* ExchangeRates.swift in Sources */,
 				5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */,
