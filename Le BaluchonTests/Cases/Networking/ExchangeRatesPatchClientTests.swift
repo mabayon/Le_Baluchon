@@ -112,6 +112,43 @@ class ExchangeRatesClientTests: XCTestCase {
         XCTAssertEqual(sut.responseQueue, response)
     }
     
+    // MARK: - ExchangeRatesService - Tests
+    func test_conformsTo_ExchangeRatesService() {
+        XCTAssertTrue((sut as AnyObject) is ExchangeRatesService)
+    }
+
+    func test_exchangeRatesService_declareGetRates() {
+        // Given
+        let service = sut as ExchangeRatesService
+        
+        // Then
+        _ = service.getRates { _, _ in }
+    }
+    // MARK: - Shared - Tests
+    func test_shared_sets_BaseURL() {
+        // Given
+        let baseURL = URL(string: "http://data.fixer.io/api/latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD&format=1")!
+        
+        // Then
+        XCTAssertEqual(ExchangeRatesClient.shared.baseURL, baseURL)
+    }
+    
+    func test_shared_sets_Session() {
+        // Given
+        let session = URLSession.shared
+        
+        // Then
+        XCTAssertEqual(ExchangeRatesClient.shared.session, session)
+    }
+    
+    func test_shared_sets_responseQueue() {
+        // Given
+        let responseQueue = DispatchQueue.main
+        
+        // Then
+        XCTAssertEqual(ExchangeRatesClient.shared.responseQueue, responseQueue)
+    }
+        
     // MARK: - GetRates - Tests
     func test_getRates_callsExpectedURL() {
         // When

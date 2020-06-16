@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dyz-RB-Y4T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dyz-RB-Y4T">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,78 +11,14 @@
         <!--Taux de change-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ExchangeRatesViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExchangeRatesViewController" id="BYZ-38-t0r" customClass="ExchangeRatesViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="o4s-hJ-RJk">
-                                <rect key="frame" x="0.0" y="45" width="375" height="55.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fvM-dk-P12">
-                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="55.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EUR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahX-e4-hsP">
-                                                <rect key="frame" x="72.5" y="0.0" width="33" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fRH-1Z-GXD">
-                                                <rect key="frame" x="18" y="28.5" width="142" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="q4J-Tw-MKd"/>
-                                                </connections>
-                                            </textField>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nBn-CL-bsS">
-                                                <rect key="frame" x="18" y="53.5" width="142" height="2"/>
-                                            </progressView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="nBn-CL-bsS" firstAttribute="width" secondItem="fRH-1Z-GXD" secondAttribute="width" id="gtT-zr-CJg"/>
-                                            <constraint firstItem="fRH-1Z-GXD" firstAttribute="width" secondItem="fvM-dk-P12" secondAttribute="width" multiplier="0.8" id="ocd-ka-HTs"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Lea-Xr-cZq">
-                                        <rect key="frame" x="197.5" y="0.0" width="177.5" height="55.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjx-Bt-mKf">
-                                                <rect key="frame" x="71.5" y="0.0" width="35" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCC-aV-Mun">
-                                                <rect key="frame" x="18" y="28.5" width="142" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cJ4-2b-KIl">
-                                                <rect key="frame" x="18" y="53.5" width="142" height="2"/>
-                                            </progressView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="cJ4-2b-KIl" firstAttribute="width" secondItem="fCC-aV-Mun" secondAttribute="width" id="7ji-0Q-hoc"/>
-                                            <constraint firstItem="fCC-aV-Mun" firstAttribute="width" secondItem="Lea-Xr-cZq" secondAttribute="width" multiplier="0.8" id="xBh-Oi-e1c"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="o4s-hJ-RJk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AcX-vl-2zv"/>
-                            <constraint firstItem="o4s-hJ-RJk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="45" id="Wsj-8u-Nkd"/>
-                            <constraint firstItem="o4s-hJ-RJk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fRO-F0-EtG"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Taux de change" id="gAJ-KQ-BKU"/>
-                    <connections>
-                        <outlet property="fromDeviseTF" destination="fRH-1Z-GXD" id="B8a-eS-fmi"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -15,6 +15,14 @@
 		5C07F0C1248E8D0C0022299E /* DecodableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0C0248E8D0C0022299E /* DecodableTestCase.swift */; };
 		5C07F0C4248E8D4C0022299E /* Data+JSONFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0C3248E8D4C0022299E /* Data+JSONFile.swift */; };
 		5C07F0C7248EA5500022299E /* XCTAssertEqualToAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07F0C6248EA5500022299E /* XCTAssertEqualToAny.swift */; };
+		5C7890982493C51C00CA7842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C8877D32493BECA004E2A3A /* Main.storyboard */; };
+		5C78909D2493CDA300CA7842 /* MockExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78909C2493CDA300CA7842 /* MockExchangeRatesService.swift */; };
+		5C8877C32493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877C22493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift */; };
+		5C8877C72493BD37004E2A3A /* UIViewController+StoryboardCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877C62493BD37004E2A3A /* UIViewController+StoryboardCreatable.swift */; };
+		5C8877C92493BD6E004E2A3A /* StoryboardCreatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877C82493BD6E004E2A3A /* StoryboardCreatable.swift */; };
+		5C8877CD2493BDD6004E2A3A /* UIViewController+StoryboardCreatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877CC2493BDD6004E2A3A /* UIViewController+StoryboardCreatableTests.swift */; };
+		5C8877D02493BE3D004E2A3A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877CF2493BE3D004E2A3A /* TestViewController.swift */; };
+		5C8877DA2493BEF1004E2A3A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877D92493BEF1004E2A3A /* TestView.swift */; };
 		5C9E17D12492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C9E17D02492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json */; };
 		5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E592248A1C9500E31A2B /* AppDelegate.swift */; };
 		5CB7E59A248A1C9500E31A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E598248A1C9500E31A2B /* Main.storyboard */; };
@@ -46,6 +54,19 @@
 		5C07F0C0248E8D0C0022299E /* DecodableTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableTestCase.swift; sourceTree = "<group>"; };
 		5C07F0C3248E8D4C0022299E /* Data+JSONFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+JSONFile.swift"; sourceTree = "<group>"; };
 		5C07F0C6248EA5500022299E /* XCTAssertEqualToAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAssertEqualToAny.swift; sourceTree = "<group>"; };
+		5C78909C2493CDA300CA7842 /* MockExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExchangeRatesService.swift; sourceTree = "<group>"; };
+		5C8877C22493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesViewControllerTests.swift; sourceTree = "<group>"; };
+		5C8877C62493BD37004E2A3A /* UIViewController+StoryboardCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+StoryboardCreatable.swift"; path = "Le Baluchon/Extensions/StoryboardCreatable/UIViewController+StoryboardCreatable.swift"; sourceTree = SOURCE_ROOT; };
+		5C8877C82493BD6E004E2A3A /* StoryboardCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoryboardCreatable.swift; path = "Le Baluchon/Extensions/StoryboardCreatable/StoryboardCreatable.swift"; sourceTree = SOURCE_ROOT; };
+		5C8877CC2493BDD6004E2A3A /* UIViewController+StoryboardCreatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StoryboardCreatableTests.swift"; sourceTree = "<group>"; };
+		5C8877CF2493BE3D004E2A3A /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		5C8877D12493BEC9004E2A3A /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		5C8877D22493BEC9004E2A3A /* TestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
+		5C8877D32493BECA004E2A3A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5C8877D92493BEF1004E2A3A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		5C8877DC2493C03D004E2A3A /* UIViewController+NibCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+NibCreatable.swift"; path = "Le Baluchon/Extensions/NibCreatable/UIViewController+NibCreatable.swift"; sourceTree = SOURCE_ROOT; };
+		5C8877DE2493C053004E2A3A /* UIView+NibCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+NibCreatable.swift"; path = "Le Baluchon/Extensions/NibCreatable/UIView+NibCreatable.swift"; sourceTree = SOURCE_ROOT; };
+		5C8877E02493C066004E2A3A /* NibCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NibCreatable.swift; path = "Le Baluchon/Extensions/NibCreatable/NibCreatable.swift"; sourceTree = SOURCE_ROOT; };
 		5C9E17D02492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GET_ExchangeRates_MissingValuesResponse.json; sourceTree = "<group>"; };
 		5CB7E58F248A1C9500E31A2B /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB7E592248A1C9500E31A2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +106,8 @@
 		5C07F0AF248E7DF30022299E /* Cases */ = {
 			isa = PBXGroup;
 			children = (
+				5C8877C12493B9D4004E2A3A /* Controllers */,
+				5C8877CA2493BDAD004E2A3A /* Extensions */,
 				5C07F0B0248E7DFB0022299E /* Models */,
 				5C07F0B1248E7E060022299E /* Networking */,
 				5CCCA0DB248F7A4F0089178B /* ViewModels */,
@@ -129,7 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				5C07F0C2248E8D350022299E /* Extensions */,
+				5C78909B2493CD5300CA7842 /* Mocks */,
 				5C07F0BF248E8CF50022299E /* Protocols */,
+				5C8877CE2493BE22004E2A3A /* Views */,
 				5C07F0C5248EA5300022299E /* XCTest Additions */,
 			);
 			path = "Test Types";
@@ -160,6 +185,78 @@
 			path = "XCTest Additions";
 			sourceTree = "<group>";
 		};
+		5C78909B2493CD5300CA7842 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				5C78909C2493CDA300CA7842 /* MockExchangeRatesService.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		5C8877C12493B9D4004E2A3A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877C22493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5C8877C42493BD0B004E2A3A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877DB2493C02F004E2A3A /* NibCreatable */,
+				5C8877C52493BD1E004E2A3A /* StoryboardCreatable */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5C8877C52493BD1E004E2A3A /* StoryboardCreatable */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877C62493BD37004E2A3A /* UIViewController+StoryboardCreatable.swift */,
+				5C8877C82493BD6E004E2A3A /* StoryboardCreatable.swift */,
+			);
+			path = StoryboardCreatable;
+			sourceTree = "<group>";
+		};
+		5C8877CA2493BDAD004E2A3A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877CB2493BDC5004E2A3A /* StoryboardCreatable */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5C8877CB2493BDC5004E2A3A /* StoryboardCreatable */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877CC2493BDD6004E2A3A /* UIViewController+StoryboardCreatableTests.swift */,
+			);
+			path = StoryboardCreatable;
+			sourceTree = "<group>";
+		};
+		5C8877CE2493BE22004E2A3A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877D32493BECA004E2A3A /* Main.storyboard */,
+				5C8877D92493BEF1004E2A3A /* TestView.swift */,
+				5C8877D22493BEC9004E2A3A /* TestView.xib */,
+				5C8877CF2493BE3D004E2A3A /* TestViewController.swift */,
+				5C8877D12493BEC9004E2A3A /* TestViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5C8877DB2493C02F004E2A3A /* NibCreatable */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877DC2493C03D004E2A3A /* UIViewController+NibCreatable.swift */,
+				5C8877DE2493C053004E2A3A /* UIView+NibCreatable.swift */,
+				5C8877E02493C066004E2A3A /* NibCreatable.swift */,
+			);
+			path = NibCreatable;
+			sourceTree = "<group>";
+		};
 		5CB7E586248A1C9500E31A2B = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +280,7 @@
 			children = (
 				5CB7E5BB248A23DA00E31A2B /* AppDelegate */,
 				5CB7E5B5248A234600E31A2B /* Controller */,
+				5C8877C42493BD0B004E2A3A /* Extensions */,
 				5CB7E5B4248A233300E31A2B /* Models */,
 				5C07F0B4248E7EDB0022299E /* Networking */,
 				5CB7E5B7248A235E00E31A2B /* Resources */,
@@ -363,6 +461,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C7890982493C51C00CA7842 /* Main.storyboard in Resources */,
 				5C07F0BD248E8C660022299E /* ExchangeRates.json in Resources */,
 				5C9E17D12492694A00110F00 /* GET_ExchangeRates_MissingValuesResponse.json in Resources */,
 			);
@@ -375,12 +474,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C8877C92493BD6E004E2A3A /* StoryboardCreatable.swift in Sources */,
 				5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */,
 				5C07F0B6248E7F390022299E /* ExchangeRatesClient.swift in Sources */,
 				5CB7E5BE248A483100E31A2B /* ExchangeRatesViewController.swift in Sources */,
 				5C07F0B9248E8B700022299E /* ExchangeRates.swift in Sources */,
 				5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */,
 				5CCCA0E32490EB170089178B /* Devise.swift in Sources */,
+				5C8877C72493BD37004E2A3A /* UIViewController+StoryboardCreatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,11 +489,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C8877D02493BE3D004E2A3A /* TestViewController.swift in Sources */,
+				5C8877CD2493BDD6004E2A3A /* UIViewController+StoryboardCreatableTests.swift in Sources */,
+				5C8877DA2493BEF1004E2A3A /* TestView.swift in Sources */,
 				5C07F0C7248EA5500022299E /* XCTAssertEqualToAny.swift in Sources */,
 				5C07F0B3248E7E670022299E /* ExchangeRatesPatchClientTests.swift in Sources */,
 				5C07F0C4248E8D4C0022299E /* Data+JSONFile.swift in Sources */,
+				5C78909D2493CDA300CA7842 /* MockExchangeRatesService.swift in Sources */,
 				5CCCA0DD248F7ACC0089178B /* ExchangeRatesViewModelTests.swift in Sources */,
 				5CCCA0DF248F82540089178B /* TimeInterval+Calendar.swift in Sources */,
+				5C8877C32493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift in Sources */,
 				5C07F0C1248E8D0C0022299E /* DecodableTestCase.swift in Sources */,
 				5C07F0BB248E8BA70022299E /* ExchangeRatesTests.swift in Sources */,
 			);

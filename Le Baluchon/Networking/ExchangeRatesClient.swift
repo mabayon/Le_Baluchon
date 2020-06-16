@@ -8,11 +8,18 @@
 
 import Foundation
 
+protocol ExchangeRatesService {
+    func getRates(completion: @escaping (ExchangeRates?, Error?) -> Void) -> URLSessionDataTask
+}
 class ExchangeRatesClient {
     
     let baseURL: URL
     let session: URLSession
     let responseQueue: DispatchQueue?
+    
+    static let shared = ExchangeRatesClient(baseURL: URL(string:"http://data.fixer.io/api/latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD&format=1")!,
+                                            session: URLSession.shared,
+                                            responseQueue: .main)
     
     init(baseURL: URL, session: URLSession, responseQueue: DispatchQueue?) {
         self.baseURL = baseURL
@@ -55,4 +62,8 @@ class ExchangeRatesClient {
             completion(models, error)
         }
     }
+}
+
+extension ExchangeRatesClient: ExchangeRatesService {
+    
 }

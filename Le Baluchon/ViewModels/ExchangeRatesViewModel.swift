@@ -44,3 +44,9 @@ class ExchangeRatesViewModel {
         return devises
     }
 }
+
+extension ExchangeRatesViewModel: Equatable {
+    static func == (lhs: ExchangeRatesViewModel, rhs: ExchangeRatesViewModel) -> Bool {
+        return lhs.exchangeRates == rhs.exchangeRates
+    }
+}

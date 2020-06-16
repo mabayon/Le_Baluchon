@@ -9,15 +9,25 @@
 import UIKit
 
 class ExchangeRatesViewController: UIViewController {
-
-    @IBOutlet weak var fromDeviseTF: UITextField!
+    
+    // MARK: - Instance Properties
+    var networkClient: ExchangeRatesService = ExchangeRatesClient.shared
+    
+    var viewModels: ExchangeRatesViewModel?
+    var dataTask: URLSessionDataTask?
         
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-}
-
-extension ExchangeRatesViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    
+    // MARK: - Refresh
+    @objc func refreshData() {
+        guard dataTask == nil else { return }
+        
+        dataTask = networkClient.getRates(completion: { (rates, error) in
+            self.dataTask = nil
+            
+            self.viewModels = ExchangeRatesViewModel(exchangeRates: rates!)
+        })
     }
 }
