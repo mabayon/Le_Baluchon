@@ -1,38 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dyz-RB-Y4T">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Inter-Bold.otf">
+            <string>Inter-Bold</string>
+        </array>
+        <array key="Inter-Regular.otf">
+            <string>Inter-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Taux de change-->
+        <!--Exchange Rates View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ExchangeRatesViewController" id="BYZ-38-t0r" customClass="ExchangeRatesViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPJ-b0-TgV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="18"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Convertisseur de devises" id="93v-02-TAP"/>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OG9-Xf-bxE">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vs-BK-pux">
+                                        <rect key="frame" x="0.0" y="128.5" width="320" height="346.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Détails EUR/USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T6y-xO-SvK">
+                                                <rect key="frame" x="78.5" y="8" width="163" height="24.5"/>
+                                                <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="b0s-i0-MdI">
+                                                <rect key="frame" x="34.5" y="52.5" width="251" height="65"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtz-gJ-bkM">
+                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Jtz-gJ-bkM" secondAttribute="height" multiplier="1:1" id="BBN-lY-1BG"/>
+                                                            <constraint firstAttribute="width" constant="65" id="ERv-U2-Fa8"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                                        <state key="normal" image="EUR">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUk-MS-l1o">
+                                                        <rect key="frame" x="93" y="19.5" width="65" height="26"/>
+                                                        <state key="normal" image="icon_Swap">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujK-JW-qks">
+                                                        <rect key="frame" x="186" y="0.0" width="65" height="65"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                                        <state key="normal" image="USD">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="ujK-JW-qks" firstAttribute="width" secondItem="ujK-JW-qks" secondAttribute="height" multiplier="1:1" id="5ag-6Z-Ckb"/>
+                                                    <constraint firstItem="mUk-MS-l1o" firstAttribute="height" secondItem="Jtz-gJ-bkM" secondAttribute="height" multiplier="0.4" id="nUW-k2-8e0"/>
+                                                </constraints>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,13 $" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gcS-i4-7tL">
+                                                <rect key="frame" x="220" y="127.5" width="66" height="30.5"/>
+                                                <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyN-cz-6fL">
+                                                <rect key="frame" x="34.5" y="127.5" width="67" height="30.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mbj-rk-wHN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="30.5"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zhi-HH-l57">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mli-hw-8ql">
+                                                                <rect key="frame" x="0.0" y="28.5" width="50" height="2"/>
+                                                            </progressView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XO-3o-LC6">
+                                                        <rect key="frame" x="50" y="0.0" width="17" height="30.5"/>
+                                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="T6y-xO-SvK" firstAttribute="centerX" secondItem="6vs-BK-pux" secondAttribute="centerX" id="6TN-a7-h5u"/>
+                                            <constraint firstItem="b0s-i0-MdI" firstAttribute="top" secondItem="T6y-xO-SvK" secondAttribute="bottom" constant="20" id="6yz-mS-YH5"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gcS-i4-7tL" secondAttribute="trailing" constant="5" id="DHj-Lh-rnv"/>
+                                            <constraint firstItem="T6y-xO-SvK" firstAttribute="top" secondItem="6vs-BK-pux" secondAttribute="top" constant="8" id="Emo-JA-xPD"/>
+                                            <constraint firstItem="gcS-i4-7tL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yyN-cz-6fL" secondAttribute="trailing" constant="5" id="FnJ-cj-eMX"/>
+                                            <constraint firstItem="yyN-cz-6fL" firstAttribute="centerX" secondItem="Jtz-gJ-bkM" secondAttribute="centerX" priority="750" id="JFU-ye-uXU"/>
+                                            <constraint firstItem="gcS-i4-7tL" firstAttribute="centerX" secondItem="ujK-JW-qks" secondAttribute="centerX" id="OrC-b2-c5J"/>
+                                            <constraint firstItem="yyN-cz-6fL" firstAttribute="top" secondItem="b0s-i0-MdI" secondAttribute="bottom" constant="10" id="WrJ-D8-ikc"/>
+                                            <constraint firstItem="gcS-i4-7tL" firstAttribute="top" secondItem="b0s-i0-MdI" secondAttribute="bottom" constant="10" id="Yct-zg-KwJ"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b0s-i0-MdI" secondAttribute="trailing" constant="8" id="izc-Fb-EPN"/>
+                                            <constraint firstItem="b0s-i0-MdI" firstAttribute="centerX" secondItem="6vs-BK-pux" secondAttribute="centerX" id="sCo-YI-Exn"/>
+                                            <constraint firstItem="Mli-hw-8ql" firstAttribute="leading" secondItem="b0s-i0-MdI" secondAttribute="leading" id="xbD-CH-uSc"/>
+                                            <constraint firstItem="b0s-i0-MdI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6vs-BK-pux" secondAttribute="leading" constant="8" id="zX3-Bf-Ons"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisis ta devise à convertir en EUR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qfF-CP-Gyr">
+                                        <rect key="frame" x="11" y="8" width="298" height="28"/>
+                                        <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="23"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="feD-Kv-oCi">
+                                        <rect key="frame" x="21" y="44" width="278" height="76.5"/>
+                                        <color key="backgroundColor" red="0.1647058824" green="0.61568627450000002" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZPs-Y0-IYJ">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CountryCollectionViewCell" id="cKz-9w-JJt" customClass="CountryCollectionViewCell" customModule="Le_Baluchon" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-26" width="128" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="p3s-Yn-Nwl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </collectionViewCellContentView>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="Jyf-tU-EZm"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="yII-fY-omw"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1647058824" green="0.61568627450000002" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="6vs-BK-pux" firstAttribute="leading" secondItem="OG9-Xf-bxE" secondAttribute="leading" id="1rY-Es-O1B"/>
+                                    <constraint firstItem="6vs-BK-pux" firstAttribute="height" secondItem="OG9-Xf-bxE" secondAttribute="height" multiplier="0.73" id="1z7-LW-aSW"/>
+                                    <constraint firstItem="feD-Kv-oCi" firstAttribute="leading" secondItem="OG9-Xf-bxE" secondAttribute="leading" constant="21" id="2qm-Dg-yug"/>
+                                    <constraint firstItem="qfF-CP-Gyr" firstAttribute="top" secondItem="OG9-Xf-bxE" secondAttribute="top" constant="8" id="Baw-6L-uXP"/>
+                                    <constraint firstAttribute="bottom" secondItem="6vs-BK-pux" secondAttribute="bottom" id="FIp-n0-1ao"/>
+                                    <constraint firstAttribute="trailing" secondItem="feD-Kv-oCi" secondAttribute="trailing" constant="21" id="T9Y-TS-kDh"/>
+                                    <constraint firstItem="qfF-CP-Gyr" firstAttribute="leading" secondItem="OG9-Xf-bxE" secondAttribute="leading" constant="11" id="W5R-38-qfd"/>
+                                    <constraint firstItem="6vs-BK-pux" firstAttribute="top" secondItem="feD-Kv-oCi" secondAttribute="bottom" constant="8" id="WQZ-lW-M1I"/>
+                                    <constraint firstAttribute="trailing" secondItem="qfF-CP-Gyr" secondAttribute="trailing" constant="11" id="gNQ-ye-XH1"/>
+                                    <constraint firstAttribute="trailing" secondItem="6vs-BK-pux" secondAttribute="trailing" id="vwx-rh-VGb"/>
+                                    <constraint firstItem="feD-Kv-oCi" firstAttribute="top" secondItem="qfF-CP-Gyr" secondAttribute="bottom" constant="8" id="xSL-P8-cgo"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QPJ-b0-TgV" firstAttribute="top" secondItem="v2b-Eo-vU0" secondAttribute="top" id="MJs-oI-lSH"/>
+                            <constraint firstItem="OG9-Xf-bxE" firstAttribute="top" secondItem="QPJ-b0-TgV" secondAttribute="bottom" id="PSW-D2-fTe"/>
+                            <constraint firstItem="OG9-Xf-bxE" firstAttribute="bottom" secondItem="v2b-Eo-vU0" secondAttribute="bottom" id="QmX-LQ-8t4"/>
+                            <constraint firstItem="OG9-Xf-bxE" firstAttribute="trailing" secondItem="v2b-Eo-vU0" secondAttribute="trailing" id="SAE-7F-uxV"/>
+                            <constraint firstItem="QPJ-b0-TgV" firstAttribute="leading" secondItem="v2b-Eo-vU0" secondAttribute="leading" id="Vpo-8G-xcc"/>
+                            <constraint firstItem="OG9-Xf-bxE" firstAttribute="leading" secondItem="v2b-Eo-vU0" secondAttribute="leading" id="b7e-Tk-DyX"/>
+                            <constraint firstItem="v2b-Eo-vU0" firstAttribute="trailing" secondItem="QPJ-b0-TgV" secondAttribute="trailing" id="zsH-d7-gy2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="v2b-Eo-vU0"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Taux de change" id="gAJ-KQ-BKU"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_ExchangeRates_Deselected" selectedImage="icon_ExchangeRates_Selected" springLoaded="YES" id="gAJ-KQ-BKU"/>
+                    <connections>
+                        <outlet property="fromDeviseButton" destination="Jtz-gJ-bkM" id="XlH-bj-879"/>
+                        <outlet property="fromDeviseWidthConstraint" destination="ERv-U2-Fa8" id="EMu-N3-Xrv"/>
+                        <outlet property="ratesView" destination="6vs-BK-pux" id="udS-cX-E5s"/>
+                        <outlet property="swapButton" destination="mUk-MS-l1o" id="Lfd-MI-9VG"/>
+                        <outlet property="toDeviseButton" destination="ujK-JW-qks" id="LhY-Rf-k7k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="105.69715142428787"/>
+            <point key="canvasLocation" x="1076.25" y="104.5774647887324"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="8TR-vf-yH7">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Dyz-RB-Y4T" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Dyz-RB-Y4T" customClass="TabBarViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="f3r-hI-MnU">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="f3r-hI-MnU" customClass="ShadowTabBar" customModule="Le_Baluchon" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="2tA-8B-g4u"/>
@@ -43,4 +223,11 @@
             <point key="canvasLocation" x="138.40000000000001" y="105.69715142428787"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="EUR" width="512" height="512"/>
+        <image name="USD" width="512" height="512"/>
+        <image name="icon_ExchangeRates_Deselected" width="25.5" height="25.5"/>
+        <image name="icon_ExchangeRates_Selected" width="25.5" height="25.5"/>
+        <image name="icon_Swap" width="62" height="53"/>
+    </resources>
 </document>
