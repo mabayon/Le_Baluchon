@@ -9,8 +9,21 @@
 import Foundation
 import UIKit
 
-struct Devise: Equatable {
+class Devise: Equatable {
+    
+    static func == (lhs: Devise, rhs: Devise) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
     let name: String
-    let value: Double
+    var value: String
+    let symbol: String
     let image: UIImage
+    
+    init(name: String, value: String, symbol: String, image: UIImage) {
+        self.name = name
+        self.value = value
+        self.symbol = symbol
+        self.image = image
+    }
 }

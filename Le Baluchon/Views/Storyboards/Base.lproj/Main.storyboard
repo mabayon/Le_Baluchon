@@ -48,87 +48,117 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="b0s-i0-MdI">
-                                                <rect key="frame" x="34.5" y="52.5" width="251" height="65"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yw2-ak-rMc" customClass="ConverterView" customModule="Le_Baluchon" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="40.5" width="320" height="108.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtz-gJ-bkM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="Jtz-gJ-bkM" secondAttribute="height" multiplier="1:1" id="BBN-lY-1BG"/>
-                                                            <constraint firstAttribute="width" constant="65" id="ERv-U2-Fa8"/>
-                                                        </constraints>
-                                                        <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
-                                                        <state key="normal" image="EUR">
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUk-MS-l1o">
-                                                        <rect key="frame" x="93" y="19.5" width="65" height="26"/>
-                                                        <state key="normal" image="icon_Swap">
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujK-JW-qks">
-                                                        <rect key="frame" x="186" y="0.0" width="65" height="65"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
-                                                        <state key="normal" image="USD">
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                                        </state>
-                                                    </button>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="ujK-JW-qks" firstAttribute="width" secondItem="ujK-JW-qks" secondAttribute="height" multiplier="1:1" id="5ag-6Z-Ckb"/>
-                                                    <constraint firstItem="mUk-MS-l1o" firstAttribute="height" secondItem="Jtz-gJ-bkM" secondAttribute="height" multiplier="0.4" id="nUW-k2-8e0"/>
-                                                </constraints>
-                                            </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,13 $" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gcS-i4-7tL">
-                                                <rect key="frame" x="220" y="127.5" width="66" height="30.5"/>
-                                                <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyN-cz-6fL">
-                                                <rect key="frame" x="34.5" y="127.5" width="67" height="30.5"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mbj-rk-wHN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="30.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="b0s-i0-MdI">
+                                                        <rect key="frame" x="34.5" y="0.0" width="251" height="65"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zhi-HH-l57">
-                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="28.5"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtz-gJ-bkM" customClass="DeviseButton" customModule="Le_Baluchon" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="Jtz-gJ-bkM" secondAttribute="height" multiplier="1:1" id="BBN-lY-1BG"/>
+                                                                    <constraint firstAttribute="width" constant="65" id="ERv-U2-Fa8"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                                                <state key="normal" image="EUR">
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUk-MS-l1o">
+                                                                <rect key="frame" x="93" y="19.5" width="65" height="26"/>
+                                                                <state key="normal" image="icon_Swap">
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="swapTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rog-FQ-9Qh"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujK-JW-qks" customClass="DeviseButton" customModule="Le_Baluchon" customModuleProvider="target">
+                                                                <rect key="frame" x="186" y="0.0" width="65" height="65"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
+                                                                <state key="normal" image="USD">
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                                </state>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="ujK-JW-qks" firstAttribute="width" secondItem="ujK-JW-qks" secondAttribute="height" multiplier="1:1" id="5ag-6Z-Ckb"/>
+                                                            <constraint firstItem="mUk-MS-l1o" firstAttribute="height" secondItem="Jtz-gJ-bkM" secondAttribute="height" multiplier="0.4" id="nUW-k2-8e0"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyN-cz-6fL">
+                                                        <rect key="frame" x="19.5" y="73" width="124" height="30.5"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mbj-rk-wHN">
+                                                                <rect key="frame" x="0.0" y="0.0" width="107" height="30.5"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zhi-HH-l57">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="107" height="28.5"/>
+                                                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="BYZ-38-t0r" id="cE4-UM-maX"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mli-hw-8ql">
+                                                                        <rect key="frame" x="0.0" y="28.5" width="107" height="2"/>
+                                                                    </progressView>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XO-3o-LC6">
+                                                                <rect key="frame" x="107" y="0.0" width="17" height="30.5"/>
                                                                 <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mli-hw-8ql">
-                                                                <rect key="frame" x="0.0" y="28.5" width="50" height="2"/>
-                                                            </progressView>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XO-3o-LC6">
-                                                        <rect key="frame" x="50" y="0.0" width="17" height="30.5"/>
-                                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpg-yi-1lz">
+                                                        <rect key="frame" x="245" y="73" width="16" height="30.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gcS-i4-7tL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="16" height="30.5"/>
+                                                                <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
-                                            </stackView>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xpg-yi-1lz" secondAttribute="trailing" constant="5" id="3AN-na-Lmi"/>
+                                                    <constraint firstItem="yyN-cz-6fL" firstAttribute="leading" secondItem="b0s-i0-MdI" secondAttribute="leading" constant="-15" id="7P2-zh-vrT"/>
+                                                    <constraint firstItem="b0s-i0-MdI" firstAttribute="centerX" secondItem="Yw2-ak-rMc" secondAttribute="centerX" id="7Sf-oU-NHw"/>
+                                                    <constraint firstItem="yyN-cz-6fL" firstAttribute="centerX" secondItem="Jtz-gJ-bkM" secondAttribute="centerX" priority="750" id="FXY-T9-aAd"/>
+                                                    <constraint firstAttribute="bottom" secondItem="xpg-yi-1lz" secondAttribute="bottom" constant="5" id="I14-fr-P53"/>
+                                                    <constraint firstItem="b0s-i0-MdI" firstAttribute="top" secondItem="Yw2-ak-rMc" secondAttribute="top" id="SWC-Nr-y0f"/>
+                                                    <constraint firstItem="yyN-cz-6fL" firstAttribute="top" secondItem="b0s-i0-MdI" secondAttribute="bottom" constant="8" id="VSa-eQ-tKD"/>
+                                                    <constraint firstItem="xpg-yi-1lz" firstAttribute="top" secondItem="b0s-i0-MdI" secondAttribute="bottom" constant="8" id="YEI-FW-coV"/>
+                                                    <constraint firstItem="xpg-yi-1lz" firstAttribute="centerX" secondItem="ujK-JW-qks" secondAttribute="centerX" id="YeQ-QJ-XWB"/>
+                                                    <constraint firstItem="xpg-yi-1lz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yyN-cz-6fL" secondAttribute="trailing" constant="10" id="mzZ-rE-l8Q"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="fromDeviseButton" destination="Jtz-gJ-bkM" id="VTf-wj-9vh"/>
+                                                    <outlet property="fromDeviseLabel" destination="9XO-3o-LC6" id="vgM-xB-hWL"/>
+                                                    <outlet property="fromDeviseTF" destination="zhi-HH-l57" id="U34-TS-lNX"/>
+                                                    <outlet property="fromDeviseWidthConstraint" destination="ERv-U2-Fa8" id="l4a-Mg-Bvo"/>
+                                                    <outlet property="swapButton" destination="mUk-MS-l1o" id="ZpH-n0-MhM"/>
+                                                    <outlet property="toDeviseButton" destination="ujK-JW-qks" id="ttL-MR-O3A"/>
+                                                    <outlet property="toDeviseLabel" destination="gcS-i4-7tL" id="dQ3-uM-AsT"/>
+                                                </connections>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="T6y-xO-SvK" firstAttribute="centerX" secondItem="6vs-BK-pux" secondAttribute="centerX" id="6TN-a7-h5u"/>
-                                            <constraint firstItem="b0s-i0-MdI" firstAttribute="top" secondItem="T6y-xO-SvK" secondAttribute="bottom" constant="20" id="6yz-mS-YH5"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gcS-i4-7tL" secondAttribute="trailing" constant="5" id="DHj-Lh-rnv"/>
                                             <constraint firstItem="T6y-xO-SvK" firstAttribute="top" secondItem="6vs-BK-pux" secondAttribute="top" constant="8" id="Emo-JA-xPD"/>
-                                            <constraint firstItem="gcS-i4-7tL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yyN-cz-6fL" secondAttribute="trailing" constant="5" id="FnJ-cj-eMX"/>
-                                            <constraint firstItem="yyN-cz-6fL" firstAttribute="centerX" secondItem="Jtz-gJ-bkM" secondAttribute="centerX" priority="750" id="JFU-ye-uXU"/>
-                                            <constraint firstItem="gcS-i4-7tL" firstAttribute="centerX" secondItem="ujK-JW-qks" secondAttribute="centerX" id="OrC-b2-c5J"/>
-                                            <constraint firstItem="yyN-cz-6fL" firstAttribute="top" secondItem="b0s-i0-MdI" secondAttribute="bottom" constant="10" id="WrJ-D8-ikc"/>
-                                            <constraint firstItem="gcS-i4-7tL" firstAttribute="top" secondItem="b0s-i0-MdI" secondAttribute="bottom" constant="10" id="Yct-zg-KwJ"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b0s-i0-MdI" secondAttribute="trailing" constant="8" id="izc-Fb-EPN"/>
-                                            <constraint firstItem="b0s-i0-MdI" firstAttribute="centerX" secondItem="6vs-BK-pux" secondAttribute="centerX" id="sCo-YI-Exn"/>
-                                            <constraint firstItem="Mli-hw-8ql" firstAttribute="leading" secondItem="b0s-i0-MdI" secondAttribute="leading" id="xbD-CH-uSc"/>
-                                            <constraint firstItem="b0s-i0-MdI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6vs-BK-pux" secondAttribute="leading" constant="8" id="zX3-Bf-Ons"/>
+                                            <constraint firstItem="Yw2-ak-rMc" firstAttribute="leading" secondItem="6vs-BK-pux" secondAttribute="leading" id="Fnv-Of-L4q"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yw2-ak-rMc" secondAttribute="trailing" id="VqK-H9-Hsz"/>
+                                            <constraint firstItem="Yw2-ak-rMc" firstAttribute="top" secondItem="T6y-xO-SvK" secondAttribute="bottom" constant="8" id="idg-VY-fLm"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisis ta devise à convertir en EUR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qfF-CP-Gyr">
@@ -192,11 +222,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_ExchangeRates_Deselected" selectedImage="icon_ExchangeRates_Selected" springLoaded="YES" id="gAJ-KQ-BKU"/>
                     <connections>
-                        <outlet property="fromDeviseButton" destination="Jtz-gJ-bkM" id="XlH-bj-879"/>
-                        <outlet property="fromDeviseWidthConstraint" destination="ERv-U2-Fa8" id="EMu-N3-Xrv"/>
+                        <outlet property="converterView" destination="Yw2-ak-rMc" id="Tjz-nN-Yhl"/>
                         <outlet property="ratesView" destination="6vs-BK-pux" id="udS-cX-E5s"/>
-                        <outlet property="swapButton" destination="mUk-MS-l1o" id="Lfd-MI-9VG"/>
-                        <outlet property="toDeviseButton" destination="ujK-JW-qks" id="LhY-Rf-k7k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

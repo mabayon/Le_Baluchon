@@ -15,20 +15,27 @@ class ExchangeRatesViewModel {
     let exchangeRates: ExchangeRates
     
     let date: String
-    let deviseBase: Devise
-    let devisesRates: [Devise]
+    var devises: [Devise]
     
     // MARK: - Object Lifecycle
     init(exchangeRates: ExchangeRates) {
         self.exchangeRates = exchangeRates
         self.date = exchangeRates.date
-        self.deviseBase = Devise(name: exchangeRates.base,
-                                 value: 1,
-                                 image: ExchangeRatesViewModel.getImage(for: exchangeRates.base)
-        )
-        self.devisesRates = ExchangeRatesViewModel.parseRates(from: exchangeRates)
+        self.devises = ExchangeRatesViewModel.parseRates(from: exchangeRates)
+      
+        let devisesEUR = Devise(name: "EUR",
+                               value: "1",
+                               symbol: ExchangeRatesViewModel.checkSymbol(for: "EUR"),
+                               image: ExchangeRatesViewModel.getImage(for: "EUR"))
+        
+        self.devises.append(devisesEUR)
     }
     
+    private enum Symbol: String {
+        case EUR = "€"
+        case USD = "$"
+    }
+
     private static func getImage(for country: String) -> UIImage {
         if let image = UIImage(named: country) {
             return image
@@ -37,11 +44,30 @@ class ExchangeRatesViewModel {
     }
     
     private static func parseRates(from exchangeRates: ExchangeRates) -> [Devise] {
-        var devises: [Devise] = []
+        var devisess: [Devise] = []
         for (key, value) in exchangeRates.rates {
-            devises.append(Devise(name: key, value: value, image: getImage(for: key)))
+            devisess.append(Devise(name: key,
+                                  value: String(value),
+                                  symbol: checkSymbol(for: key),
+                                  image: getImage(for: key)))
         }
-        return devises
+        return devisess
+    }
+    
+    private static func checkSymbol(for name: String) -> String {
+        switch name {
+        case "EUR":
+            return Symbol.EUR.rawValue
+        case "USD":
+            return Symbol.USD.rawValue
+        default:
+            return ""
+        }
+    }
+    
+    func configure(fromDevise: Devise, fromDeviseLabel: UILabel, toDevise: Devise, toDeviseLabel: UILabel) {
+        fromDeviseLabel.text = fromDevise.symbol
+        toDeviseLabel.text = toDevise.value + toDevise.symbol
     }
 }
 

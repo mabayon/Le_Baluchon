@@ -83,13 +83,13 @@ class ExchangeRatesViewControllerTests: XCTestCase {
         // Given
         givenMockNetworkClient()
         let rates = givenRates()
-        let viewModels = ExchangeRatesViewModel(exchangeRates: rates)
+        let viewModel = ExchangeRatesViewModel(exchangeRates: rates)
         
         // When
         sut.refreshData()
         mockNetworkClient.getRatesCompletion(rates, nil)
 
-        XCTAssertEqual(sut.viewModels, viewModels)
+        XCTAssertEqual(sut.viewModel, viewModel)
     }
     
 }

@@ -16,7 +16,7 @@ class ExchangeRatesClientTests: XCTestCase {
     var mockSession: MockURLSession!
     var sut: ExchangeRatesClient!
     var getRatesURL: URL {
-        return URL(string: "rates", relativeTo: baseURL)!
+        return URL(string: "latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD", relativeTo: baseURL)!
     }
     
     // MARK: - Test Lifecycle
@@ -127,7 +127,7 @@ class ExchangeRatesClientTests: XCTestCase {
     // MARK: - Shared - Tests
     func test_shared_sets_BaseURL() {
         // Given
-        let baseURL = URL(string: "http://data.fixer.io/api/latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD&format=1")!
+        let baseURL = URL(string: "http://data.fixer.io/api/")!
         
         // Then
         XCTAssertEqual(ExchangeRatesClient.shared.baseURL, baseURL)
