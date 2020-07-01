@@ -15,11 +15,11 @@ class Converter {
     
     var state: State = .fromEUR {
         didSet {
-          stateChangedCallback?(self)
+          stateChangedCallback?()
         }
     }
     
-    var stateChangedCallback: ((Converter) -> ())?
+    var stateChangedCallback: (() -> Void)?
 
     enum State {
         case fromEUR, toEUR
@@ -29,18 +29,18 @@ class Converter {
         self.rates = rates
     }
     
-    func calculRates(for amount: Double, fromDevise: String, toDevise: String) {
+    func calculRates(for amount: Double, fromCurrency: String, toCurrency: String) {
         
         switch state {
         case .fromEUR:
-            guard let rates = rates[toDevise] else {
+            guard let rates = rates[toCurrency] else {
                 result = nil
                 return
             }
             
             result = Double(round(10000 * (amount * rates)) / 10000)
         case .toEUR:
-            guard let rates = rates[fromDevise] else {
+            guard let rates = rates[fromCurrency] else {
                 result = nil
                 return
             }

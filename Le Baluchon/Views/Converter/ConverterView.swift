@@ -10,38 +10,38 @@ import UIKit
 
 class ConverterView: UIView {
     
-    @IBOutlet weak private var fromDeviseButton: DeviseButton!
-    @IBOutlet weak private var toDeviseButton: DeviseButton!
+    @IBOutlet weak private var fromCurrencyButton: CurrencyButton!
+    @IBOutlet weak private var toCurrencyButton: CurrencyButton!
     @IBOutlet weak private var swapButton: UIButton!
-    @IBOutlet weak private var fromDeviseLabel: UILabel!
-    @IBOutlet weak private var toDeviseLabel: UILabel!
-    @IBOutlet weak private var fromDeviseWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var fromCurrencyLabel: UILabel!
+    @IBOutlet weak private var toCurrencyLabel: UILabel!
+    @IBOutlet weak private var fromCurrencyWidthConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var fromDeviseTF: UITextField!
+    @IBOutlet weak var fromCurrencyTF: UITextField!
 
-    var fromDeviseName: String? = "EUR" {
+    var fromCurrencyName: String = "EUR" {
         didSet {
-            fromDeviseButton.name = fromDeviseName!
-            fromDeviseButton.imageView?.image = UIImage().getImage(for: fromDeviseName)
+            fromCurrencyButton.name = fromCurrencyName
+            fromCurrencyButton.imageView?.image = UIImage().getImage(for: fromCurrencyName)
         }
     }
     
-    var toDeviseName: String? = "USD" {
+    var toCurrencyName: String = "USD" {
         didSet {
-            toDeviseButton.name = toDeviseName!
-            toDeviseButton.imageView?.image = UIImage().getImage(for: toDeviseName)
+            toCurrencyButton.name = toCurrencyName
+            toCurrencyButton.imageView?.image = UIImage().getImage(for: toCurrencyName)
         }
     }
     
-    var toDeviseResult: String? {
+    var toCurrencyResult: String? {
         didSet {
-            toDeviseLabel.text = toDeviseResult
+            toCurrencyLabel.text = toCurrencyResult
         }
     }
     
-    var fromDeviseSymbol: String? {
+    var fromCurrencySymbol: String? {
         didSet {
-            fromDeviseLabel.text = fromDeviseSymbol
+            fromCurrencyLabel.text = fromCurrencySymbol
         }
     }
     
@@ -51,22 +51,22 @@ class ConverterView: UIView {
     
     private func setupViews() {
         swapButton.imageView?.contentMode = .scaleAspectFit
-        fromDeviseButton.name = "EUR"
-        toDeviseButton.name = "USD"
-        fromDeviseButton.applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner], cornerRadius: 10.0)
-        fromDeviseButton.applyShadow()
-        toDeviseButton.applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner], cornerRadius: 10.0)
-        toDeviseButton.applyShadow()
+        fromCurrencyButton.name = "EUR"
+        toCurrencyButton.name = "USD"
+        fromCurrencyButton.applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner], cornerRadius: 10.0)
+        fromCurrencyButton.applyShadow()
+        toCurrencyButton.applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner], cornerRadius: 10.0)
+        toCurrencyButton.applyShadow()
     }
     
     func swapButtons() {
-          let tempButtonName = fromDeviseButton.name
+          let tempButtonName = fromCurrencyButton.name
         
-          fromDeviseName = toDeviseButton.name
-          toDeviseName = tempButtonName
+          fromCurrencyName = toCurrencyButton.name
+          toCurrencyName = tempButtonName
     }
     
-    func updateFromDeviseWidth(constant: CGFloat) {
-        fromDeviseWidthConstraint.constant = constant
+    func updateFromCurrencyWidth(constant: CGFloat) {
+        fromCurrencyWidthConstraint.constant = constant
     }
 }

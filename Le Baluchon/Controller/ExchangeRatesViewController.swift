@@ -29,49 +29,64 @@ class ExchangeRatesViewController: UIViewController {
     var viewModel: ExchangeRatesViewModel?
     var dataTask: URLSessionDataTask?
     
-    var converter: Converter?
-    var timer: Timer?
-        
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        converter?.stateChangedCallback = { model in
-            DispatchQueue.main.async {
-                self.converterView.swapButtons()
-            }
+    var converter: Converter? {
+        didSet {
+            observeStateChange()
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      refreshData()
+    var timer: Timer?
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-        
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshData()
+    }
+    
     // MARK: - IBActions
     @IBAction func swapTapped(_ sender: Any) {
-        converterView.swapButtons()
         converter?.state = converter?.state == .fromEUR ? .toEUR : .fromEUR
-        convert(amount: converterView.fromDeviseTF.text)
+    }
+    
+    // MARK: - Observer
+    func observeStateChange() {
+        converter?.stateChangedCallback = {
+            DispatchQueue.main.async {
+                self.converterView.swapButtons()
+                self.convert(amount: self.converterView.fromCurrencyTF.text)
+            }
+        }
     }
     
     // MARK: - Convert
     func convert(amount: String?) {
         
         guard let amountText = amount,
-            let amount = Double(amountText),
-            let fromDeviseName = converterView.fromDeviseName,
-            let toDeviseName = converterView.toDeviseName
+            let amount = Double(amountText)
             else { return }
         
+        let fromCurrencyName = converterView.fromCurrencyName
+        let toCurrencyName = converterView.toCurrencyName
         
-        converter?.calculRates(for: amount, fromDevise: fromDeviseName, toDevise: toDeviseName)
-    
+        converter?.calculRates(for: amount, fromCurrency: fromCurrencyName, toCurrency: toCurrencyName)
+        
         let result = String(converter?.result ?? 0)
-        let toDeviseSymbol = viewModel?.getSymbol(for: toDeviseName) ?? ""
-        converterView.fromDeviseSymbol = viewModel?.getSymbol(for: fromDeviseName)
-        converterView.toDeviseResult = result + toDeviseSymbol
-    }
+        _ = viewModel?.currencies.filter({ $0.name == toCurrencyName }).map {$0.value = result }
         
+        viewModel?.configure(fromCurrency: fromCurrencyName,
+                             toCurrency: toCurrencyName,
+                             completion: { (fromCurrency, toCurrency) in
+                                DispatchQueue.main.async {
+                                    self.converterView.fromCurrencySymbol = fromCurrency
+                                    self.converterView.toCurrencyResult = toCurrency
+                                }
+        })
+    }
+    
     // MARK: - Refresh
     @objc func refreshData() {
         guard dataTask == nil else { return }
@@ -85,8 +100,8 @@ class ExchangeRatesViewController: UIViewController {
             
             self.viewModel = ExchangeRatesViewModel(exchangeRates: rates)
             self.converter = Converter(rates: rates.rates)
-            self.converterView.fromDeviseTF.text = "1"
-            self.convert(amount: self.converterView.fromDeviseTF.text)
+            self.converterView.fromCurrencyTF.text = "1"
+            self.convert(amount: self.converterView.fromCurrencyTF.text)
             self.collectionView.reloadData()
         })
     }
@@ -95,20 +110,20 @@ class ExchangeRatesViewController: UIViewController {
 // MARK: - CollectionView DataSource
 extension ExchangeRatesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count = viewModel?.devises.count else { return 0 }
+        guard let count = viewModel?.currencies.count else { return 0 }
         
         return count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CountryCollectionViewCell.identifier, for: indexPath) as! CountryCollectionViewCell
-
+        
         cell.applyShadow()
         cell.delegate = self
         
-        guard let arrayWithoutEUR = viewModel?.devises.filter({ $0.name != "EUR" })
+        guard let arrayWithoutEUR = viewModel?.currencies.filter({ $0.name != "EUR" })
             else { return cell }
-     
+        
         cell.name = arrayWithoutEUR[indexPath.row].name
         return cell
     }
@@ -117,23 +132,23 @@ extension ExchangeRatesViewController: UICollectionViewDataSource {
 // MARK: - CollectionView DelegateFlowLayout
 extension ExchangeRatesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        swapCurrencies(indexPath: indexPath)
+        swapCurrency(indexPath: indexPath)
     }
     
-    func swapCurrencies(indexPath: IndexPath) {
-        guard let name = viewModel?.devises[indexPath.row].name else {
+    func swapCurrency(indexPath: IndexPath) {
+        guard let name = viewModel?.currencies[indexPath.row].name else {
             return
         }
         
         switch converter?.state {
         case .fromEUR:
-            converterView.toDeviseName = name
+            converterView.toCurrencyName = name
         case .toEUR:
-            converterView.fromDeviseName = name
+            converterView.fromCurrencyName = name
         case .none:
             break
         }
-        convert(amount: converterView.fromDeviseTF.text)
+        convert(amount: converterView.fromCurrencyTF.text)
     }
 }
 
@@ -154,7 +169,7 @@ extension ExchangeRatesViewController: UICollectionViewDelegateFlowLayout {
 
 extension ExchangeRatesViewController: CountryCollectionViewCellDelegate {
     func getImageContainerWidth(_ width: CGFloat) {
-        converterView.updateFromDeviseWidth(constant: width)
+        converterView.updateFromCurrencyWidth(constant: width)
     }
 }
 
@@ -164,19 +179,19 @@ extension ExchangeRatesViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        converterView.fromDeviseTF.resignFirstResponder()
+        converterView.fromCurrencyTF.resignFirstResponder()
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         timer?.invalidate()
-               
+        
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (timer) in
             self.convert(amount: textField.text)
         })
-
+        
         if string.count == 0 && textField.text?.count == 1 {
             if textField.text != "0" {
                 textField.text = "0"

@@ -15,20 +15,20 @@ class ExchangeRatesViewModel {
     let exchangeRates: ExchangeRates
     
     let date: String
-    var devises: [Devise] 
+    var currencies: [Currency] 
     
     // MARK: - Object Lifecycle
     init(exchangeRates: ExchangeRates) {
         self.exchangeRates = exchangeRates
         self.date = exchangeRates.date
-        self.devises = ExchangeRatesViewModel.parseRates(from: exchangeRates)
+        self.currencies = ExchangeRatesViewModel.parseRates(from: exchangeRates)
       
-        let devisesEUR = Devise(name: "EUR",
+        let currenciesEUR = Currency(name: "EUR",
                                value: "1",
-                               symbol: ExchangeRatesViewModel.checkSymbol(for: "EUR"))
+                               symbol: ExchangeRatesViewModel.selectSymbol(for: "EUR"))
         
-        self.devises.append(devisesEUR)
-        self.devises = ExchangeRatesViewModel.sortDevise(devises)
+        self.currencies.append(currenciesEUR)
+        self.currencies = ExchangeRatesViewModel.sortCurrency(currencies)
     }
     
     private enum Symbol: String {
@@ -38,17 +38,17 @@ class ExchangeRatesViewModel {
         case CNY_JPY = "¥"
     }
     
-    private static func parseRates(from exchangeRates: ExchangeRates) -> [Devise] {
-        var devises: [Devise] = []
+    private static func parseRates(from exchangeRates: ExchangeRates) -> [Currency] {
+        var currencies: [Currency] = []
         for (key, value) in exchangeRates.rates {
-            devises.append(Devise(name: key,
+            currencies.append(Currency(name: key,
                                   value: String(value),
-                                  symbol: checkSymbol(for: key)))
+                                  symbol: selectSymbol(for: key)))
         }
-        return devises
+        return currencies
     }
-    
-    private static func checkSymbol(for name: String) -> String {
+        
+    private static func selectSymbol(for name: String) -> String {
         switch name {
         case "EUR":
             return Symbol.EUR.rawValue
@@ -63,30 +63,47 @@ class ExchangeRatesViewModel {
         }
     }
     
-    private static func sortDevise(_ devises: [Devise]) -> [Devise] {
-        let devisesOrder = ["USD", "GBP", "CNY", "JPY", "CAD", "EUR"]
-        let devisesContained = devisesOrder.filter { devises.map({ $0.name }).contains($0) }
-        var sortedDevises = devises
+    private static func sortCurrency(_ currencies: [Currency]) -> [Currency] {
+        let currenciesOrder = ["USD", "GBP", "CNY", "JPY", "CAD", "EUR"]
+        let currenciesContained = currenciesOrder.filter { currencies.map({ $0.name }).contains($0) }
+        var sortedCurrency = currencies
         
-        for i in 0...devisesContained.count - 1 {
-            if let index = sortedDevises.map ({ $0.name })
-                .firstIndex(of: devisesContained[i]) {
-                sortedDevises.rearrange(from: index, to: i)
+        for i in 0...currenciesContained.count - 1 {
+            if let index = sortedCurrency.map ({ $0.name })
+                .firstIndex(of: currenciesContained[i]) {
+                sortedCurrency.rearrange(from: index, to: i)
             }
         }
-        return sortedDevises
+        return sortedCurrency
     }
     
-    func getSymbol(for country: String) -> String? {
-        return devises.filter ({ $0.name == country }).map({ $0.symbol}).first
+    private func getSymbol(for country: String) -> String {
+        return currencies.filter ({ $0.name == country }).map({ $0.symbol}).first ?? ""
     }
     
-    func configure(fromDevise: Devise,
-                   fromDeviseLabel: UILabel,
-                   toDevise: Devise,
-                   toDeviseLabel: UILabel) {
-        fromDeviseLabel.text = fromDevise.symbol
-        toDeviseLabel.text = toDevise.value + toDevise.symbol
+    private func getValue(for currency: String) -> String {
+        guard let value = currencies.filter({ $0.name == currency }).first?.value else {
+            return ""
+        }
+        return value
+    }
+    
+    func configure(fromCurrency: String,
+                   toCurrency: String,
+                   completion: @escaping (String, String) -> ()) {
+        
+        let fromCurrencySymbol = getSymbol(for: fromCurrency)
+        let toCurrency = getValue(for: toCurrency) + getSymbol(for: toCurrency)
+        
+        completion(fromCurrencySymbol, toCurrency)
+    }
+    
+    func configure2(fromCurrency: Currency,
+                   fromCurrencyLabel: UILabel,
+                   toCurrency: Currency,
+                   toCurrencyLabel: UILabel) {
+        fromCurrencyLabel.text = fromCurrency.symbol
+        toCurrencyLabel.text = toCurrency.value + toCurrency.symbol
     }
 }
 

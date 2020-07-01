@@ -1,5 +1,5 @@
 //
-//  Devise.swift
+//  Currency.swift
 //  Le Baluchon
 //
 //  Created by Mahieu Bayon on 10/06/2020.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Devise: Equatable {
+class Currency: Equatable {
     
-    static func == (lhs: Devise, rhs: Devise) -> Bool {
+    static func == (lhs: Currency, rhs: Currency) -> Bool {
         return lhs.name == rhs.name
     }
     

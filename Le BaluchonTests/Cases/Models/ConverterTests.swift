@@ -42,7 +42,7 @@ class ConverterTests: XCTestCase {
         let result = amountToConvert * ratesUSD
     
         // When
-        sut.calculRates(for: 10, fromDevise: "EUR", toDevise: "USD")
+        sut.calculRates(for: 10, fromCurrency: "EUR", toCurrency: "USD")
         
         // Then
         XCTAssertEqual(sut.result, result)
@@ -56,29 +56,29 @@ class ConverterTests: XCTestCase {
         
         // When
         sut.state = .toEUR
-        sut.calculRates(for: 10, fromDevise: "USD", toDevise: "EUR")
+        sut.calculRates(for: 10, fromCurrency: "USD", toCurrency: "EUR")
         
         // Then
         XCTAssertEqual(sut.result, result)
     }
     
-    func testCalculRates_toDeviseInvalid_resultNil() {
+    func testCalculRates_toCurrencyInvalid_resultNil() {
         // Given
-        let invalidDevise = "GGG"
+        let invalidCurrency = "GGG"
         
         // When
-        sut.calculRates(for: 10, fromDevise: "EUR", toDevise: invalidDevise)
+        sut.calculRates(for: 10, fromCurrency: "EUR", toCurrency: invalidCurrency)
         
         // Then
         XCTAssertNil(sut.result)
     }
 
-    func testCalculRates_fromDeviseInvalid_resultNil() {
+    func testCalculRates_fromCurrencyInvalid_resultNil() {
         // Given
-        let invalidDevise = "GGG"
+        let invalidCurrency = "GGG"
         
         // When
-        sut.calculRates(for: 10, fromDevise: invalidDevise, toDevise: "EUR")
+        sut.calculRates(for: 10, fromCurrency: invalidCurrency, toCurrency: "EUR")
         
         // Then
         XCTAssertNil(sut.result)

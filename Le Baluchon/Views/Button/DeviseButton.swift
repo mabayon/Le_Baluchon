@@ -1,5 +1,5 @@
 //
-//  DeviseButton.swift
+//  CurrencyButton.swift
 //  Le Baluchon
 //
 //  Created by Mahieu Bayon on 29/06/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DeviseButton: UIButton {
+class CurrencyButton: UIButton {
 
     var name = ""
 }

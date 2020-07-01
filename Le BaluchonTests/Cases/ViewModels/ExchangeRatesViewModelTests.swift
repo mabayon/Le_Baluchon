@@ -45,36 +45,37 @@ class ExchangeRatesViewModelTests: XCTestCase {
         XCTAssertEqual(sut.date, exchangeRates.date)
     }
         
-    func test_initExchangeRates_givenRatesUSD_setsDevises() {
+    func test_initExchangeRates_givenRatesUSD_setsCurrency() {
         // Given
         whenSUTSetFromExchangeRates(rates: ["USD": 1.12972])
 
         // Then
-        let expectedDevises = [Devise(name: "EUR", value: "1", symbol: "€"), Devise(name: "USD", value: "1.12972", symbol: "$")]
-        XCTAssertEqual(sut.devises, expectedDevises)
+        let expectedCurrency = [Currency(name: "USD", value: "1.12972", symbol: "$"),
+                                 Currency(name: "EUR", value: "1", symbol: "€")]
+        XCTAssertEqual(sut.currencies, expectedCurrency)
     }
     
-    func test_initExchangeRates_givenUnknownDeviseImage_setDevises() {
+    func test_initExchangeRates_givenUnknownCurrencyImage_setCurrency() {
         // Given
         whenSUTSetFromExchangeRates(rates: ["AUD": 1.12972])
 
-        let expectedDevises = [Devise(name: "EUR", value: "1", symbol: "€"),
-                               Devise(name: "AUD", value: "1.12972", symbol: "")]
+        let expectedCurrency = [Currency(name: "EUR", value: "1", symbol: "€"),
+                                 Currency(name: "AUD", value: "1.12972", symbol: ""),]
         // Then
-        XCTAssertEqual(sut.devises, expectedDevises)
+        XCTAssertEqual(sut.currencies, expectedCurrency)
     }
     
     // MUST BE CHANGED WHEN THERE ARE MORE DEVISES
-//    func test_initExchangeRates_givenRatesUSD_EUR_setsDevises() {
+//    func test_initExchangeRates_givenRatesUSD_EUR_setsCurrency() {
 //        // Given
 //        whenSUTSetFromExchangeRates(rates: ["USD": 1.12972, "EUR": 1.256333])
 //
 //        // Then
-//        let expectedDevises = [Devise(name: "USD", value: "1.12972", symbol: "$", image: UIImage(named: "USD")!),
-//                               Devise(name: "EUR", value: "1.256333", symbol: "€", image: UIImage(named: "EUR")!)]
+//        let expectedCurrency = [Currency(name: "USD", value: "1.12972", symbol: "$", image: UIImage(named: "USD")!),
+//                               Currency(name: "EUR", value: "1.256333", symbol: "€", image: UIImage(named: "EUR")!)]
 //
-//        XCTAssertEqual(sut.devises.sorted { $0.name < $1.name },
-//                       expectedDevises.sorted { $0.name < $1.name })
+//        XCTAssertEqual(sut.currencies.sorted { $0.name < $1.name },
+//                       expectedCurrency.sorted { $0.name < $1.name })
 //    }
         
 //    func test_initExchangeRates_givenLastUpdate1YearAgo_setLastUpdate() {
