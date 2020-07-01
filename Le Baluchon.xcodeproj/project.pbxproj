@@ -46,6 +46,7 @@
 		5CCCA0E32490EB170089178B /* Devise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCCA0E22490EB170089178B /* Devise.swift */; };
 		5CEC03B524AB605B00C569AD /* ConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC03B424AB605B00C569AD /* ConverterView.swift */; };
 		5CF4641C24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4641B24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift */; };
+		5CF4641F24ACA06E0043E6BA /* UIImage+GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4641E24ACA06E0043E6BA /* UIImage+GetImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		5CCCA0E22490EB170089178B /* Devise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devise.swift; sourceTree = "<group>"; };
 		5CEC03B424AB605B00C569AD /* ConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterView.swift; sourceTree = "<group>"; };
 		5CF4641B24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+Rearrange.swift"; sourceTree = "<group>"; };
+		5CF4641E24ACA06E0043E6BA /* UIImage+GetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GetImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 		5C8877C42493BD0B004E2A3A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5CF4641D24ACA0480043E6BA /* UIImage */,
 				5CF4641A24AC61EB0043E6BA /* Array */,
 				5CAED5DD249B91B800688729 /* Identifiers */,
 				5C15697F249B64E60079AD1F /* Shadow */,
@@ -487,6 +490,14 @@
 			path = Array;
 			sourceTree = "<group>";
 		};
+		5CF4641D24ACA0480043E6BA /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				5CF4641E24ACA06E0043E6BA /* UIImage+GetImage.swift */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -597,6 +608,7 @@
 			files = (
 				5C8877C92493BD6E004E2A3A /* StoryboardCreatable.swift in Sources */,
 				5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */,
+				5CF4641F24ACA06E0043E6BA /* UIImage+GetImage.swift in Sources */,
 				5C156984249B6A0F0079AD1F /* TabBarViewController.swift in Sources */,
 				5CAED5DC249B91A000688729 /* CountryCollectionViewCell.swift in Sources */,
 				5C423DD424AA291F0084427B /* Converter.swift in Sources */,

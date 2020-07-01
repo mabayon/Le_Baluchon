@@ -8,9 +8,13 @@
 
 import UIKit
 
+protocol CountryCollectionViewCellDelegate {
+    func getImageContainerWidth(_ width: CGFloat)
+}
+
 class CountryCollectionViewCell: UICollectionViewCell {
     
-    let imageContainer: UIView = {
+    private let imageContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.applyRounded(at:
@@ -18,7 +22,7 @@ class CountryCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
         imageView.image = UIImage(named: "USD")
@@ -27,7 +31,7 @@ class CountryCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont(name: "Inter-Regular", size: 15)
@@ -35,6 +39,18 @@ class CountryCollectionViewCell: UICollectionViewCell {
         label.text = "USD"
         return label
     }()
+    
+    var name: String? {
+        didSet {
+            label.text = name
+            imageView.image = UIImage().getImage(for: name)
+        }
+    }
+    
+    var delegate: CountryCollectionViewCellDelegate?
+    
+    override func setNeedsDisplay() {                delegate?.getImageContainerWidth(imageContainer.frame.width)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,7 +75,5 @@ class CountryCollectionViewCell: UICollectionViewCell {
         imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
         imageView.widthAnchor.constraint(equalTo: imageContainer.widthAnchor, multiplier: 0.5).isActive = true
         imageView.heightAnchor.constraint(equalTo: imageContainer.heightAnchor, multiplier: 0.5).isActive = true
-
-        
-    }
+    }    
 }

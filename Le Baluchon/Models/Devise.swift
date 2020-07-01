@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class Devise: Equatable {
     
@@ -18,12 +17,10 @@ class Devise: Equatable {
     let name: String
     var value: String
     let symbol: String
-    let image: UIImage
     
-    init(name: String, value: String, symbol: String, image: UIImage) {
+    init(name: String, value: String, symbol: String) {
         self.name = name
         self.value = value
         self.symbol = symbol
-        self.image = image
     }
 }

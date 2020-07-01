@@ -50,7 +50,7 @@ class ExchangeRatesViewModelTests: XCTestCase {
         whenSUTSetFromExchangeRates(rates: ["USD": 1.12972])
 
         // Then
-        let expectedDevises = [Devise(name: "USD", value: "1.12972", symbol: "$", image: UIImage(named: "USD")!), Devise(name: "EUR", value: "1", symbol: "€", image: UIImage(named: "EUR")!)]
+        let expectedDevises = [Devise(name: "EUR", value: "1", symbol: "€"), Devise(name: "USD", value: "1.12972", symbol: "$")]
         XCTAssertEqual(sut.devises, expectedDevises)
     }
     
@@ -58,8 +58,8 @@ class ExchangeRatesViewModelTests: XCTestCase {
         // Given
         whenSUTSetFromExchangeRates(rates: ["AUD": 1.12972])
 
-        let expectedDevises = [Devise(name: "AUD", value: "1.12972", symbol: "", image: UIImage()),
-                               Devise(name: "EUR", value: "1", symbol: "€", image: UIImage(named: "EUR")!)]
+        let expectedDevises = [Devise(name: "EUR", value: "1", symbol: "€"),
+                               Devise(name: "AUD", value: "1.12972", symbol: "")]
         // Then
         XCTAssertEqual(sut.devises, expectedDevises)
     }

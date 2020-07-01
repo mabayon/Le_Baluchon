@@ -23,7 +23,7 @@ class ExchangeRatesViewController: UIViewController {
     
     // MARK: - Instance Properties
     var countryCellImage: UIView?
-
+    
     var networkClient: ExchangeRatesService = ExchangeRatesClient.shared
     
     var viewModel: ExchangeRatesViewModel?
@@ -35,11 +35,10 @@ class ExchangeRatesViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        if let countryCellImage = countryCellImage {
-            converterView.updateFromDeviseWidth(constant: countryCellImage.frame.width)
+        converter?.stateChangedCallback = { model in
+            DispatchQueue.main.async {
+                self.converterView.swapButtons()
+            }
         }
     }
     
@@ -51,6 +50,7 @@ class ExchangeRatesViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func swapTapped(_ sender: Any) {
         converterView.swapButtons()
+        converter?.state = converter?.state == .fromEUR ? .toEUR : .fromEUR
         convert(amount: converterView.fromDeviseTF.text)
     }
     
@@ -58,25 +58,18 @@ class ExchangeRatesViewController: UIViewController {
     func convert(amount: String?) {
         
         guard let amountText = amount,
-            let amount = Double(amountText) else { return }
+            let amount = Double(amountText),
+            let fromDeviseName = converterView.fromDeviseName,
+            let toDeviseName = converterView.toDeviseName
+            else { return }
         
-        let fromDeviseName = converterView.fromDeviseButton.name
-        let toDeviseName = converterView.toDeviseButton.name
         
         converter?.calculRates(for: amount, fromDevise: fromDeviseName, toDevise: toDeviseName)
+    
         let result = String(converter?.result ?? 0)
-       
-        guard let toDevise = viewModel?.devises
-            .filter({ $0.name == toDeviseName }).first,
-        let fromDevise = viewModel?.devises
-        .filter({ $0.name == fromDeviseName }).first else { return }
-        
-        toDevise.value = result
-       
-        viewModel?.configure(fromDevise: fromDevise,
-                             fromDeviseLabel: converterView.fromDeviseLabel,
-                             toDevise: toDevise,
-                             toDeviseLabel: converterView.toDeviseLabel)
+        let toDeviseSymbol = viewModel?.getSymbol(for: toDeviseName) ?? ""
+        converterView.fromDeviseSymbol = viewModel?.getSymbol(for: fromDeviseName)
+        converterView.toDeviseResult = result + toDeviseSymbol
     }
         
     // MARK: - Refresh
@@ -104,25 +97,47 @@ extension ExchangeRatesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let count = viewModel?.devises.count else { return 0 }
         
-        return count
+        return count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CountryCollectionViewCell.identifier, for: indexPath) as! CountryCollectionViewCell
 
         cell.applyShadow()
-
-        if countryCellImage == nil {
-            countryCellImage = cell.imageContainer
-        }
+        cell.delegate = self
         
-        cell.label.text = viewModel?.devises[indexPath.row].name
-        cell.imageView.image = viewModel?.devises[indexPath.row].image
+        guard let arrayWithoutEUR = viewModel?.devises.filter({ $0.name != "EUR" })
+            else { return cell }
+     
+        cell.name = arrayWithoutEUR[indexPath.row].name
         return cell
     }
 }
 
-// MARK: - CollectionView Delegate
+// MARK: - CollectionView DelegateFlowLayout
+extension ExchangeRatesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        swapCurrencies(indexPath: indexPath)
+    }
+    
+    func swapCurrencies(indexPath: IndexPath) {
+        guard let name = viewModel?.devises[indexPath.row].name else {
+            return
+        }
+        
+        switch converter?.state {
+        case .fromEUR:
+            converterView.toDeviseName = name
+        case .toEUR:
+            converterView.fromDeviseName = name
+        case .none:
+            break
+        }
+        convert(amount: converterView.fromDeviseTF.text)
+    }
+}
+
+// MARK: - CollectionView DelegateFlowLayout
 extension ExchangeRatesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width * 0.25
@@ -134,6 +149,12 @@ extension ExchangeRatesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         let lineSpacing: CGFloat = 20.0
         return lineSpacing
+    }
+}
+
+extension ExchangeRatesViewController: CountryCollectionViewCellDelegate {
+    func getImageContainerWidth(_ width: CGFloat) {
+        converterView.updateFromDeviseWidth(constant: width)
     }
 }
 

@@ -55,6 +55,7 @@ class ConverterTests: XCTestCase {
         let result = Double(round(10000 * (amountToConvert * ratesEUR)) / 10000)
         
         // When
+        sut.state = .toEUR
         sut.calculRates(for: 10, fromDevise: "USD", toDevise: "EUR")
         
         // Then

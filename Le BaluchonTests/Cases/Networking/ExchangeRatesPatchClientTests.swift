@@ -16,7 +16,7 @@ class ExchangeRatesClientTests: XCTestCase {
     var mockSession: MockURLSession!
     var sut: ExchangeRatesClient!
     var getRatesURL: URL {
-        return URL(string: "latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD", relativeTo: baseURL)!
+        return URL(string: "latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD,GBP,JPY,CNY,CAD", relativeTo: baseURL)!
     }
     
     // MARK: - Test Lifecycle

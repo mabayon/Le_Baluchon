@@ -9,9 +9,21 @@
 import Foundation
 
 class Converter {
-    
+        
     let rates: [String: Double]
     var result: Double?
+    
+    var state: State = .fromEUR {
+        didSet {
+          stateChangedCallback?(self)
+        }
+    }
+    
+    var stateChangedCallback: ((Converter) -> ())?
+
+    enum State {
+        case fromEUR, toEUR
+    }
     
     init(rates: [String: Double]) {
         self.rates = rates
@@ -19,14 +31,15 @@ class Converter {
     
     func calculRates(for amount: Double, fromDevise: String, toDevise: String) {
         
-        if fromDevise == "EUR" {
+        switch state {
+        case .fromEUR:
             guard let rates = rates[toDevise] else {
                 result = nil
                 return
             }
             
             result = Double(round(10000 * (amount * rates)) / 10000)
-        } else {
+        case .toEUR:
             guard let rates = rates[fromDevise] else {
                 result = nil
                 return

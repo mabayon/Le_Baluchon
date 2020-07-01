@@ -10,28 +10,46 @@ import UIKit
 
 class ConverterView: UIView {
     
-    @IBOutlet weak var fromDeviseButton: DeviseButton! {
+    @IBOutlet weak private var fromDeviseButton: DeviseButton!
+    @IBOutlet weak private var toDeviseButton: DeviseButton!
+    @IBOutlet weak private var swapButton: UIButton!
+    @IBOutlet weak private var fromDeviseLabel: UILabel!
+    @IBOutlet weak private var toDeviseLabel: UILabel!
+    @IBOutlet weak private var fromDeviseWidthConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var fromDeviseTF: UITextField!
+
+    var fromDeviseName: String? = "EUR" {
         didSet {
-            
+            fromDeviseButton.name = fromDeviseName!
+            fromDeviseButton.imageView?.image = UIImage().getImage(for: fromDeviseName)
         }
     }
-    @IBOutlet weak var toDeviseButton: DeviseButton! {
-           didSet {
-           }
-       }
     
-    @IBOutlet weak var swapButton: UIButton!
-    @IBOutlet weak var fromDeviseTF: UITextField!
-    @IBOutlet weak var fromDeviseLabel: UILabel!
-    @IBOutlet weak var toDeviseLabel: UILabel!
+    var toDeviseName: String? = "USD" {
+        didSet {
+            toDeviseButton.name = toDeviseName!
+            toDeviseButton.imageView?.image = UIImage().getImage(for: toDeviseName)
+        }
+    }
     
-    @IBOutlet weak var fromDeviseWidthConstraint: NSLayoutConstraint!
-
+    var toDeviseResult: String? {
+        didSet {
+            toDeviseLabel.text = toDeviseResult
+        }
+    }
+    
+    var fromDeviseSymbol: String? {
+        didSet {
+            fromDeviseLabel.text = fromDeviseSymbol
+        }
+    }
+    
     override func awakeFromNib() {
         setupViews()
     }
     
-    func setupViews() {
+    private func setupViews() {
         swapButton.imageView?.contentMode = .scaleAspectFit
         fromDeviseButton.name = "EUR"
         toDeviseButton.name = "USD"
@@ -43,12 +61,9 @@ class ConverterView: UIView {
     
     func swapButtons() {
           let tempButtonName = fromDeviseButton.name
-          let tempButtonImage = fromDeviseButton.imageView?.image
         
-          fromDeviseButton.name = toDeviseButton.name
-          fromDeviseButton.imageView?.image = toDeviseButton.imageView?.image
-          toDeviseButton.name = tempButtonName
-          toDeviseButton.imageView?.image = tempButtonImage
+          fromDeviseName = toDeviseButton.name
+          toDeviseName = tempButtonName
     }
     
     func updateFromDeviseWidth(constant: CGFloat) {

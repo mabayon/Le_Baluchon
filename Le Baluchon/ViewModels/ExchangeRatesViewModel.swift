@@ -25,8 +25,7 @@ class ExchangeRatesViewModel {
       
         let devisesEUR = Devise(name: "EUR",
                                value: "1",
-                               symbol: ExchangeRatesViewModel.checkSymbol(for: "EUR"),
-                               image: ExchangeRatesViewModel.getImage(for: "EUR"))
+                               symbol: ExchangeRatesViewModel.checkSymbol(for: "EUR"))
         
         self.devises.append(devisesEUR)
         self.devises = ExchangeRatesViewModel.sortDevise(devises)
@@ -34,50 +33,52 @@ class ExchangeRatesViewModel {
     
     private enum Symbol: String {
         case EUR = "€"
-        case USD = "$"
-    }
-
-    private static func getImage(for country: String) -> UIImage {
-        if let image = UIImage(named: country) {
-            return image
-        }
-        return UIImage()
+        case USD_CAD = "$"
+        case GBP = "£"
+        case CNY_JPY = "¥"
     }
     
     private static func parseRates(from exchangeRates: ExchangeRates) -> [Devise] {
-        var devisess: [Devise] = []
+        var devises: [Devise] = []
         for (key, value) in exchangeRates.rates {
-            devisess.append(Devise(name: key,
+            devises.append(Devise(name: key,
                                   value: String(value),
-                                  symbol: checkSymbol(for: key),
-                                  image: getImage(for: key)))
+                                  symbol: checkSymbol(for: key)))
         }
-        return devisess
+        return devises
     }
     
     private static func checkSymbol(for name: String) -> String {
         switch name {
         case "EUR":
             return Symbol.EUR.rawValue
-        case "USD":
-            return Symbol.USD.rawValue
+        case "USD", "CAD":
+            return Symbol.USD_CAD.rawValue
+        case "GBP":
+            return Symbol.GBP.rawValue
+        case "CNY", "JPY":
+            return Symbol.CNY_JPY.rawValue
         default:
             return ""
         }
     }
     
     private static func sortDevise(_ devises: [Devise]) -> [Devise] {
-        let devisesOrder = ["EUR", "USD", "GBP", "CNY", "JPY", "CAD"]
+        let devisesOrder = ["USD", "GBP", "CNY", "JPY", "CAD", "EUR"]
         let devisesContained = devisesOrder.filter { devises.map({ $0.name }).contains($0) }
         var sortedDevises = devises
         
-        for i in 0...5 {
+        for i in 0...devisesContained.count - 1 {
             if let index = sortedDevises.map ({ $0.name })
                 .firstIndex(of: devisesContained[i]) {
                 sortedDevises.rearrange(from: index, to: i)
             }
         }
         return sortedDevises
+    }
+    
+    func getSymbol(for country: String) -> String? {
+        return devises.filter ({ $0.name == country }).map({ $0.symbol}).first
     }
     
     func configure(fromDevise: Devise,
