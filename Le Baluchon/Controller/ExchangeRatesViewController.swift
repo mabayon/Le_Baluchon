@@ -18,6 +18,7 @@ class ExchangeRatesViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var converterView: ConverterView!
     
     // MARK: - Instance Properties
@@ -93,7 +94,7 @@ class ExchangeRatesViewController: UIViewController {
             self.converter = Converter(rates: rates.rates)
             self.converterView.fromDeviseTF.text = "1"
             self.convert(amount: self.converterView.fromDeviseTF.text)
-
+            self.collectionView.reloadData()
         })
     }
 }
@@ -101,18 +102,22 @@ class ExchangeRatesViewController: UIViewController {
 // MARK: - CollectionView DataSource
 extension ExchangeRatesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        guard let count = viewModel?.devises.count else { return 0 }
+        
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CountryCollectionViewCell.identifier, for: indexPath) as! CountryCollectionViewCell
 
+        cell.applyShadow()
+
         if countryCellImage == nil {
             countryCellImage = cell.imageContainer
         }
         
-        cell.applyShadow()
-        
+        cell.label.text = viewModel?.devises[indexPath.row].name
+        cell.imageView.image = viewModel?.devises[indexPath.row].image
         return cell
     }
 }

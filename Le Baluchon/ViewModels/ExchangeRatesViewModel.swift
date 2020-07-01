@@ -15,7 +15,7 @@ class ExchangeRatesViewModel {
     let exchangeRates: ExchangeRates
     
     let date: String
-    var devises: [Devise]
+    var devises: [Devise] 
     
     // MARK: - Object Lifecycle
     init(exchangeRates: ExchangeRates) {
@@ -29,6 +29,7 @@ class ExchangeRatesViewModel {
                                image: ExchangeRatesViewModel.getImage(for: "EUR"))
         
         self.devises.append(devisesEUR)
+        self.devises = ExchangeRatesViewModel.sortDevise(devises)
     }
     
     private enum Symbol: String {
@@ -65,7 +66,24 @@ class ExchangeRatesViewModel {
         }
     }
     
-    func configure(fromDevise: Devise, fromDeviseLabel: UILabel, toDevise: Devise, toDeviseLabel: UILabel) {
+    private static func sortDevise(_ devises: [Devise]) -> [Devise] {
+        let devisesOrder = ["EUR", "USD", "GBP", "CNY", "JPY", "CAD"]
+        let devisesContained = devisesOrder.filter { devises.map({ $0.name }).contains($0) }
+        var sortedDevises = devises
+        
+        for i in 0...5 {
+            if let index = sortedDevises.map ({ $0.name })
+                .firstIndex(of: devisesContained[i]) {
+                sortedDevises.rearrange(from: index, to: i)
+            }
+        }
+        return sortedDevises
+    }
+    
+    func configure(fromDevise: Devise,
+                   fromDeviseLabel: UILabel,
+                   toDevise: Devise,
+                   toDeviseLabel: UILabel) {
         fromDeviseLabel.text = fromDevise.symbol
         toDeviseLabel.text = toDevise.value + toDevise.symbol
     }

@@ -222,6 +222,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_ExchangeRates_Deselected" selectedImage="icon_ExchangeRates_Selected" springLoaded="YES" id="gAJ-KQ-BKU"/>
                     <connections>
+                        <outlet property="collectionView" destination="feD-Kv-oCi" id="mX4-QU-S18"/>
                         <outlet property="converterView" destination="Yw2-ak-rMc" id="Tjz-nN-Yhl"/>
                         <outlet property="ratesView" destination="6vs-BK-pux" id="udS-cX-E5s"/>
                     </connections>

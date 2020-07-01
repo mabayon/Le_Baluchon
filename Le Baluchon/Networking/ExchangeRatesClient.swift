@@ -28,7 +28,7 @@ class ExchangeRatesClient {
     }
     
     func getRates(completion: @escaping (ExchangeRates?, Error?) -> Void) -> URLSessionDataTask {
-        let url = URL(string: "latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD", relativeTo: baseURL)!
+        let url = URL(string: "latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD,GBP,JPY,CNY,CAD", relativeTo: baseURL)!
         let task = session.dataTask(with: url) { [weak self] (data, response, error) in
             guard let self = self else { return }
             

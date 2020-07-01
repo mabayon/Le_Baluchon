@@ -45,6 +45,7 @@
 		5CCCA0DF248F82540089178B /* TimeInterval+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCCA0DE248F82540089178B /* TimeInterval+Calendar.swift */; };
 		5CCCA0E32490EB170089178B /* Devise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCCA0E22490EB170089178B /* Devise.swift */; };
 		5CEC03B524AB605B00C569AD /* ConverterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC03B424AB605B00C569AD /* ConverterView.swift */; };
+		5CF4641C24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4641B24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		5CCCA0E1248F871B0089178B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5CCCA0E22490EB170089178B /* Devise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devise.swift; sourceTree = "<group>"; };
 		5CEC03B424AB605B00C569AD /* ConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterView.swift; sourceTree = "<group>"; };
+		5CF4641B24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+Rearrange.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +263,7 @@
 		5C8877C42493BD0B004E2A3A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5CF4641A24AC61EB0043E6BA /* Array */,
 				5CAED5DD249B91B800688729 /* Identifiers */,
 				5C15697F249B64E60079AD1F /* Shadow */,
 				5C15697B249B5A5C0079AD1F /* Rounded */,
@@ -476,6 +479,14 @@
 			path = Converter;
 			sourceTree = "<group>";
 		};
+		5CF4641A24AC61EB0043E6BA /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				5CF4641B24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift */,
+			);
+			path = Array;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -596,6 +607,7 @@
 				5C423DD924AA60FF0084427B /* DeviseButton.swift in Sources */,
 				5CEC03B524AB605B00C569AD /* ConverterView.swift in Sources */,
 				5CB7E5BE248A483100E31A2B /* ExchangeRatesViewController.swift in Sources */,
+				5CF4641C24AC62230043E6BA /* RangeReplaceableCollection+Rearrange.swift in Sources */,
 				5C156981249B65080079AD1F /* UIView+ApplyShadow.swift in Sources */,
 				5C07F0B9248E8B700022299E /* ExchangeRates.swift in Sources */,
 				5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */,
