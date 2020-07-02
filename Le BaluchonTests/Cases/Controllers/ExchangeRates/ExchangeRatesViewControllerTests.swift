@@ -13,7 +13,7 @@ class ExchangeRatesViewControllerTests: XCTestCase {
 
     // MARK: - Instance Properties
     var sut: ExchangeRatesViewController!
-    var mockNetworkClient: MockExchangeRatesService!
+    var mockNetworkClient: MockNetworkClientsService!
     
     override func setUp() {
         super.setUp()
@@ -29,7 +29,7 @@ class ExchangeRatesViewControllerTests: XCTestCase {
     
     // MARK: - Given
     func givenMockNetworkClient() {
-        mockNetworkClient = MockExchangeRatesService()
+        mockNetworkClient = MockNetworkClientsService()
         sut.networkClient = mockNetworkClient
     }
     
@@ -40,7 +40,7 @@ class ExchangeRatesViewControllerTests: XCTestCase {
 
     // MARK: - Instance Properties - Tests
     func test_networkClient_setToExchangeRatesClient() {
-        XCTAssertTrue((sut.networkClient as? ExchangeRatesClient) === ExchangeRatesClient.shared)
+        XCTAssertTrue((sut.networkClient as! NetworkClients) === NetworkClients.fixer)
     }
     
     func test_refreshData_sets_request() {

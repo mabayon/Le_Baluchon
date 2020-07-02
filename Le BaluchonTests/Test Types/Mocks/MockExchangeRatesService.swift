@@ -9,12 +9,12 @@
 @testable import Le_Baluchon
 import Foundation
 
-class MockExchangeRatesService: ExchangeRatesService {
+class MockNetworkClientsService: NetworkClientsService {
     var getRatesCallCount = 0
     var getRatesDataTask = URLSessionDataTask()
     var getRatesCompletion: ((ExchangeRates?, Error?) -> Void)!
     
-    func getRates(completion: @escaping (ExchangeRates?, Error?) -> Void) -> URLSessionDataTask {
+    func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
         getRatesCallCount += 1
         getRatesCompletion = completion
         return getRatesDataTask

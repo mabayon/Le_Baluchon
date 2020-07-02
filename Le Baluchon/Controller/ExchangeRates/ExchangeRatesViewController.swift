@@ -24,7 +24,7 @@ class ExchangeRatesViewController: UIViewController {
     // MARK: - Instance Properties
     var countryCellImage: UIView?
     
-    var networkClient: ExchangeRatesService = ExchangeRatesClient.shared
+    var networkClient: NetworkClientsService = NetworkClients.fixer
     
     var viewModel: ExchangeRatesViewModel?
     var dataTask: URLSessionDataTask?
@@ -91,10 +91,10 @@ class ExchangeRatesViewController: UIViewController {
     @objc func refreshData() {
         guard dataTask == nil else { return }
         
-        dataTask = networkClient.getRates(completion: { (rates, error) in
+        dataTask = networkClient.getData(completion: { (rates, error) in
             self.dataTask = nil
             
-            guard let rates = rates else {
+            guard let rates = rates as? ExchangeRates else {
                 return
             }
             

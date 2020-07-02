@@ -1,34 +1,41 @@
 //
-//  ExchangeRatesClient.swift
+//  NetworkClients.swift
 //  Le Baluchon
 //
-//  Created by Mahieu Bayon on 08/06/2020.
+//  Created by Mahieu Bayon on 02/07/2020.
 //  Copyright © 2020 Mabayon. All rights reserved.
 //
 
 import Foundation
 
-protocol ExchangeRatesService {
-    func getRates(completion: @escaping (ExchangeRates?, Error?) -> Void) -> URLSessionDataTask
+protocol NetworkClientsService {
+    func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask
 }
-class ExchangeRatesClient {
+class NetworkClients {
     
-    let baseURL: URL
+    let apiURL: String
     let session: URLSession
+    let apiService: APIService
     let responseQueue: DispatchQueue?
     
-    static let shared = ExchangeRatesClient(baseURL: URL(string:"http://data.fixer.io/api/")!,
+    static let fixer = NetworkClients(apiURL: Fixer.url,
                                             session: URLSession.shared,
-                                            responseQueue: .main)
+                                            responseQueue: .main,
+                                            apiServices: .Fixer)
     
-    init(baseURL: URL, session: URLSession, responseQueue: DispatchQueue?) {
-        self.baseURL = baseURL
+    init(apiURL: String,
+         session: URLSession,
+         responseQueue: DispatchQueue?,
+         apiServices: APIService) {
+        
+        self.apiURL = apiURL
         self.session = session
         self.responseQueue = responseQueue
+        self.apiService = apiServices
     }
     
-    func getRates(completion: @escaping (ExchangeRates?, Error?) -> Void) -> URLSessionDataTask {
-        let url = URL(string: "latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD,GBP,JPY,CNY,CAD", relativeTo: baseURL)!
+    func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
+        let url = URL(string: apiURL)!
         let task = session.dataTask(with: url) { [weak self] (data, response, error) in
             guard let self = self else { return }
             
@@ -41,8 +48,11 @@ class ExchangeRatesClient {
             }
             let decoder = JSONDecoder()
             do {
-                let rates = try decoder.decode(ExchangeRates.self, from: data)
-                self.dispatchResult(models: rates, completion: completion)
+                switch self.apiService {
+                case .Fixer:
+                    let rates = try decoder.decode(ExchangeRates.self, from: data)
+                    self.dispatchResult(models: rates, completion: completion)
+                }
             } catch {
                 self.dispatchResult(error: error, completion: completion)
             }
@@ -50,7 +60,7 @@ class ExchangeRatesClient {
         task.resume()
         return task
     }
-    
+        
     private func dispatchResult<Type>(models: Type? = nil,
                                       error: Error? = nil,
                                       completion: @escaping (Type?, Error?) -> Void) {
@@ -64,6 +74,6 @@ class ExchangeRatesClient {
     }
 }
 
-extension ExchangeRatesClient: ExchangeRatesService {
+extension NetworkClients: NetworkClientsService {
     
 }

@@ -1,34 +1,34 @@
 //
-//  ExchangeRatesClient.swift
+//  NetworkClientsTests.swift
 //  Le BaluchonTests
 //
-//  Created by Mahieu Bayon on 08/06/2020.
+//  Created by Mahieu Bayon on 02/07/2020.
 //  Copyright © 2020 Mabayon. All rights reserved.
 //
 
 @testable import Le_Baluchon
 import XCTest
 
-class ExchangeRatesClientTests: XCTestCase {
+class NetworkClientsTests: XCTestCase {
 
     // MARK: - Instance Properties
-    var baseURL: URL!
+    var apiURL: String!
     var mockSession: MockURLSession!
-    var sut: ExchangeRatesClient!
-    var getRatesURL: URL {
-        return URL(string: "latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD,GBP,JPY,CNY,CAD", relativeTo: baseURL)!
+    var sut: NetworkClients!
+    var getFixerURL: URL {
+        return URL(string: Fixer.url)!
     }
-    
+
     // MARK: - Test Lifecycle
     override func setUp() {
         super.setUp()
-        baseURL = URL(string: "https://example.com/api/v1/")!
+        apiURL = Fixer.url
         mockSession = MockURLSession()
-        sut = ExchangeRatesClient(baseURL: baseURL, session: mockSession, responseQueue: nil)
+        sut = NetworkClients(apiURL: apiURL, session: mockSession, responseQueue: nil, apiServices: .Fixer)
     }
 
     override func tearDown() {
-        baseURL = nil
+        apiURL = nil
         mockSession = nil
         sut = nil
         super.tearDown()
@@ -36,12 +36,12 @@ class ExchangeRatesClientTests: XCTestCase {
     
     // MARK: - Helper methods
     
-    func whenGetRates(data: Data? = nil,
+    func whengetData(data: Data? = nil,
                       statusCode: Int = 200,
                       error: Error? = nil)
         -> (calledCompletion: Bool, rates: ExchangeRates?, error: Error?) {
 
-            let response = HTTPURLResponse(url: getRatesURL,
+            let response = HTTPURLResponse(url: getFixerURL,
                                            statusCode: statusCode,
                                            httpVersion: nil,
                                            headerFields: nil)
@@ -50,9 +50,9 @@ class ExchangeRatesClientTests: XCTestCase {
             var receivedRates: ExchangeRates? = nil
             var receivedError: Error? = nil
             
-            let mockTask = sut.getRates { (rates, error) in
+            let mockTask = sut.getData { (rates, error) in
                 calledCompletion = true
-                receivedRates = rates
+                receivedRates = rates as? ExchangeRates
                 receivedError = error as NSError?
             } as! MockURLSessionDataTask
 
@@ -61,26 +61,27 @@ class ExchangeRatesClientTests: XCTestCase {
 
     }
     
-    func verifyGetRatesDispatchedToMain(data: Data? = nil,
+    func verifygetDataDispatchedToMain(data: Data? = nil,
                                         statusCode: Int = 200,
                                         error: Error? = nil,
                                         line: UInt = #line) {
         // Given
         mockSession.givenDispatchQueue()
-        sut = ExchangeRatesClient(baseURL: baseURL,
+        sut = NetworkClients(apiURL: apiURL,
                                        session: mockSession,
-                                       responseQueue: .main)
+                                       responseQueue: .main,
+                                       apiServices: .Fixer)
         
         let expectation = self.expectation(description: "Completion wasn't called")
         
         // When
         var thread: Thread!
-        let mockTask = sut.getRates { (rates, error) in
+        let mockTask = sut.getData { (rates, error) in
             thread = Thread.current
             expectation.fulfill()
         } as! MockURLSessionDataTask
         
-        let response = HTTPURLResponse(url: getRatesURL,
+        let response = HTTPURLResponse(url: getFixerURL,
                                        statusCode: statusCode,
                                        httpVersion: nil,
                                        headerFields: nil)
@@ -94,7 +95,7 @@ class ExchangeRatesClientTests: XCTestCase {
     }
     // MARK: - Init - Tests
     func test_init_sets_BaseURL() {
-        XCTAssertEqual(sut.baseURL, baseURL)
+        XCTAssertEqual(sut.apiURL, apiURL)
     }
     
     func test_init_sets_Session() {
@@ -106,31 +107,32 @@ class ExchangeRatesClientTests: XCTestCase {
         let response = DispatchQueue.main
         
         // When
-        sut = ExchangeRatesClient(baseURL: baseURL,
+        sut = NetworkClients(apiURL: apiURL,
                                        session: mockSession,
-                                       responseQueue: response)
+                                       responseQueue: response,
+                                       apiServices: .Fixer)
         XCTAssertEqual(sut.responseQueue, response)
     }
     
     // MARK: - ExchangeRatesService - Tests
     func test_conformsTo_ExchangeRatesService() {
-        XCTAssertTrue((sut as AnyObject) is ExchangeRatesService)
+        XCTAssertTrue((sut as AnyObject) is NetworkClientsService)
     }
 
-    func test_exchangeRatesService_declareGetRates() {
+    func test_exchangeRatesService_declaregetData() {
         // Given
-        let service = sut as ExchangeRatesService
+        let service = sut as NetworkClientsService
         
         // Then
-        _ = service.getRates { _, _ in }
+        _ = service.getData { _, _ in }
     }
     // MARK: - Shared - Tests
     func test_shared_sets_BaseURL() {
         // Given
-        let baseURL = URL(string: "http://data.fixer.io/api/")!
+        let apiURL = "http://data.fixer.io/api/latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD,GBP,JPY,CNY,CAD"
         
         // Then
-        XCTAssertEqual(ExchangeRatesClient.shared.baseURL, baseURL)
+        XCTAssertEqual(NetworkClients.fixer.apiURL, apiURL)
     }
     
     func test_shared_sets_Session() {
@@ -138,7 +140,7 @@ class ExchangeRatesClientTests: XCTestCase {
         let session = URLSession.shared
         
         // Then
-        XCTAssertEqual(ExchangeRatesClient.shared.session, session)
+        XCTAssertEqual(NetworkClients.fixer.session, session)
     }
     
     func test_shared_sets_responseQueue() {
@@ -146,31 +148,31 @@ class ExchangeRatesClientTests: XCTestCase {
         let responseQueue = DispatchQueue.main
         
         // Then
-        XCTAssertEqual(ExchangeRatesClient.shared.responseQueue, responseQueue)
+        XCTAssertEqual(NetworkClients.fixer.responseQueue, responseQueue)
     }
         
-    // MARK: - GetRates - Tests
-    func test_getRates_callsExpectedURL() {
+    // MARK: - getData - Tests
+    func test_getData_callsExpectedURL() {
         // When
-        let mockTask = sut.getRates { (_, _) in
+        let mockTask = sut.getData { (_, _) in
             
         } as! MockURLSessionDataTask
         
         // Then
-        XCTAssertEqual(mockTask.url, getRatesURL)
+        XCTAssertEqual(mockTask.url, getFixerURL)
     }
     
-    func test_getRates_callsResumOnTask() {
+    func test_getData_callsResumOnTask() {
         // When
-        let mockTask = sut.getRates { (_, _) in } as! MockURLSessionDataTask
+        let mockTask = sut.getData { (_, _) in } as! MockURLSessionDataTask
         
         // Then
         XCTAssertTrue(mockTask.calledResume)
     }
     
-    func test_getRates_givenResponseStatusCode500_callsCompletion() {
+    func test_getData_givenResponseStatusCode500_callsCompletion() {
         // When
-        let result = whenGetRates(statusCode: 500)
+        let result = whengetData(statusCode: 500)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
@@ -178,11 +180,11 @@ class ExchangeRatesClientTests: XCTestCase {
         XCTAssertNil(result.error)
     }
     
-    func test_getRates_givenError_callsCompletionWithError() throws {
+    func test_getData_givenError_callsCompletionWithError() throws {
         let expectedError = NSError(domain: "com.Le_BaluchonTests", code: 42)
         
         // When
-        let result = whenGetRates(error: expectedError)
+        let result = whengetData(error: expectedError)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
@@ -192,7 +194,7 @@ class ExchangeRatesClientTests: XCTestCase {
         XCTAssertEqual(actualError, expectedError)
     }
     
-    func test_getRates_givenValidJSON_callsCompletionWithRates() throws {
+    func test_getData_givenValidJSON_callsCompletionWithRates() throws {
         // Given
         let data = try Data.fromJSON(fileName: "ExchangeRates")
         
@@ -200,7 +202,7 @@ class ExchangeRatesClientTests: XCTestCase {
         let rates = try decodoer.decode(ExchangeRates.self, from: data)
         
         // When
-        let result = whenGetRates(data: data)
+        let result = whengetData(data: data)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
@@ -208,7 +210,7 @@ class ExchangeRatesClientTests: XCTestCase {
         XCTAssertEqual(result.rates, rates)
     }
     
-    func test_getRates_givenInvalidJSON_callsCompletionWithError() throws {
+    func test_getData_givenInvalidJSON_callsCompletionWithError() throws {
         // Given
         let data = try Data.fromJSON(fileName: "GET_ExchangeRates_MissingValuesResponse")
         
@@ -222,7 +224,7 @@ class ExchangeRatesClientTests: XCTestCase {
         }
         
         // When
-        let result = whenGetRates(data: data)
+        let result = whengetData(data: data)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
@@ -234,68 +236,31 @@ class ExchangeRatesClientTests: XCTestCase {
     }
     
     // MARK: - Queue - Tests
-    func test_getRates_givenHTTPStatusError_dispatchesToResponseQueue() {
-        verifyGetRatesDispatchedToMain(statusCode: 500)
+    func test_getData_givenHTTPStatusError_dispatchesToResponseQueue() {
+        verifygetDataDispatchedToMain(statusCode: 500)
     }
     
-    func test_getRates_givenError_dispatchesToResponseQueue() {
+    func test_getData_givenError_dispatchesToResponseQueue() {
         // Given
         let error = NSError(domain: "com.Le_BaluchonTests", code: 42)
 
         // Then
-        verifyGetRatesDispatchedToMain(error: error)
+        verifygetDataDispatchedToMain(error: error)
     }
     
-    func test_getRates_givenGoodResponse_dispatchesToResponseQueue() throws {
+    func test_getData_givenGoodResponse_dispatchesToResponseQueue() throws {
         // Given
         let data = try Data.fromJSON(fileName: "ExchangeRates")
         
         // Then
-        verifyGetRatesDispatchedToMain(data: data)
+        verifygetDataDispatchedToMain(data: data)
     }
     
-    func test_getRates_givenInvalidResponse_dispatchesToResponseQueue() throws {
+    func test_getData_givenInvalidResponse_dispatchesToResponseQueue() throws {
         // Given
         let data = try Data.fromJSON(fileName: "GET_ExchangeRates_MissingValuesResponse")
         
         // Then
-        verifyGetRatesDispatchedToMain(data: data)
-    }
-}
-
-class MockURLSession: URLSession {
-    var queue: DispatchQueue? = nil
-    
-    func givenDispatchQueue() {
-        queue = DispatchQueue(label: "com.Le_BaluchonTests.MockSession")
-    }
-    override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        return MockURLSessionDataTask(completionHandler: completionHandler, url: url, queue: queue)
-    }
-}
-
-class MockURLSessionDataTask: URLSessionDataTask {
-    var completionHandler: (Data?, URLResponse?, Error?) -> Void
-    var url: URL
-    
-    init(completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void,
-         url: URL,
-         queue: DispatchQueue?) {
-        if let queue = queue {
-            self.completionHandler = { data, response, error in
-                queue.async {
-                    completionHandler(data, response, error)
-                }
-            }
-        } else {
-            self.completionHandler = completionHandler
-        }
-        self.url = url
-        super.init()
-    }
-    
-    var calledResume = false
-    override func resume() {
-        calledResume = true
+        verifygetDataDispatchedToMain(data: data)
     }
 }
