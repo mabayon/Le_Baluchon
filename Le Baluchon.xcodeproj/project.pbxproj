@@ -146,8 +146,7 @@
 		5C07F0B0248E7DFB0022299E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5C07F0BA248E8BA70022299E /* ExchangeRatesTests.swift */,
-				5C423DD024AA28530084427B /* ConverterTests.swift */,
+				5CBD68F624ADD06B00F24A2C /* ExchangeRates */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -155,7 +154,7 @@
 		5C07F0B1248E7E060022299E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				5C07F0B2248E7E670022299E /* ExchangeRatesPatchClientTests.swift */,
+				5CBD68F724ADD07800F24A2C /* ExchangeRates */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -163,7 +162,7 @@
 		5C07F0B4248E7EDB0022299E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				5C07F0B5248E7F390022299E /* ExchangeRatesClient.swift */,
+				5CBD68F324ADD04400F24A2C /* ExchangeRates */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -257,7 +256,7 @@
 		5C8877C12493B9D4004E2A3A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C8877C22493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift */,
+				5CBD68F524ADD06300F24A2C /* ExchangeRates */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -402,9 +401,7 @@
 		5CB7E5B4248A233300E31A2B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5C07F0B8248E8B700022299E /* ExchangeRates.swift */,
-				5CCCA0E22490EB170089178B /* Currency.swift */,
-				5C423DD324AA291F0084427B /* Converter.swift */,
+				5CBD68F224ADD03700F24A2C /* ExchangeRates */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -412,7 +409,7 @@
 		5CB7E5B5248A234600E31A2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5CB7E5BD248A483100E31A2B /* ExchangeRatesViewController.swift */,
+				5CBD68F124ADD01500F24A2C /* ExchangeRates */,
 				5C156983249B6A0F0079AD1F /* TabBarViewController.swift */,
 			);
 			path = Controller;
@@ -458,10 +455,77 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		5CCCA0D8248F79DE0089178B /* ViewModels */ = {
+		5CBD68F124ADD01500F24A2C /* ExchangeRates */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7E5BD248A483100E31A2B /* ExchangeRatesViewController.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CBD68F224ADD03700F24A2C /* ExchangeRates */ = {
+			isa = PBXGroup;
+			children = (
+				5C07F0B8248E8B700022299E /* ExchangeRates.swift */,
+				5CCCA0E22490EB170089178B /* Currency.swift */,
+				5C423DD324AA291F0084427B /* Converter.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CBD68F324ADD04400F24A2C /* ExchangeRates */ = {
+			isa = PBXGroup;
+			children = (
+				5C07F0B5248E7F390022299E /* ExchangeRatesClient.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CBD68F424ADD05000F24A2C /* ExchangeRates */ = {
 			isa = PBXGroup;
 			children = (
 				5CCCA0D9248F7A450089178B /* ExchangeRatesViewModel.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CBD68F524ADD06300F24A2C /* ExchangeRates */ = {
+			isa = PBXGroup;
+			children = (
+				5C8877C22493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CBD68F624ADD06B00F24A2C /* ExchangeRates */ = {
+			isa = PBXGroup;
+			children = (
+				5C07F0BA248E8BA70022299E /* ExchangeRatesTests.swift */,
+				5C423DD024AA28530084427B /* ConverterTests.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CBD68F724ADD07800F24A2C /* ExchangeRates */ = {
+			isa = PBXGroup;
+			children = (
+				5C07F0B2248E7E670022299E /* ExchangeRatesPatchClientTests.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CBD68F824ADD07E00F24A2C /* ExchangeRates */ = {
+			isa = PBXGroup;
+			children = (
+				5CCCA0DC248F7ACC0089178B /* ExchangeRatesViewModelTests.swift */,
+			);
+			path = ExchangeRates;
+			sourceTree = "<group>";
+		};
+		5CCCA0D8248F79DE0089178B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5CBD68F424ADD05000F24A2C /* ExchangeRates */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -469,7 +533,7 @@
 		5CCCA0DB248F7A4F0089178B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				5CCCA0DC248F7ACC0089178B /* ExchangeRatesViewModelTests.swift */,
+				5CBD68F824ADD07E00F24A2C /* ExchangeRates */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
