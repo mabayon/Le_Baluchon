@@ -36,8 +36,8 @@
 		5CA130AC24AE21DD00AAD98B /* NetworkClients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA130AB24AE21DD00AAD98B /* NetworkClients.swift */; };
 		5CA130AE24AE22FC00AAD98B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA130AD24AE22FC00AAD98B /* APIService.swift */; };
 		5CA130B024AE271A00AAD98B /* Fixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA130AF24AE271A00AAD98B /* Fixer.swift */; };
-		5CA130B324AE277000AAD98B /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA130B224AE277000AAD98B /* APIKeys.swift */; };
 		5CA130B524AE2A1900AAD98B /* NetworkClientsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA130B424AE2A1900AAD98B /* NetworkClientsTests.swift */; };
+		5CAAEBF224AE3B000032B964 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEBF124AE3B000032B964 /* APIKeys.swift */; };
 		5CAED5DC249B91A000688729 /* CountryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAED5DB249B91A000688729 /* CountryCollectionViewCell.swift */; };
 		5CAED5DF249B91F200688729 /* UICollectionViewCell+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAED5DE249B91F200688729 /* UICollectionViewCell+Identifier.swift */; };
 		5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E592248A1C9500E31A2B /* AppDelegate.swift */; };
@@ -102,8 +102,8 @@
 		5CA130AB24AE21DD00AAD98B /* NetworkClients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClients.swift; sourceTree = "<group>"; };
 		5CA130AD24AE22FC00AAD98B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		5CA130AF24AE271A00AAD98B /* Fixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixer.swift; sourceTree = "<group>"; };
-		5CA130B224AE277000AAD98B /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		5CA130B424AE2A1900AAD98B /* NetworkClientsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientsTests.swift; sourceTree = "<group>"; };
+		5CAAEBF124AE3B000032B964 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		5CAED5DB249B91A000688729 /* CountryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCollectionViewCell.swift; sourceTree = "<group>"; };
 		5CAED5DE249B91F200688729 /* UICollectionViewCell+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Identifier.swift"; sourceTree = "<group>"; };
 		5CB7E58F248A1C9500E31A2B /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +182,7 @@
 				5CA130AB24AE21DD00AAD98B /* NetworkClients.swift */,
 				5CA130AF24AE271A00AAD98B /* Fixer.swift */,
 				5CA130AD24AE22FC00AAD98B /* APIService.swift */,
-				5CA130B224AE277000AAD98B /* APIKeys.swift */,
+				5CAAEBF124AE3B000032B964 /* APIKeys.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -712,11 +712,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C8877C92493BD6E004E2A3A /* StoryboardCreatable.swift in Sources */,
-				5CA130B324AE277000AAD98B /* APIKeys.swift in Sources */,
 				5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */,
 				5CF4641F24ACA06E0043E6BA /* UIImage+GetImage.swift in Sources */,
 				5C156984249B6A0F0079AD1F /* TabBarViewController.swift in Sources */,
 				5CA130AE24AE22FC00AAD98B /* APIService.swift in Sources */,
+				5CAAEBF224AE3B000032B964 /* APIKeys.swift in Sources */,
 				5CBD690324ADD36300F24A2C /* WeatherModel.swift in Sources */,
 				5CAED5DC249B91A000688729 /* CountryCollectionViewCell.swift in Sources */,
 				5C423DD424AA291F0084427B /* Converter.swift in Sources */,
