@@ -10,7 +10,7 @@
 import XCTest
 
 class ExchangeRatesViewModelTests: XCTestCase {
-
+    
     // MARK: - Instance Properties
     var sut: ExchangeRatesViewModel!
     var exchangeRates: ExchangeRates!
@@ -20,22 +20,22 @@ class ExchangeRatesViewModelTests: XCTestCase {
         super.setUp()
         whenSUTSetFromExchangeRates()
     }
-
+    
     override func tearDown() {
         exchangeRates = nil
         sut = nil
         super.tearDown()
     }
-        
+    
     // MARK: - When
     func whenSUTSetFromExchangeRates(date: String = "2020-06-09",
                                      base: String = "EUR",
                                      rates: [String: Double] = ["USD": 1.12972]) {
-      
+        
         exchangeRates = ExchangeRates(base: base, date: date, rates: rates)
         sut = ExchangeRatesViewModel(exchangeRates: exchangeRates)
     }
-    
+        
     // MARK: - Init - Tests
     func test_initExchangeRates_setsExchangeRates() {
         XCTAssertEqual(sut.exchangeRates, exchangeRates)
@@ -44,141 +44,157 @@ class ExchangeRatesViewModelTests: XCTestCase {
     func test_initExchangeRates_setsDate() {
         XCTAssertEqual(sut.date, exchangeRates.date)
     }
-        
-    func test_initExchangeRates_givenRatesUSD_setsCurrency() {
+    
+    func test_initExchangeRates_givenRates_setsCurrency() {
         // Given
-        whenSUTSetFromExchangeRates(rates: ["USD": 1.12972])
-
+        whenSUTSetFromExchangeRates(rates: ["USD": 1.12972,
+                                            "GBP": 1.12972,
+                                            "CNY": 1.12972,
+                                            "JPY": 1.12972,
+                                            "CAD": 1.12972])
+        
         // Then
         let expectedCurrency = [Currency(name: "USD", value: "1.12972", symbol: "$"),
-                                 Currency(name: "EUR", value: "1", symbol: "€")]
+                                Currency(name: "GBP", value: "1.12972", symbol: "£"),
+                                Currency(name: "CNY", value: "1.12972", symbol: "¥"),
+                                Currency(name: "JPY", value: "1.12972", symbol: "¥"),
+                                Currency(name: "CAD", value: "1.12972", symbol: "$"),
+                                Currency(name: "EUR", value: "1", symbol: "€")]
+        
         XCTAssertEqual(sut.currencies, expectedCurrency)
     }
     
-    func test_initExchangeRates_givenUnknownCurrencyImage_setCurrency() {
+    func test_initExchangeRates_givenUnknownCurrency_setCurrency() {
         // Given
         whenSUTSetFromExchangeRates(rates: ["AUD": 1.12972])
-
+        
         let expectedCurrency = [Currency(name: "EUR", value: "1", symbol: "€"),
-                                 Currency(name: "AUD", value: "1.12972", symbol: ""),]
+                                Currency(name: "AUD", value: "1.12972", symbol: ""),]
         // Then
         XCTAssertEqual(sut.currencies, expectedCurrency)
+    }
+    
+    func testConfigure_givenUnknownCurrency_valueWillBeEmpty() {
+        // Given
+        sut.configure(fromCurrency: "EUR", toCurrency: "UNK") { (fromCurrency, toCurrency) in
+            XCTAssertEqual(toCurrency, "")
+        }
     }
     
     // MUST BE CHANGED WHEN THERE ARE MORE DEVISES
-//    func test_initExchangeRates_givenRatesUSD_EUR_setsCurrency() {
-//        // Given
-//        whenSUTSetFromExchangeRates(rates: ["USD": 1.12972, "EUR": 1.256333])
-//
-//        // Then
-//        let expectedCurrency = [Currency(name: "USD", value: "1.12972", symbol: "$", image: UIImage(named: "USD")!),
-//                               Currency(name: "EUR", value: "1.256333", symbol: "€", image: UIImage(named: "EUR")!)]
-//
-//        XCTAssertEqual(sut.currencies.sorted { $0.name < $1.name },
-//                       expectedCurrency.sorted { $0.name < $1.name })
-//    }
-        
-//    func test_initExchangeRates_givenLastUpdate1YearAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 1.year.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 1 an")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate2YearsAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 2.years.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 2 ans")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate1MonthAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 1.month.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 1 mois")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate2MonthsAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 2.months.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 2 mois")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate1WeekAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 1.week.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 1 semaine")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate2WeeksAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 2.weeks.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 2 semaines")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate1DayAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 1.day.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 1 jour")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate2DaysAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 2.days.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 2 jours")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate1HourAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 1.hour.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 1 heure")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate2HoursAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 2.hours.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 2 heures")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate1MinuteAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 1.minute.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 1 minute")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate2MinutesAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 2.minutes.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 2 minutes")
-//    }
-//
-//    func test_initExchangeRates_givenLastUpdate1SecondAgo_setLastUpdate() {
-//        // Given
-//        whenSUTSetFromExchangeRates(timestamp: 1.second.pastDate)
-//
-//        // Then
-//        XCTAssertEqual(sut.lastUpdate, "Il y a 1 seconde")
-//    }
+    //    func test_initExchangeRates_givenRatesUSD_EUR_setsCurrency() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(rates: ["USD": 1.12972, "EUR": 1.256333])
+    //
+    //        // Then
+    //        let expectedCurrency = [Currency(name: "USD", value: "1.12972", symbol: "$", image: UIImage(named: "USD")!),
+    //                               Currency(name: "EUR", value: "1.256333", symbol: "€", image: UIImage(named: "EUR")!)]
+    //
+    //        XCTAssertEqual(sut.currencies.sorted { $0.name < $1.name },
+    //                       expectedCurrency.sorted { $0.name < $1.name })
+    //    }
+    
+    //    func test_initExchangeRates_givenLastUpdate1YearAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 1.year.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 1 an")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate2YearsAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 2.years.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 2 ans")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate1MonthAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 1.month.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 1 mois")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate2MonthsAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 2.months.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 2 mois")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate1WeekAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 1.week.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 1 semaine")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate2WeeksAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 2.weeks.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 2 semaines")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate1DayAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 1.day.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 1 jour")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate2DaysAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 2.days.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 2 jours")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate1HourAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 1.hour.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 1 heure")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate2HoursAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 2.hours.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 2 heures")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate1MinuteAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 1.minute.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 1 minute")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate2MinutesAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 2.minutes.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 2 minutes")
+    //    }
+    //
+    //    func test_initExchangeRates_givenLastUpdate1SecondAgo_setLastUpdate() {
+    //        // Given
+    //        whenSUTSetFromExchangeRates(timestamp: 1.second.pastDate)
+    //
+    //        // Then
+    //        XCTAssertEqual(sut.lastUpdate, "Il y a 1 seconde")
+    //    }
 }

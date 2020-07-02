@@ -76,11 +76,7 @@ class ExchangeRatesViewModel {
         }
         return sortedCurrency
     }
-    
-    private func getSymbol(for country: String) -> String {
-        return currencies.filter ({ $0.name == country }).map({ $0.symbol}).first ?? ""
-    }
-    
+        
     private func getValue(for currency: String) -> String {
         guard let value = currencies.filter({ $0.name == currency }).first?.value else {
             return ""
@@ -92,18 +88,10 @@ class ExchangeRatesViewModel {
                    toCurrency: String,
                    completion: @escaping (String, String) -> ()) {
         
-        let fromCurrencySymbol = getSymbol(for: fromCurrency)
-        let toCurrency = getValue(for: toCurrency) + getSymbol(for: toCurrency)
+        let fromCurrencySymbol = ExchangeRatesViewModel.selectSymbol(for: fromCurrency)
+        let toCurrency = getValue(for: toCurrency) + ExchangeRatesViewModel.selectSymbol(for: toCurrency)
         
         completion(fromCurrencySymbol, toCurrency)
-    }
-    
-    func configure2(fromCurrency: Currency,
-                   fromCurrencyLabel: UILabel,
-                   toCurrency: Currency,
-                   toCurrencyLabel: UILabel) {
-        fromCurrencyLabel.text = fromCurrency.symbol
-        toCurrencyLabel.text = toCurrency.value + toCurrency.symbol
     }
 }
 

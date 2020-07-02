@@ -34,7 +34,7 @@ class ConverterTests: XCTestCase {
     }
     
     // MARK: - CalculRates - Tests
-    func testCalculRates_toUSD_convertEURToUSD() {
+    func testCalculRates_formEUR_convertEURToUSD() {
         // Given
         let ratesUSD = 1.12972
         let amountToConvert = 10.0
@@ -48,7 +48,7 @@ class ConverterTests: XCTestCase {
         XCTAssertEqual(sut.result, result)
     }
         
-    func testCalculRates_fromUSD_convertUSDtoEUR() {
+    func testCalculRates_toEUR_convertUSDtoEUR() {
         let ratesUSD = 1.12972
         let amountToConvert = 10.0
         let ratesEUR = (100.0 / ratesUSD) / 100.0
@@ -78,6 +78,7 @@ class ConverterTests: XCTestCase {
         let invalidCurrency = "GGG"
         
         // When
+        sut.state = .toEUR
         sut.calculRates(for: 10, fromCurrency: invalidCurrency, toCurrency: "EUR")
         
         // Then
