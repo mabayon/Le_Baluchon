@@ -12,7 +12,7 @@ import Foundation
 class MockNetworkClientsService: NetworkClientsService {
     var getRatesCallCount = 0
     var getRatesDataTask = URLSessionDataTask()
-    var getRatesCompletion: ((ExchangeRates?, Error?) -> Void)!
+    var getRatesCompletion: ((Any?, Error?) -> Void)!
     
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
         getRatesCallCount += 1

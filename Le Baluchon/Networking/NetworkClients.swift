@@ -23,6 +23,11 @@ class NetworkClients {
                                             responseQueue: .main,
                                             apiServices: .Fixer)
     
+    static let openWeather = NetworkClients(apiURL: OpenWeather.url,
+                                            session: URLSession.shared,
+                                            responseQueue: .main,
+                                            apiServices: .OpenWeather)
+    
     init(apiURL: String,
          session: URLSession,
          responseQueue: DispatchQueue?,
@@ -51,6 +56,9 @@ class NetworkClients {
                 switch self.apiService {
                 case .Fixer:
                     let rates = try decoder.decode(ExchangeRates.self, from: data)
+                    self.dispatchResult(models: rates, completion: completion)
+                case .OpenWeather:
+                    let rates = try decoder.decode(TodayWeather.self, from: data)
                     self.dispatchResult(models: rates, completion: completion)
                 }
             } catch {

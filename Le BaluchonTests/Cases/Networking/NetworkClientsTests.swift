@@ -15,8 +15,19 @@ class NetworkClientsTests: XCTestCase {
     var apiURL: String!
     var mockSession: MockURLSession!
     var sut: NetworkClients!
+    
+    var apiServices: APIService = .Fixer {
+        didSet {
+            sut = NetworkClients(apiURL: apiURL, session: mockSession, responseQueue: nil, apiServices: apiServices)
+        }
+    }
+    
     var getFixerURL: URL {
         return URL(string: Fixer.url)!
+    }
+
+    var getOpenWeatherURL: URL {
+        return URL(string: OpenWeather.url)!
     }
 
     // MARK: - Test Lifecycle
@@ -24,7 +35,7 @@ class NetworkClientsTests: XCTestCase {
         super.setUp()
         apiURL = Fixer.url
         mockSession = MockURLSession()
-        sut = NetworkClients(apiURL: apiURL, session: mockSession, responseQueue: nil, apiServices: .Fixer)
+        apiServices = .Fixer
     }
 
     override func tearDown() {
@@ -36,10 +47,11 @@ class NetworkClientsTests: XCTestCase {
     
     // MARK: - Helper methods
     
-    func whengetData(data: Data? = nil,
+    func whenGetData(for url: URL,
+                     data: Data? = nil,
                       statusCode: Int = 200,
                       error: Error? = nil)
-        -> (calledCompletion: Bool, rates: ExchangeRates?, error: Error?) {
+        -> (calledCompletion: Bool, data: Any?, error: Error?) {
 
             let response = HTTPURLResponse(url: getFixerURL,
                                            statusCode: statusCode,
@@ -47,17 +59,17 @@ class NetworkClientsTests: XCTestCase {
                                            headerFields: nil)
                         
             var calledCompletion = false
-            var receivedRates: ExchangeRates? = nil
+            var receivedData: Any? = nil
             var receivedError: Error? = nil
             
-            let mockTask = sut.getData { (rates, error) in
+            let mockTask = sut.getData { (data, error) in
                 calledCompletion = true
-                receivedRates = rates as? ExchangeRates
+                receivedData = data
                 receivedError = error as NSError?
             } as! MockURLSessionDataTask
 
             mockTask.completionHandler(data, response, error)
-            return (calledCompletion, receivedRates, receivedError)
+            return (calledCompletion, receivedData, receivedError)
 
     }
     
@@ -114,12 +126,12 @@ class NetworkClientsTests: XCTestCase {
         XCTAssertEqual(sut.responseQueue, response)
     }
     
-    // MARK: - ExchangeRatesService - Tests
-    func test_conformsTo_ExchangeRatesService() {
+    // MARK: - NetworkClientsService - Tests
+    func test_conformsTo_NetworkClientsService() {
         XCTAssertTrue((sut as AnyObject) is NetworkClientsService)
     }
 
-    func test_exchangeRatesService_declaregetData() {
+    func test_networkClientsService_declareGetData() {
         // Given
         let service = sut as NetworkClientsService
         
@@ -172,11 +184,11 @@ class NetworkClientsTests: XCTestCase {
     
     func test_getData_givenResponseStatusCode500_callsCompletion() {
         // When
-        let result = whengetData(statusCode: 500)
+        let result = whenGetData(for: getFixerURL, statusCode: 500)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
-        XCTAssertNil(result.rates)
+        XCTAssertNil(result.data)
         XCTAssertNil(result.error)
     }
     
@@ -184,11 +196,11 @@ class NetworkClientsTests: XCTestCase {
         let expectedError = NSError(domain: "com.Le_BaluchonTests", code: 42)
         
         // When
-        let result = whengetData(error: expectedError)
+        let result = whenGetData(for: getFixerURL, error: expectedError)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
-        XCTAssertNil(result.rates)
+        XCTAssertNil(result.data)
 
         let actualError = try XCTUnwrap(result.error as NSError?)
         XCTAssertEqual(actualError, expectedError)
@@ -202,12 +214,12 @@ class NetworkClientsTests: XCTestCase {
         let rates = try decodoer.decode(ExchangeRates.self, from: data)
         
         // When
-        let result = whengetData(data: data)
+        let result = whenGetData(for: getFixerURL, data: data)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
         XCTAssertNil(result.error)
-        XCTAssertEqual(result.rates, rates)
+        XCTAssertEqual((result.data as? ExchangeRates), rates)
     }
     
     func test_getData_givenInvalidJSON_callsCompletionWithError() throws {
@@ -224,11 +236,11 @@ class NetworkClientsTests: XCTestCase {
         }
         
         // When
-        let result = whengetData(data: data)
+        let result = whenGetData(for: getFixerURL, data: data)
         
         // Then
         XCTAssertTrue(result.calledCompletion)
-        XCTAssertNil(result.rates)
+        XCTAssertNil(result.data)
        
         let actualError = try XCTUnwrap(result.error as NSError?)
         XCTAssertEqual(actualError.domain, expectedError.domain)
@@ -263,4 +275,28 @@ class NetworkClientsTests: XCTestCase {
         // Then
         verifygetDataDispatchedToMain(data: data)
     }
+}
+
+// MARK: - OpenWeather - Tests
+extension NetworkClientsTests {
+    
+    func test_getData_givenValidJSON_callsCompletionWithTodayWeather() throws {
+        // Given
+        OpenWeather.latitude = "48.8534"
+        OpenWeather.longitude = "2.3488"
+        apiServices = .OpenWeather
+        let data = try Data.fromJSON(fileName: "TodayWeather")
+        
+        let decodoer = JSONDecoder()
+        let weather = try decodoer.decode(TodayWeather.self, from: data)
+        
+        // When
+        let result = whenGetData(for: getOpenWeatherURL, data: data)
+        
+        // Then
+        XCTAssertTrue(result.calledCompletion)
+        XCTAssertNil(result.error)
+        XCTAssertEqual((result.data as? TodayWeather), weather)
+    }
+
 }

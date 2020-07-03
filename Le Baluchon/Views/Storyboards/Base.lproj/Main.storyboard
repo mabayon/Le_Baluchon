@@ -43,13 +43,13 @@
                                         <rect key="frame" x="0.0" y="128.5" width="320" height="346.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Détails EUR/USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="T6y-xO-SvK">
-                                                <rect key="frame" x="82.5" y="8" width="155" height="23.5"/>
+                                                <rect key="frame" x="78.5" y="8" width="163" height="24.5"/>
                                                 <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yw2-ak-rMc" customClass="ConverterView" customModule="Le_Baluchon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="39.5" width="320" height="107.5"/>
+                                                <rect key="frame" x="0.0" y="40.5" width="320" height="108.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="b0s-i0-MdI">
                                                         <rect key="frame" x="34.5" y="0.0" width="251" height="65"/>
@@ -90,13 +90,13 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyN-cz-6fL">
-                                                        <rect key="frame" x="19.5" y="73" width="121" height="29.5"/>
+                                                        <rect key="frame" x="19.5" y="73" width="124" height="30.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mbj-rk-wHN">
-                                                                <rect key="frame" x="0.0" y="0.0" width="107" height="29.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="107" height="30.5"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zhi-HH-l57">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="107" height="27.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="107" height="28.5"/>
                                                                         <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                         <connections>
@@ -104,12 +104,12 @@
                                                                         </connections>
                                                                     </textField>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mli-hw-8ql">
-                                                                        <rect key="frame" x="0.0" y="27.5" width="107" height="2"/>
+                                                                        <rect key="frame" x="0.0" y="28.5" width="107" height="2"/>
                                                                     </progressView>
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="€" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XO-3o-LC6">
-                                                                <rect key="frame" x="107" y="0.0" width="14" height="29.5"/>
+                                                                <rect key="frame" x="107" y="0.0" width="17" height="30.5"/>
                                                                 <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -117,10 +117,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpg-yi-1lz">
-                                                        <rect key="frame" x="246" y="73" width="14" height="29.5"/>
+                                                        <rect key="frame" x="245" y="73" width="16" height="30.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gcS-i4-7tL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="29.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="16" height="30.5"/>
                                                                 <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -162,13 +162,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choisis ta devise à convertir en EUR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qfF-CP-Gyr">
-                                        <rect key="frame" x="11" y="8" width="298" height="27"/>
+                                        <rect key="frame" x="11" y="8" width="298" height="28"/>
                                         <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="feD-Kv-oCi">
-                                        <rect key="frame" x="21" y="43" width="278" height="77.5"/>
+                                        <rect key="frame" x="21" y="44" width="278" height="76.5"/>
                                         <color key="backgroundColor" red="0.1647058824" green="0.61568627450000002" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZPs-Y0-IYJ">
                                             <size key="itemSize" width="128" height="128"/>
@@ -178,7 +178,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CountryCollectionViewCell" id="cKz-9w-JJt" customClass="CountryCollectionViewCell" customModule="Le_Baluchon" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-25.5" width="128" height="128"/>
+                                                <rect key="frame" x="0.0" y="-26" width="128" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="p3s-Yn-Nwl">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -231,6 +231,103 @@
             </objects>
             <point key="canvasLocation" x="1076.25" y="104.5774647887324"/>
         </scene>
+        <!--Weather View Controller-->
+        <scene sceneID="hqn-LG-Dk1">
+            <objects>
+                <viewController id="CLU-Q7-9cg" customClass="WeatherViewController" customModule="Le_Baluchon" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2O6-Bq-Ieu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2v-gE-qx8" customClass="TodayWeatherView" customModule="Le_Baluchon" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="320" height="197.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKj-d3-cdA">
+                                        <rect key="frame" x="123" y="8" width="74" height="36.5"/>
+                                        <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cjS-xf-O6V">
+                                        <rect key="frame" x="40" y="52" width="240" height="73"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="1000" text="21°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vg7-sY-uDN">
+                                                <rect key="frame" x="0.0" y="0.0" width="116" height="73"/>
+                                                <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="60"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="weather_clear_sky_d" translatesAutoresizingMaskIntoConstraints="NO" id="eQm-Y2-VUS">
+                                                <rect key="frame" x="124" y="0.0" width="116" height="73"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="eQm-Y2-VUS" firstAttribute="height" secondItem="Vg7-sY-uDN" secondAttribute="height" id="RUb-8L-SAG"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ensoleillé" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeN-Ub-bLc">
+                                        <rect key="frame" x="127" y="133" width="66.5" height="18.5"/>
+                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mercredi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGC-DO-grX">
+                                        <rect key="frame" x="8" y="165" width="87.5" height="24.5"/>
+                                        <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.6470588235294118" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="dGC-DO-grX" firstAttribute="leading" secondItem="V2v-gE-qx8" secondAttribute="leading" constant="8" id="4v2-uS-rno"/>
+                                    <constraint firstItem="AKj-d3-cdA" firstAttribute="top" secondItem="V2v-gE-qx8" secondAttribute="top" constant="8" id="5gs-YB-KGr"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dGC-DO-grX" secondAttribute="trailing" constant="20" symbolic="YES" id="DV3-Xr-tUx"/>
+                                    <constraint firstItem="cjS-xf-O6V" firstAttribute="centerX" secondItem="V2v-gE-qx8" secondAttribute="centerX" id="DtT-li-TtO"/>
+                                    <constraint firstItem="ZeN-Ub-bLc" firstAttribute="top" secondItem="cjS-xf-O6V" secondAttribute="bottom" constant="8" id="EbP-PE-O6I"/>
+                                    <constraint firstItem="cjS-xf-O6V" firstAttribute="top" secondItem="AKj-d3-cdA" secondAttribute="bottom" constant="7.5" id="Jdb-KV-Lsg"/>
+                                    <constraint firstAttribute="bottom" secondItem="dGC-DO-grX" secondAttribute="bottom" constant="8" id="Kpi-vk-kuv"/>
+                                    <constraint firstItem="cjS-xf-O6V" firstAttribute="leading" secondItem="V2v-gE-qx8" secondAttribute="leading" constant="40" id="UMS-Hn-wEH"/>
+                                    <constraint firstItem="AKj-d3-cdA" firstAttribute="centerX" secondItem="V2v-gE-qx8" secondAttribute="centerX" id="W9L-9b-YvA"/>
+                                    <constraint firstItem="dGC-DO-grX" firstAttribute="top" secondItem="ZeN-Ub-bLc" secondAttribute="bottom" constant="13.5" id="Zoq-JQ-zGR"/>
+                                    <constraint firstItem="ZeN-Ub-bLc" firstAttribute="centerX" secondItem="V2v-gE-qx8" secondAttribute="centerX" id="pjl-lJ-xrV"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="cityLabel" destination="AKj-d3-cdA" id="was-vT-Rif"/>
+                                    <outlet property="dayLabel" destination="dGC-DO-grX" id="bqk-UE-AM9"/>
+                                    <outlet property="descriptionLabel" destination="ZeN-Ub-bLc" id="1il-SC-b1n"/>
+                                    <outlet property="imageView" destination="eQm-Y2-VUS" id="shR-wd-WgH"/>
+                                    <outlet property="tempLabel" destination="Vg7-sY-uDN" id="eSf-2W-YLQ"/>
+                                </connections>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uvw-7d-q98">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Météo" id="VnT-cV-Gm1"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="V2v-gE-qx8" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="Bij-KD-2ax"/>
+                            <constraint firstItem="Uvw-7d-q98" firstAttribute="top" secondItem="fcl-50-9Ry" secondAttribute="top" id="D2l-SR-tlk"/>
+                            <constraint firstItem="Uvw-7d-q98" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="c4r-jk-xjO"/>
+                            <constraint firstItem="V2v-gE-qx8" firstAttribute="top" secondItem="Uvw-7d-q98" secondAttribute="bottom" id="mtB-nr-GCc"/>
+                            <constraint firstItem="V2v-gE-qx8" firstAttribute="trailing" secondItem="fcl-50-9Ry" secondAttribute="trailing" id="q67-ee-foo"/>
+                            <constraint firstItem="Uvw-7d-q98" firstAttribute="trailing" secondItem="fcl-50-9Ry" secondAttribute="trailing" id="xzI-Uv-Hyx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fcl-50-9Ry"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="icon_Weather_Deselected" selectedImage="icon_Weather_Selected" id="fjq-E8-zBn"/>
+                    <connections>
+                        <outlet property="todayWeatherView" destination="V2v-gE-qx8" id="yK2-kJ-sHK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J9v-7Z-279" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.875" y="894.71830985915494"/>
+        </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="8TR-vf-yH7">
             <objects>
@@ -243,6 +340,7 @@
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <segue destination="CLU-Q7-9cg" kind="relationship" relationship="viewControllers" id="AcV-Lb-Avo"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="2tA-8B-g4u"/>
                     </connections>
                 </tabBarController>
@@ -257,5 +355,8 @@
         <image name="icon_ExchangeRates_Deselected" width="25.5" height="25.5"/>
         <image name="icon_ExchangeRates_Selected" width="25.5" height="25.5"/>
         <image name="icon_Swap" width="62" height="53"/>
+        <image name="icon_Weather_Deselected" width="25.5" height="20"/>
+        <image name="icon_Weather_Selected" width="25.5" height="20"/>
+        <image name="weather_clear_sky_d" width="196" height="196"/>
     </resources>
 </document>

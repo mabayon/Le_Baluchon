@@ -13,7 +13,7 @@ class WeatherTests: XCTestCase, DecodableTestCase {
     
     // MARK: - Instance Properties
     var dictionary: NSDictionary!
-    var sut: WeatherModel!
+    var sut: TodayWeather!
     
     // MARK: - Test Lifecyle
     override func setUp() {

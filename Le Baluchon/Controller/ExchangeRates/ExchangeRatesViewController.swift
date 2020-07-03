@@ -88,7 +88,7 @@ class ExchangeRatesViewController: UIViewController {
     }
     
     // MARK: - Refresh
-    @objc func refreshData() {
+    func refreshData() {
         guard dataTask == nil else { return }
         
         dataTask = networkClient.getData(completion: { (rates, error) in

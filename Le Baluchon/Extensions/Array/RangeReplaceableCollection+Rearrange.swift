@@ -15,3 +15,8 @@ extension RangeReplaceableCollection where Indices: Equatable {
         insert(remove(at: from), at: to)
     }
 }
+
+let masterColors = ["red", "purple", "pink", "yellow", "brown", "blue", "orange", "green"]
+var colors = ["yellow", "red", "purple"] // whatever colors you have
+var newArr = masterColors.filter { colors.contains($0) }
+
