@@ -120,11 +120,7 @@ extension ExchangeRatesViewController: UICollectionViewDataSource {
         
         cell.applyShadow()
         cell.delegate = self
-        
-        guard let arrayWithoutEUR = viewModel?.currencies.filter({ $0.name != "EUR" })
-            else { return cell }
-        
-        cell.name = arrayWithoutEUR[indexPath.row].name
+        viewModel?.configureCell(cell, for: indexPath.row)
         return cell
     }
 }

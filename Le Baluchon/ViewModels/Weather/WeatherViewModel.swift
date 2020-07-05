@@ -19,46 +19,14 @@ class WeatherViewModel {
     let day: String
     
     var weatherCondition: WeatherCondition = .none
-    
-    enum WeatherCondition {
-        case clearSkyD, clearSkyN, thunderstorm,
-        clouds, fewCloudsD, fewCloudsN, mist, rain, snow, none
         
-        var image: UIImage {
-            let imageName: String
-            switch self {
-            case .clearSkyD:
-                imageName = "weather_clear_sky_d"
-            case .clearSkyN:
-                imageName = "weather_clear_sky_n"
-            case .thunderstorm:
-                imageName = "weather_thunderstorm"
-            case .clouds:
-                imageName = "weather_clouds"
-            case .fewCloudsD:
-                imageName = "weather_few_clouds_d"
-            case .fewCloudsN:
-                imageName = "weather_few_clouds_n"
-            case .mist:
-                imageName = "weather_mist"
-            case .rain:
-                imageName = "weather_rain"
-            case .snow:
-                imageName = "weather_snow"
-            case .none:
-                return UIImage()
-            }
-            return UIImage(named: imageName)!
-        }
-    }
-    
     init(weather: TodayWeather) {
         self.weather = weather
         self.city = weather.name
         self.temp = WeatherViewModel.formatTemp(for: weather)
         self.weatherCondition = WeatherViewModel.formatWeatherCondition(for: weather)
         self.description = WeatherViewModel.formatDescription(for: weather)
-        self.day = WeatherViewModel.formatDay()
+        self.day = Date.getDayString()
     }
     
     private static func formatTemp(for weather: TodayWeather) -> String {
@@ -98,47 +66,7 @@ class WeatherViewModel {
     private static func formatDescription(for weather: TodayWeather) -> String {
         return weather.weather.first?.description ?? ""
     }
-    
-    private static func formatDay() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-
-        formatter.dateFormat = "dd.MM.yyyy"
-        let today = formatter.string(from: date)
         
-        switch getDayOfWeek(today: today, formatter: formatter) {
-        case 1:
-            return "Dimanche"
-        case 2:
-            return "Lundi"
-        case 3:
-            return "Mardi"
-        case 4:
-            return "Mercredi"
-        case 5:
-            return "Jeudi"
-        case 6:
-            return "Vendredi"
-        case 7:
-            return "Samedi"
-        default:
-            break
-        }
-        return ""
-    }
-    
-    private static func getDayOfWeek(today: String, formatter: DateFormatter) -> Int? {
-
-        if let todayDate = formatter.date(from: today) {
-            let myCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-            let myComponents = myCalendar.components(.weekday, from: todayDate)
-            let weekDay = myComponents.weekday
-            return weekDay
-        } else {
-            return nil
-        }
-    }
-    
     func configure(imageView: UIImageView,
                    cityLabel: UILabel,
                    tempLabel: UILabel,

@@ -24,7 +24,6 @@ extension UIImage {
         defer {
             UIGraphicsEndImageContext()
         }
-
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }

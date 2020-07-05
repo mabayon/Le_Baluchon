@@ -93,6 +93,11 @@ class ExchangeRatesViewModel {
         
         completion(fromCurrencySymbol, toCurrency)
     }
+    
+    func configureCell(_ cell: CountryCollectionViewCell, for row: Int) {
+        let arrayWithoutEUR = currencies.filter({ $0.name != "EUR" })
+        cell.name = arrayWithoutEUR[row].name
+    }
 }
 
 extension ExchangeRatesViewModel: Equatable {

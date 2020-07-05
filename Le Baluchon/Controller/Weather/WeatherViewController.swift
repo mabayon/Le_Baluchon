@@ -56,7 +56,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
             OpenWeather.latitude = String(location.coordinate.latitude)
             OpenWeather.longitude = String(location.coordinate.longitude)
             networkClient = NetworkClients.openWeather
-            refreshData()
+//            refreshData()
             locationManager.stopUpdatingLocation()
         }
     }

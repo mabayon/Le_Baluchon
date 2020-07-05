@@ -38,9 +38,17 @@ class WeatherTests: XCTestCase, DecodableTestCase {
     
     // MARK: - Decodable - Test
     
-    func test_decodable_sets_weather() {
-        let expected = [Weather(main: "Rain", description: "légère pluie", icon: "10d")]
-        XCTAssertEqual(sut.weather, expected)
+    func test_decodable_sets_weather() throws {
+        
+        let weather = dictionary["weather"] as! [[String: Any]]
+        let main = weather.map { $0 }.first.map { $0 }?.filter{ $0.key == "main" }.first
+        let description = weather.map { $0 }.first.map { $0 }?.filter{ $0.key == "description" }.first
+        let icon = weather.map { $0 }.first.map { $0 }?.filter{ $0.key == "icon" }.first
+
+        XCTAssertEqual(sut.weather.first?.main, main?.value as? String)
+        XCTAssertEqual(sut.weather.first?.description, description?.value as? String)
+        XCTAssertEqual(sut.weather.first?.icon, icon?.value as? String)
+
     }
     
     func test_decodable_sets_name() throws {
