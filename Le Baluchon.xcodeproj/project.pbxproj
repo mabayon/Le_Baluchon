@@ -31,6 +31,7 @@
 		5C48A4C024B1DF2700E884C2 /* ForecastManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48A4BF24B1DF2700E884C2 /* ForecastManagerTests.swift */; };
 		5C48A4C324B20C9E00E884C2 /* Date+FromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48A4C224B20C9E00E884C2 /* Date+FromString.swift */; };
 		5C48A4C524B20DED00E884C2 /* Date+ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48A4C424B20DED00E884C2 /* Date+ToString.swift */; };
+		5C48A4C724B21EA500E884C2 /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48A4C624B21EA500E884C2 /* Temp.swift */; };
 		5C6C13CE24AFBABE004BE476 /* Date+GetDayString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C13CD24AFBABE004BE476 /* Date+GetDayString.swift */; };
 		5C7890982493C51C00CA7842 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C8877D32493BECA004E2A3A /* Main.storyboard */; };
 		5C78909D2493CDA300CA7842 /* MockExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78909C2493CDA300CA7842 /* MockExchangeRatesService.swift */; };
@@ -109,6 +110,7 @@
 		5C48A4BF24B1DF2700E884C2 /* ForecastManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastManagerTests.swift; sourceTree = "<group>"; };
 		5C48A4C224B20C9E00E884C2 /* Date+FromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+FromString.swift"; sourceTree = "<group>"; };
 		5C48A4C424B20DED00E884C2 /* Date+ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
+		5C48A4C624B21EA500E884C2 /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		5C6C13CD24AFBABE004BE476 /* Date+GetDayString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+GetDayString.swift"; sourceTree = "<group>"; };
 		5C78909C2493CDA300CA7842 /* MockExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExchangeRatesService.swift; sourceTree = "<group>"; };
 		5C8877C22493B9FC004E2A3A /* ExchangeRatesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesViewControllerTests.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				5C03321324B06D5C00F4D598 /* WeatherCondition.swift */,
 				5C03321A24B091F700F4D598 /* ForecastWeather.swift */,
 				5C48A4BD24B1DE4F00E884C2 /* ForecastManager.swift */,
+				5C48A4C624B21EA500E884C2 /* Temp.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -818,6 +821,7 @@
 				5C156984249B6A0F0079AD1F /* TabBarViewController.swift in Sources */,
 				5C03321424B06D5C00F4D598 /* WeatherCondition.swift in Sources */,
 				5CA130AE24AE22FC00AAD98B /* APIService.swift in Sources */,
+				5C48A4C724B21EA500E884C2 /* Temp.swift in Sources */,
 				5CAAEBF224AE3B000032B964 /* APIKeys.swift in Sources */,
 				5CAAEBF424AE46520032B964 /* OpenWeather.swift in Sources */,
 				5C48A4C324B20C9E00E884C2 /* Date+FromString.swift in Sources */,

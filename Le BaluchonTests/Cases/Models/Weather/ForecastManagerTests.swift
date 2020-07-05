@@ -40,9 +40,9 @@ class ForecastManagerTests: XCTestCase {
     func testInitList_setsList() {
         XCTAssertEqual(sut.list, list)
     }
-    
-    // MARK: - GetLastForecastOfTheDay - Tests
-    func testGetLastForecastOfTheDay_createANewListWithOnlyTheLastForecastOfTheDay() {
+        
+    // MARK: - LastForecast - Tests
+    func testLastForecast_createANewListWithOnlyTheLastForecastOfTheDay() {
         // Given
         let expected = ["2020-07-06 21:00:00",
                         "2020-07-07 21:00:00",
@@ -53,7 +53,15 @@ class ForecastManagerTests: XCTestCase {
         let sutLastForecast = sut.lastForecast.map { $0.dt_txt }
         XCTAssertEqual(sutLastForecast, expected)
     }
+    
+    // MARK: - Temps - Tests
+    func testTemps_getTheMinMaxTemperatures() {
+        let expected: [Temp] = [Temp(min: 13, max: 20),
+                                Temp(min: 13, max: 24),
+                                Temp(min: 16, max: 23),
+                                Temp(min: 15, max: 28),
+                                Temp(min: 17, max: 20)]
+        
+        XCTAssertEqual(sut.temps, expected)
+    }
 }
-
-// sutDt.filter({$0.contains("2020-07-10")}).last
-// sut.list.map({ $0.dt_txt }).lastIndex(where: {$0.contains("2020-07-10")})

@@ -11,13 +11,15 @@ import Foundation
 class ForecastManager {
     let list: [List]
     let lastForecast: [List]
+    let temps: [Temp]
     
     init(list: [List]) {
         self.list = list
         lastForecast = ForecastManager.getLastForecastOfTheDay(from: list)
+        temps = ForecastManager.getMinMaxTemps(form: list)
     }
     
-    static func getLastForecastOfTheDay(from list: [List]) -> [List] {
+    private static func getLastForecastOfTheDay(from list: [List]) -> [List] {
         var listLastForecast: [List] = []
         let dateForecast = getDateForecast(from: list)
         for date in dateForecast {
@@ -36,5 +38,24 @@ class ForecastManager {
             dateForecast.append(date?.toString() ?? "")
         }
         return dateForecast
+    }
+    
+    private static func getMinMaxTemps(form list: [List]) -> [Temp] {
+        var temps: [Temp] = []
+        let dateForecast = getDateForecast(from: list)
+        for date in dateForecast {
+            let listForDate = list.filter({ $0.dt_txt.contains(date) })
+            temps.append(findMinMax(form: listForDate))
+        }
+        return temps
+    }
+    
+    private static func findMinMax(form list: [List]) -> Temp {
+        var minMaxTemp = Temp(min: 0, max: 0)
+        let sortedTemp = list.map({ $0.main.temp }).sorted { $0 < $1 }
+        if let min = sortedTemp.first, let max = sortedTemp.last {
+            minMaxTemp = Temp(min: Int(min), max: Int(max))
+        }
+        return minMaxTemp
     }
 }
