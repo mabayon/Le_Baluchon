@@ -11,11 +11,13 @@ import CoreLocation
 
 class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var todayWeatherView: TodayWeatherView!
+    @IBOutlet weak var tableView: UITableView!
+    
     var networkClient: NetworkClientsService?
     var dataTask: URLSessionDataTask?
 
     var weatherViewModel: WeatherViewModel?
-    @IBOutlet weak var todayWeatherView: TodayWeatherView!
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -59,5 +61,17 @@ extension WeatherViewController: CLLocationManagerDelegate {
 //            refreshData()
             locationManager.stopUpdatingLocation()
         }
+    }
+}
+
+extension WeatherViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier) as! ForecastTableViewCell
+        
+        return cell
     }
 }

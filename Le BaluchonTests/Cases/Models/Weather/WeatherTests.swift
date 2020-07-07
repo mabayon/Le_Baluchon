@@ -59,16 +59,4 @@ class WeatherTests: XCTestCase, DecodableTestCase {
         let expected = Main(temp: 15.67)
         try XCTAssertEqualToAny(sut.main, expected)
     }
-    
-    //    func test_decodable_sets_description() throws {
-    //      try XCTAssertEqualToAny(sut.description, dictionary["description"])
-    //    }
-    //
-    //    func test_decodable_sets_temp() throws {
-    //      try XCTAssertEqualToAny(sut.temp, dictionary["temp"])
-    //    }
-    //
-    //    func test_decodable_sets_icon() throws {
-    //      try XCTAssertEqualToAny(sut.icon, dictionary["icon"])
-    //    }
 }

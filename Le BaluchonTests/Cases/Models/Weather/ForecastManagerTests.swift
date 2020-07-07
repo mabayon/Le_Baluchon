@@ -33,9 +33,6 @@ class ForecastManagerTests: XCTestCase {
         list = forecastWeather.list
     }
     
-    func givenLastForecastOfTheDay() {
-        
-    }
     // MARK: - Init - Tests
     func testInitList_setsList() {
         XCTAssertEqual(sut.list, list)

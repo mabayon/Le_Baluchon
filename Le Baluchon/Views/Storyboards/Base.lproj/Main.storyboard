@@ -274,7 +274,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mercredi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGC-DO-grX">
                                         <rect key="frame" x="8" y="159.5" width="79" height="23.5"/>
-                                        <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -307,20 +307,89 @@
                                     <navigationItem title="Météo" id="VnT-cV-Gm1"/>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OMW-yg-vOA">
+                                <rect key="frame" x="0.0" y="235" width="320" height="284"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForecastTableViewCell" id="wPZ-bP-Pi0" customClass="ForecastTableViewCell" customModule="Le_Baluchon" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wPZ-bP-Pi0" id="cMW-dA-Hi0">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mercredi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CR4-pl-NUT">
+                                                    <rect key="frame" x="15" y="10" width="79" height="23.5"/>
+                                                    <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="20"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather_clouds" translatesAutoresizingMaskIntoConstraints="NO" id="M8L-Kq-DOi">
+                                                    <rect key="frame" x="138" y="-0.5" width="44" height="44.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="M8L-Kq-DOi" secondAttribute="height" multiplier="1:1" id="7Rd-9D-OVr"/>
+                                                        <constraint firstAttribute="width" constant="44" id="aC9-BH-5ck"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rgk-cg-hj4">
+                                                    <rect key="frame" x="249.5" y="10" width="55" height="23.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeh-TZ-dZc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="22.5" height="23.5"/>
+                                                            <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="20"/>
+                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdc-Hg-RRa">
+                                                            <rect key="frame" x="32.5" y="0.0" width="22.5" height="23.5"/>
+                                                            <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="20"/>
+                                                            <color key="textColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CR4-pl-NUT" firstAttribute="centerY" secondItem="cMW-dA-Hi0" secondAttribute="centerY" id="HWA-eI-Sm8"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rgk-cg-hj4" secondAttribute="trailing" constant="15.5" id="KB8-fa-M60"/>
+                                                <constraint firstItem="M8L-Kq-DOi" firstAttribute="centerY" secondItem="cMW-dA-Hi0" secondAttribute="centerY" id="S81-DG-awc"/>
+                                                <constraint firstItem="Rgk-cg-hj4" firstAttribute="centerY" secondItem="cMW-dA-Hi0" secondAttribute="centerY" id="aaJ-gC-Lwl"/>
+                                                <constraint firstItem="M8L-Kq-DOi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CR4-pl-NUT" secondAttribute="trailing" constant="8" symbolic="YES" id="nCU-fO-BaN"/>
+                                                <constraint firstItem="CR4-pl-NUT" firstAttribute="leading" secondItem="cMW-dA-Hi0" secondAttribute="leading" constant="15" id="p6D-s3-NqI"/>
+                                                <constraint firstItem="M8L-Kq-DOi" firstAttribute="centerX" secondItem="cMW-dA-Hi0" secondAttribute="centerX" id="zk9-CT-h9Y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dayLabel" destination="CR4-pl-NUT" id="Awf-1M-BXE"/>
+                                            <outlet property="tempMaxLabel" destination="xeh-TZ-dZc" id="iuz-Sj-WwH"/>
+                                            <outlet property="tempMinLabel" destination="gdc-Hg-RRa" id="OGf-Ot-u2J"/>
+                                            <outlet property="weatherImage" destination="M8L-Kq-DOi" id="txt-No-h14"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="CLU-Q7-9cg" id="bMH-0A-fFZ"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="fcl-50-9Ry" firstAttribute="bottom" secondItem="OMW-yg-vOA" secondAttribute="bottom" id="9gs-uQ-Vlj"/>
                             <constraint firstItem="V2v-gE-qx8" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="Bij-KD-2ax"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="top" secondItem="fcl-50-9Ry" secondAttribute="top" id="D2l-SR-tlk"/>
+                            <constraint firstItem="fcl-50-9Ry" firstAttribute="trailing" secondItem="OMW-yg-vOA" secondAttribute="trailing" id="Tut-mF-A0E"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="c4r-jk-xjO"/>
                             <constraint firstItem="V2v-gE-qx8" firstAttribute="top" secondItem="Uvw-7d-q98" secondAttribute="bottom" id="mtB-nr-GCc"/>
                             <constraint firstItem="V2v-gE-qx8" firstAttribute="trailing" secondItem="fcl-50-9Ry" secondAttribute="trailing" id="q67-ee-foo"/>
+                            <constraint firstItem="OMW-yg-vOA" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="wtc-2d-yXt"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="trailing" secondItem="fcl-50-9Ry" secondAttribute="trailing" id="xzI-Uv-Hyx"/>
+                            <constraint firstItem="OMW-yg-vOA" firstAttribute="top" secondItem="V2v-gE-qx8" secondAttribute="bottom" id="zKd-8N-IbN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fcl-50-9Ry"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_Weather_Deselected" selectedImage="icon_Weather_Selected" id="fjq-E8-zBn"/>
                     <connections>
+                        <outlet property="tableView" destination="OMW-yg-vOA" id="zCF-S8-WbA"/>
                         <outlet property="todayWeatherView" destination="V2v-gE-qx8" id="yK2-kJ-sHK"/>
                     </connections>
                 </viewController>
@@ -358,5 +427,6 @@
         <image name="icon_Weather_Deselected" width="25.5" height="20"/>
         <image name="icon_Weather_Selected" width="25.5" height="20"/>
         <image name="weather_clear_sky_d" width="196" height="196"/>
+        <image name="weather_clouds" width="244.5" height="146"/>
     </resources>
 </document>

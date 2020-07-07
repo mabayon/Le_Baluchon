@@ -13,7 +13,7 @@ extension Date {
     static func getDayString(for date: Date = Date()) -> String {
         let formatter = DateFormatter()
 
-        formatter.dateFormat = "dd.MM.yyyy"
+        formatter.dateFormat = "yyyy.MM.dd"
         let today = formatter.string(from: date)
         
         switch getDayOfWeek(today: today, formatter: formatter) {
