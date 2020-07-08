@@ -10,46 +10,47 @@ import UIKit
 import CoreLocation
 
 class WeatherViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var networkClient: NetworkClientsService?
     var dataTaskCurrentWeather: URLSessionDataTask?
     var dataTaskForecast: URLSessionDataTask?
-
+    
     var weatherViewModel: WeatherViewModel?
     var forecastViewModels: [ForecastViewModel] = []
     
     let locationManager = CLLocationManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         setupCollectionView()
         setupLocationManager()
     }
     
     func setupLocationManager() {
-          locationManager.delegate = self
+        locationManager.delegate = self
         
-          locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         
-          locationManager.requestWhenInUseAuthorization()
-          locationManager.startUpdatingLocation()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
-        
+    
     func setupCollectionView() {
         // Register cell classes
         collectionView!.register(WeatherCollectionViewCell.self,
-                                      forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
+                                 forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true
         collectionView.allowsSelection = false
         collectionView.backgroundColor = UIColor(red: 250/255, green: 165/255, blue: 98/255, alpha: 1)
     }
-
+    
     func refreshDataCurrentWeather() {
         guard dataTaskCurrentWeather == nil else { return }
         
@@ -87,7 +88,12 @@ class WeatherViewController: UIViewController {
             self.collectionView.reloadData()
         })
     }
-
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let x = targetContentOffset.pointee.x
+        
+        pageControl.currentPage = Int(x / view.frame.width)
+    }
+    
 }
 
 extension WeatherViewController: CLLocationManagerDelegate {
@@ -108,11 +114,11 @@ extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier,
                                                       for: indexPath) as! WeatherCollectionViewCell
-    
+        
         // Configure the cell
         weatherViewModel?.configure(cell)
         return cell
@@ -124,6 +130,8 @@ extension WeatherViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let weatherCollectionViewCell = cell as? WeatherCollectionViewCell else { return }
         weatherCollectionViewCell.setTableViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+        
+        pageControl.currentPage = indexPath.row
     }
 }
 

@@ -231,11 +231,11 @@
 		5C07F0B4248E7EDB0022299E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				5CAAEBF124AE3B000032B964 /* APIKeys.swift */,
+				5CA130AD24AE22FC00AAD98B /* APIService.swift */,
+				5CA130AF24AE271A00AAD98B /* Fixer.swift */,
 				5CA130AB24AE21DD00AAD98B /* NetworkClients.swift */,
 				5CAAEBF324AE46520032B964 /* OpenWeather.swift */,
-				5CA130AF24AE271A00AAD98B /* Fixer.swift */,
-				5CA130AD24AE22FC00AAD98B /* APIService.swift */,
-				5CAAEBF124AE3B000032B964 /* APIKeys.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -310,6 +310,14 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		5C17FAB024B624E900013DDB /* TabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5C156983249B6A0F0079AD1F /* TabBarViewController.swift */,
+			);
+			path = TabBarViewController;
+			sourceTree = "<group>";
+		};
 		5C423DD724AA60DA0084427B /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,14 +357,14 @@
 		5C8877C42493BD0B004E2A3A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				5C6C13CC24AFBA8F004BE476 /* Date */,
-				5CF4641D24ACA0480043E6BA /* UIImage */,
 				5CF4641A24AC61EB0043E6BA /* Array */,
+				5C6C13CC24AFBA8F004BE476 /* Date */,
 				5CAED5DD249B91B800688729 /* Identifiers */,
-				5C15697F249B64E60079AD1F /* Shadow */,
-				5C15697B249B5A5C0079AD1F /* Rounded */,
 				5C8877DB2493C02F004E2A3A /* NibCreatable */,
+				5C15697B249B5A5C0079AD1F /* Rounded */,
+				5C15697F249B64E60079AD1F /* Shadow */,
 				5C8877C52493BD1E004E2A3A /* StoryboardCreatable */,
+				5CF4641D24ACA0480043E6BA /* UIImage */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -417,13 +425,6 @@
 				5C156988249B758A0079AD1F /* Inter-Bold.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		5C9363A2249912AE00F0B9D8 /* NavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NavigationBar;
 			sourceTree = "<group>";
 		};
 		5CAAEBF524AE4BED0032B964 /* Weather */ = {
@@ -517,8 +518,8 @@
 		5CB7E5B4248A233300E31A2B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5CBD68F924ADD0AD00F24A2C /* Weather */,
 				5CBD68F224ADD03700F24A2C /* ExchangeRates */,
+				5CBD68F924ADD0AD00F24A2C /* Weather */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -526,9 +527,9 @@
 		5CB7E5B5248A234600E31A2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5CAAEBF524AE4BED0032B964 /* Weather */,
 				5CBD68F124ADD01500F24A2C /* ExchangeRates */,
-				5C156983249B6A0F0079AD1F /* TabBarViewController.swift */,
+				5C17FAB024B624E900013DDB /* TabBarViewController */,
+				5CAAEBF524AE4BED0032B964 /* Weather */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -536,13 +537,12 @@
 		5CB7E5B6248A235200E31A2B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5CC7AA7924B4788200F5CD88 /* TableViewCells */,
-				5CEC03B324AB603D00C569AD /* ExchangeRates */,
 				5C423DD724AA60DA0084427B /* Button */,
 				5CAED5DA249B917000688729 /* CollectionViewCells */,
-				5C156985249B71F80079AD1F /* TabBar */,
-				5C9363A2249912AE00F0B9D8 /* NavigationBar */,
+				5CEC03B324AB603D00C569AD /* ExchangeRates */,
 				5CB7E5BC248A240700E31A2B /* Storyboards */,
+				5C156985249B71F80079AD1F /* TabBar */,
+				5CC7AA7924B4788200F5CD88 /* TableViewCells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -550,8 +550,8 @@
 		5CB7E5B7248A235E00E31A2B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5C93639D2499094600F0B9D8 /* Fonts */,
 				5CB7E59B248A1C9600E31A2B /* Assets.xcassets */,
+				5C93639D2499094600F0B9D8 /* Fonts */,
 				5CB7E5A0248A1C9600E31A2B /* Info.plist */,
 			);
 			path = Resources;
@@ -568,8 +568,8 @@
 		5CB7E5BC248A240700E31A2B /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				5CB7E598248A1C9500E31A2B /* Main.storyboard */,
 				5CB7E59D248A1C9600E31A2B /* LaunchScreen.storyboard */,
+				5CB7E598248A1C9500E31A2B /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -676,8 +676,8 @@
 		5CCCA0D8248F79DE0089178B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				5CAAEBFD24AF5A410032B964 /* Weather */,
 				5CBD68F424ADD05000F24A2C /* ExchangeRates */,
+				5CAAEBFD24AF5A410032B964 /* Weather */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

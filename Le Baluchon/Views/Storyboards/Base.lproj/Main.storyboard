@@ -250,7 +250,7 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GGt-QS-Hqg">
-                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="438"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cro-wh-Oax">
                                     <size key="itemSize" width="128" height="128"/>
@@ -269,27 +269,35 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ThJ-Rb-Dan">
+                                <rect key="frame" x="140.5" y="482" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="fcl-50-9Ry" firstAttribute="trailing" secondItem="GGt-QS-Hqg" secondAttribute="trailing" id="37x-B5-4sb"/>
+                            <constraint firstItem="ThJ-Rb-Dan" firstAttribute="centerX" secondItem="2O6-Bq-Ieu" secondAttribute="centerX" id="4nY-3W-4iQ"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="top" secondItem="fcl-50-9Ry" secondAttribute="top" id="D2l-SR-tlk"/>
                             <constraint firstItem="GGt-QS-Hqg" firstAttribute="top" secondItem="Uvw-7d-q98" secondAttribute="bottom" id="SZE-8h-Tn0"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="c4r-jk-xjO"/>
                             <constraint firstItem="GGt-QS-Hqg" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="jfE-80-mMe"/>
-                            <constraint firstItem="fcl-50-9Ry" firstAttribute="bottom" secondItem="GGt-QS-Hqg" secondAttribute="bottom" id="jhb-TV-WHg"/>
+                            <constraint firstItem="ThJ-Rb-Dan" firstAttribute="bottom" secondItem="fcl-50-9Ry" secondAttribute="bottom" id="ql5-NR-vcU"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="trailing" secondItem="fcl-50-9Ry" secondAttribute="trailing" id="xzI-Uv-Hyx"/>
+                            <constraint firstItem="ThJ-Rb-Dan" firstAttribute="top" secondItem="GGt-QS-Hqg" secondAttribute="bottom" id="y7i-Zf-zFb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fcl-50-9Ry"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_Weather_Deselected" selectedImage="icon_Weather_Selected" id="fjq-E8-zBn"/>
                     <connections>
                         <outlet property="collectionView" destination="GGt-QS-Hqg" id="wvR-Xk-1cg"/>
+                        <outlet property="pageControl" destination="ThJ-Rb-Dan" id="VtT-mW-zgm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9v-7Z-279" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-214" y="895"/>
+            <point key="canvasLocation" x="-215.625" y="894.71830985915494"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="8TR-vf-yH7">

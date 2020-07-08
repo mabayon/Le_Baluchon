@@ -17,22 +17,7 @@ class NetworkClients {
     let session: URLSession
     let apiService: APIService
     let responseQueue: DispatchQueue?
-    
-    static let fixer = NetworkClients(apiURL: Fixer.url,
-                                      session: URLSession.shared,
-                                      responseQueue: .main,
-                                      apiServices: .Fixer)
-    
-    static let openWeather = NetworkClients(apiURL: OpenWeather.urlCurrentWeather,
-                                            session: URLSession.shared,
-                                            responseQueue: .main,
-                                            apiServices: .OpenWeatherCurrent)
-    
-    static let openWeatherForecast = NetworkClients(apiURL: OpenWeather.urlForecast,
-                                                    session: URLSession.shared,
-                                                    responseQueue: .main,
-                                                    apiServices: .OpenWeatherForecast)
-    
+        
     init(apiURL: String,
          session: URLSession,
          responseQueue: DispatchQueue?,
@@ -89,6 +74,23 @@ class NetworkClients {
             completion(models, error)
         }
     }
+}
+
+extension NetworkClients {
+    static let fixer = NetworkClients(apiURL: Fixer.url,
+                                      session: URLSession.shared,
+                                      responseQueue: .main,
+                                      apiServices: .Fixer)
+    
+    static let openWeather = NetworkClients(apiURL: OpenWeather.urlCurrentWeather,
+                                            session: URLSession.shared,
+                                            responseQueue: .main,
+                                            apiServices: .OpenWeatherCurrent)
+    
+    static let openWeatherForecast = NetworkClients(apiURL: OpenWeather.urlForecast,
+                                                    session: URLSession.shared,
+                                                    responseQueue: .main,
+                                                    apiServices: .OpenWeatherForecast)
 }
 
 extension NetworkClients: NetworkClientsService {
