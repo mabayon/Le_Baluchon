@@ -65,11 +65,20 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    let forecastView: UIView = {
+        let view = UIView()
+        view.applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
+        view.applyShadow()
+        return view
+    }()
+    
     let forecastTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.identifier)
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
+        tableView.applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
+        tableView.layer.masksToBounds = true
         return tableView
     }()
 
@@ -95,8 +104,8 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         currentWeatherView.addSubview(cityLabel)
         
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        cityLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        cityLabel.topAnchor.constraint(equalTo: currentWeatherView.topAnchor).isActive = true
+        cityLabel.centerXAnchor.constraint(equalTo: currentWeatherView.centerXAnchor).isActive = true
         
         currentWeatherView.addSubview(currentForecastStackView)
         currentForecastStackView.addArrangedSubview(tempLabel)
@@ -104,32 +113,41 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         
         currentForecastStackView.translatesAutoresizingMaskIntoConstraints = false
         currentForecastStackView.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 20).isActive = true
-        currentForecastStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 40).isActive = true
-        currentForecastStackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        currentForecastStackView.leftAnchor.constraint(equalTo: currentWeatherView.leftAnchor, constant: 40).isActive = true
+        currentForecastStackView.centerXAnchor.constraint(equalTo: currentWeatherView.centerXAnchor).isActive = true
         
         weatherImageView.translatesAutoresizingMaskIntoConstraints = false
         weatherImageView.heightAnchor.constraint(equalTo: tempLabel.heightAnchor).isActive = true
         
-        addSubview(weatherDescriptionLabel)
+        currentWeatherView.addSubview(weatherDescriptionLabel)
         
         weatherDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         weatherDescriptionLabel.topAnchor.constraint(equalTo: currentForecastStackView.bottomAnchor, constant: 20).isActive = true
-        weatherDescriptionLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        weatherDescriptionLabel.centerXAnchor.constraint(equalTo: currentWeatherView.centerXAnchor).isActive = true
         
-        addSubview(dayLabel)
+        currentWeatherView.addSubview(dayLabel)
         
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.topAnchor.constraint(equalTo: weatherDescriptionLabel.bottomAnchor, constant: 20).isActive = true
-        dayLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        dayLabel.leftAnchor.constraint(equalTo: currentWeatherView.leftAnchor, constant: 20).isActive = true
         dayLabel.bottomAnchor.constraint(equalTo: currentWeatherView.bottomAnchor, constant: -10).isActive = true
         
-        addSubview(forecastTableView)
+        addSubview(forecastView)
+        
+        forecastView.translatesAutoresizingMaskIntoConstraints = false
+        forecastView.topAnchor.constraint(equalTo: currentWeatherView.bottomAnchor).isActive = true
+        forecastView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        forecastView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        forecastView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+        
+        forecastView.addSubview(forecastTableView)
         
         forecastTableView.translatesAutoresizingMaskIntoConstraints = false
-        forecastTableView.topAnchor.constraint(equalTo: currentWeatherView.bottomAnchor).isActive = true
-        forecastTableView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        forecastTableView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        forecastTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        forecastTableView.topAnchor.constraint(equalTo: forecastView.topAnchor).isActive = true
+        forecastTableView.leftAnchor.constraint(equalTo: forecastView.leftAnchor).isActive = true
+        forecastTableView.rightAnchor.constraint(equalTo: forecastView.rightAnchor).isActive = true
+        forecastTableView.bottomAnchor.constraint(equalTo: forecastView.bottomAnchor).isActive = true
     }
 }
 

@@ -41,12 +41,13 @@ class WeatherViewController: UIViewController {
         
     func setupCollectionView() {
         // Register cell classes
-        self.collectionView!.register(WeatherCollectionViewCell.self,
+        collectionView!.register(WeatherCollectionViewCell.self,
                                       forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.isPagingEnabled = true
-        self.collectionView.allowsSelection = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
+        collectionView.allowsSelection = false
+        collectionView.backgroundColor = UIColor(red: 250/255, green: 165/255, blue: 98/255, alpha: 1)
     }
 
     func refreshDataCurrentWeather() {
