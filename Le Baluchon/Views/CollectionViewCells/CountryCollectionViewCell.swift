@@ -49,7 +49,8 @@ class CountryCollectionViewCell: UICollectionViewCell {
     
     var delegate: CountryCollectionViewCellDelegate?
     
-    override func setNeedsDisplay() {                delegate?.getImageContainerWidth(imageContainer.frame.width)
+    override func setNeedsDisplay() {
+        delegate?.getImageContainerWidth(imageContainer.frame.width)
     }
     
     override func awakeFromNib() {

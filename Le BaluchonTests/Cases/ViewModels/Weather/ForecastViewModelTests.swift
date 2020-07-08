@@ -19,7 +19,7 @@ class ForecastViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         try! givenListFromForecastManager()
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
     }
     
     override func tearDown() {
@@ -54,7 +54,7 @@ class ForecastViewModelTests: XCTestCase {
     // MARK: - When
     func whenConfigureForecastTableViewCell() {
       givenListingsTableViewCell()
-      sut.configureCell(cell)
+      sut.configure(cell)
     }
 
     
@@ -86,7 +86,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenCoditions_rain_WeatherConditionWillBeRain() {
         // Given
         forecast = List(weather: createWeather(), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.rain
                 
@@ -96,7 +96,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenCoditions_clearSky_WeatherConditionWillBeClearSky() {
         // Given
         forecast = List(weather: createWeather(icon: "01d"), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.clearSkyD
                 
@@ -107,7 +107,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenCoditions_fewClouds_WeatherConditionWillBeFewCloudsD() {
         // Given
         forecast = List(weather: createWeather(icon: "02d"), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.fewCloudsD
                 
@@ -117,7 +117,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenCoditions_clouds_WeatherConditionWillBeClouds() {
         // Given
         forecast = List(weather: createWeather(icon: "03d"), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.clouds
                 
@@ -127,7 +127,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenCoditions_thunderstorm_WeatherConditionWillBeThunderstorm() {
         // Given
         forecast = List(weather: createWeather(icon: "11d"), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.thunderstorm
                 
@@ -137,7 +137,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenCoditions_snow_WeatherConditionWillBeClearSnow() {
         // Given
         forecast = List(weather: createWeather(icon: "13d"), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.snow
                 
@@ -147,7 +147,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenCoditions_mist_WeatherConditionWillBeMist() {
         // Given
         forecast = List(weather: createWeather(icon: "50d"), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.mist
                 
@@ -159,7 +159,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_initForecast_givenUnknownCondition_weatherConditionWillBeNone() {
         // Given
         forecast = List(weather: createWeather(icon: "unknown"), main: Main(temp: 20), dt_txt: "")
-        sut = ForecastViewModel(forecast: forecast, temp: temp)
+        sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.none
         

@@ -2,65 +2,63 @@
 //  WeatherViewController.swift
 //  Le Baluchon
 //
-//  Created by Mahieu Bayon on 02/07/2020.
+//  Created by Mahieu Bayon on 08/07/2020.
 //  Copyright © 2020 Mabayon. All rights reserved.
 //
 
 import UIKit
-import CoreLocation
 
 class WeatherViewController: UIViewController {
-    
-    @IBOutlet weak var todayWeatherView: TodayWeatherView!
-    @IBOutlet weak var tableView: UITableView!
-    
-    var networkClient: NetworkClientsService?
-    var dataTask: URLSessionDataTask?
 
-    var weatherViewModel: WeatherViewModel?
-    let locationManager = CLLocationManager()
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-      
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-      
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+
+        // Do any additional setup after loading the view.
+        setupCollectionView()
     }
     
-    func refreshData() {
-        guard dataTask == nil else { return }
-        
-        dataTask = networkClient?.getData(completion: { (weather, error) in
-            self.dataTask = nil
-            
-            guard let weather = weather as? TodayWeather else {
-                return
-            }
-            
-            self.weatherViewModel = WeatherViewModel(weather: weather)
-            self.weatherViewModel?.configure(imageView: self.todayWeatherView.imageView,
-                                             cityLabel: self.todayWeatherView.cityLabel,
-                                             tempLabel: self.todayWeatherView.tempLabel,
-                                             descriptionLabel: self.todayWeatherView.descriptionLabel,
-                                             dayLabel: self.todayWeatherView.dayLabel)
-        })
+    func setupCollectionView() {
+        // Register cell classes
+        self.collectionView!.register(WeatherCollectionViewCell.self,
+                                      forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.isPagingEnabled = true
+    }
+
+}
+
+extension WeatherViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier,
+                                                      for: indexPath) as! WeatherCollectionViewCell
+    
+        // Configure the cell
+    
+        return cell
     }
 }
 
-extension WeatherViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        if let location = locations.first,
-            location.horizontalAccuracy <= manager.desiredAccuracy {
-            OpenWeather.latitude = String(location.coordinate.latitude)
-            OpenWeather.longitude = String(location.coordinate.longitude)
-            networkClient = NetworkClients.openWeather
-//            refreshData()
-            locationManager.stopUpdatingLocation()
-        }
+extension WeatherViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let weatherCollectionViewCell = cell as? WeatherCollectionViewCell else { return }
+        weatherCollectionViewCell.setTableViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+    }
+}
+
+extension WeatherViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 
@@ -74,4 +72,8 @@ extension WeatherViewController: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension WeatherViewController: UITableViewDelegate {
+    
 }

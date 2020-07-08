@@ -27,7 +27,7 @@ class NetworkClientsTests: XCTestCase {
     }
 
     var getOpenWeatherURL: URL {
-        return URL(string: OpenWeather.url)!
+        return URL(string: OpenWeather.urlCurrentWeather)!
     }
 
     // MARK: - Test Lifecycle
@@ -284,7 +284,7 @@ extension NetworkClientsTests {
         // Given
         OpenWeather.latitude = "48.8534"
         OpenWeather.longitude = "2.3488"
-        apiServices = .OpenWeather
+        apiServices = .OpenWeatherCurrent
         let data = try Data.fromJSON(fileName: "TodayWeather")
         
         let decodoer = JSONDecoder()

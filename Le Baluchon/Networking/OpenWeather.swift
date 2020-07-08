@@ -9,7 +9,9 @@
 import Foundation
 
 struct OpenWeather {
-    static private let baseURL = "http://api.openweathermap.org/data/2.5/weather"
+    static private let baseURL = "http://api.openweathermap.org/data/2.5/"
+    static private let currentWeather = "weather"
+    static private let forecast = "forecast"
     static private let accessKey = "?appid=\(APIKeys.OpenWeather)"
     static private var parameters = "&lang=fr&units=metric"
     
@@ -25,7 +27,11 @@ struct OpenWeather {
         }
     }
     
-    static var url: String { return OpenWeather.baseURL + OpenWeather.accessKey + OpenWeather.parameters }
-
+    static var urlCurrentWeather: String {
+        return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters
+    }
+    static var urlForecast: String {
+        return OpenWeather.baseURL + forecast + OpenWeather.accessKey + OpenWeather.parameters
+    }
     
 }

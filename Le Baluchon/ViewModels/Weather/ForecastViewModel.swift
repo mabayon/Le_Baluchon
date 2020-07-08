@@ -15,12 +15,12 @@ class ForecastViewModel {
     let tempMin: String
     let weatherCondition: WeatherCondition
     
-    init(forecast: List, temp: Temp) {
+    init(forecast: List, temps: Temp) {
         self.forecast = forecast
         day = ForecastViewModel.getDay(from: forecast)
         weatherCondition = ForecastViewModel.formatWeatherCondition(for: forecast)
-        tempMax = String(temp.max)
-        tempMin = String(temp.min)
+        tempMax = String(temps.max)
+        tempMin = String(temps.min)
     }
     
     private static func getDay(from list: List) -> String {
@@ -54,9 +54,9 @@ class ForecastViewModel {
         return .none
     }
         
-        func configureCell(_ cell: ForecastTableViewCell) {
+        func configure(_ cell: ForecastTableViewCell) {
             cell.dayLabel.text = day
-            cell.imageView?.image = weatherCondition.image
+            cell.weatherImage.image = weatherCondition.image
             cell.tempMaxLabel.text = tempMax
             cell.tempMinLabel.text = tempMin
         }

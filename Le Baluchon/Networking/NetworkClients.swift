@@ -19,14 +19,19 @@ class NetworkClients {
     let responseQueue: DispatchQueue?
     
     static let fixer = NetworkClients(apiURL: Fixer.url,
-                                            session: URLSession.shared,
-                                            responseQueue: .main,
-                                            apiServices: .Fixer)
+                                      session: URLSession.shared,
+                                      responseQueue: .main,
+                                      apiServices: .Fixer)
     
-    static let openWeather = NetworkClients(apiURL: OpenWeather.url,
+    static let openWeather = NetworkClients(apiURL: OpenWeather.urlCurrentWeather,
                                             session: URLSession.shared,
                                             responseQueue: .main,
-                                            apiServices: .OpenWeather)
+                                            apiServices: .OpenWeatherCurrent)
+    
+    static let openWeatherForecast = NetworkClients(apiURL: OpenWeather.urlForecast,
+                                                    session: URLSession.shared,
+                                                    responseQueue: .main,
+                                                    apiServices: .OpenWeatherForecast)
     
     init(apiURL: String,
          session: URLSession,
@@ -57,9 +62,13 @@ class NetworkClients {
                 case .Fixer:
                     let rates = try decoder.decode(ExchangeRates.self, from: data)
                     self.dispatchResult(models: rates, completion: completion)
-                case .OpenWeather:
-                    let rates = try decoder.decode(TodayWeather.self, from: data)
-                    self.dispatchResult(models: rates, completion: completion)
+                case .OpenWeatherCurrent:
+                    let currentWeather = try decoder.decode(TodayWeather.self, from: data)
+                    self.dispatchResult(models: currentWeather, completion: completion)
+                case .OpenWeatherForecast:
+                    let forecast = try decoder.decode(ForecastWeather.self, from: data)
+                    self.dispatchResult(models: forecast, completion: completion)
+                    
                 }
             } catch {
                 self.dispatchResult(error: error, completion: completion)
@@ -68,7 +77,7 @@ class NetworkClients {
         task.resume()
         return task
     }
-        
+    
     private func dispatchResult<Type>(models: Type? = nil,
                                       error: Error? = nil,
                                       completion: @escaping (Type?, Error?) -> Void) {

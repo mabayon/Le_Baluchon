@@ -10,6 +10,10 @@ import Foundation
 
 struct ForecastWeather: Decodable, Equatable {
     let list: [List]
+    
+    enum CodingKeys: String, CodingKey {
+        case list
+    }
 }
 
 struct List: Decodable, Equatable {
