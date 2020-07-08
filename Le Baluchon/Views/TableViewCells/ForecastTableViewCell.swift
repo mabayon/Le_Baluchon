@@ -13,7 +13,7 @@ class ForecastTableViewCell: UITableViewCell {
     var dayLabel: UILabel = {
         let label = UILabel()
         label.text = "Jeudi"
-        label.font = UIFont(name: "Inter-Regular", size: 15)
+        label.font = UIFont(name: "Inter-Regular", size: 23)
         label.textColor = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         return label
     }()
@@ -25,9 +25,31 @@ class ForecastTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    @IBOutlet weak var tempMaxLabel: UILabel!
-    @IBOutlet weak var tempMinLabel: UILabel!
+    var tempsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
+        stackView.spacing = 16
+        return stackView
+    }()
     
+    var tempMaxLabel: UILabel = {
+        let label = UILabel()
+        label.text = "18"
+        label.font = UIFont(name: "Inter-Regular", size: 23)
+        label.textColor = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+        return label
+    }()
+        
+    var tempMinLabel: UILabel = {
+        let label = UILabel()
+        label.text = "13"
+        label.font = UIFont(name: "Inter-Regular", size: 23)
+        label.textColor = UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -52,5 +74,13 @@ class ForecastTableViewCell: UITableViewCell {
         weatherImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         weatherImage.widthAnchor.constraint(equalToConstant: 44).isActive = true
         weatherImage.heightAnchor.constraint(equalTo: weatherImage.widthAnchor).isActive = true
+        
+        addSubview(tempsStackView)
+        
+        tempsStackView.addArrangedSubview(tempMaxLabel)
+        tempsStackView.addArrangedSubview(tempMinLabel)
+        tempsStackView.translatesAutoresizingMaskIntoConstraints = false
+        tempsStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        tempsStackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }

@@ -12,7 +12,7 @@ import XCTest
 class WeatherViewModelTests: XCTestCase {
 
     var sut: WeatherViewModel!
-    var todayWeatherView: TodayWeatherView!
+    var cell: WeatherCollectionViewCell!
     var todayWeather: TodayWeather! {
         didSet {
             if todayWeather != nil {
@@ -42,21 +42,19 @@ class WeatherViewModelTests: XCTestCase {
     }
     
     // MARK: Given
-    func givenTodayWeatherView() {
+    func givenWeatherCollectionViewCell() {
         let viewController = WeatherViewController.instanceFromStoryboard()
-        viewController.loadView()
+        viewController.loadViewIfNeeded()
         
-        todayWeatherView = viewController.todayWeatherView
+        let collectionView = viewController.collectionView!
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier,
+                                                        for: IndexPath(item: 0, section: 0)) as? WeatherCollectionViewCell
     }
     
-    // MARK: When
-    func whenConfigureTodayWeatherView() {
-        givenTodayWeatherView()
-        sut.configure(imageView: todayWeatherView.imageView,
-                      cityLabel: todayWeatherView.cityLabel,
-                      tempLabel: todayWeatherView.tempLabel,
-                      descriptionLabel: todayWeatherView.descriptionLabel,
-                      dayLabel: todayWeatherView.dayLabel)
+    // MARK: - When
+    func whenConfigureForecastTableViewCell() {
+        givenWeatherCollectionViewCell()
+        sut.configure(cell)
     }
 
     // MARK: - Init - Tests
@@ -267,26 +265,26 @@ class WeatherViewModelTests: XCTestCase {
         
     func test_configure_setsCityLabel() {
         // When
-        whenConfigureTodayWeatherView()
-        XCTAssertEqual(todayWeatherView.cityLabel.text, sut.city)
+        whenConfigureForecastTableViewCell()
+        XCTAssertEqual(cell.cityLabel.text, sut.city)
     }
     
     func test_configure_setsTempLabel() {
         // When
-        whenConfigureTodayWeatherView()
-        XCTAssertEqual(todayWeatherView.tempLabel.text, sut.temp)
+        whenConfigureForecastTableViewCell()
+        XCTAssertEqual(cell.tempLabel.text, sut.temp)
     }
     
     func test_configure_setsDescriptionLabel() {
         // When
-        whenConfigureTodayWeatherView()
-        XCTAssertEqual(todayWeatherView.descriptionLabel.text, sut.description)
+        whenConfigureForecastTableViewCell()
+        XCTAssertEqual(cell.weatherDescriptionLabel.text, sut.description)
     }
 
     func test_configure_setsDayLabel() {
         // When
-        whenConfigureTodayWeatherView()
-        XCTAssertEqual(todayWeatherView.dayLabel.text, sut.day)
+        whenConfigureForecastTableViewCell()
+        XCTAssertEqual(cell.dayLabel.text, sut.day)
     }
 
 }

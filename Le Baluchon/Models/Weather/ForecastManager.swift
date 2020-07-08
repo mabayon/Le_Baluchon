@@ -35,7 +35,7 @@ class ForecastManager {
         let currentDate = String(list.first.map({ $0.dt_txt })?.split(separator: " ").first ?? "")
         for i in 1...5 {
             let date = Calendar.current.date(byAdding: .day, value: i, to: Date().fromString(currentDate))
-            dateForecast.append(date?.toString() ?? "")
+            dateForecast.append(date?.toString() ?? "")            
         }
         return dateForecast
     }

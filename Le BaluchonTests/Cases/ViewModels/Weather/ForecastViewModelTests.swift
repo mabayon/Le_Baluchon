@@ -43,20 +43,23 @@ class ForecastViewModelTests: XCTestCase {
         temp = forecastManager.temps.first
     }
     
-    func givenListingsTableViewCell() {
-      let viewController = WeatherViewController.instanceFromStoryboard()
-      viewController.loadViewIfNeeded()
-      
-      let tableView = viewController.tableView!
-      cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier) as? ForecastTableViewCell
+    func givenForecastTableViewCell() {
+        let viewController = WeatherViewController.instanceFromStoryboard()
+        viewController.loadViewIfNeeded()
+        
+        let collectionView = viewController.collectionView!
+        let cellCV = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCollectionViewCell.identifier,
+                                                        for: IndexPath(item: 0, section: 0)) as? WeatherCollectionViewCell
+        let tableView = cellCV?.forecastTableView
+        cell = tableView?.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier) as? ForecastTableViewCell
     }
     
     // MARK: - When
     func whenConfigureForecastTableViewCell() {
-      givenListingsTableViewCell()
-      sut.configure(cell)
+        givenForecastTableViewCell()
+        sut.configure(cell)
     }
-
+    
     
     // MARK: - Init - Tests
     func test_initForecast_setsForecast() {
@@ -89,7 +92,7 @@ class ForecastViewModelTests: XCTestCase {
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.rain
-                
+        
         XCTAssertEqual(sut.weatherCondition, expected)
     }
     
@@ -99,10 +102,10 @@ class ForecastViewModelTests: XCTestCase {
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.clearSkyD
-                
+        
         XCTAssertEqual(sut.weatherCondition, expected)
     }
-
+    
     
     func test_initForecast_givenCoditions_fewClouds_WeatherConditionWillBeFewCloudsD() {
         // Given
@@ -110,7 +113,7 @@ class ForecastViewModelTests: XCTestCase {
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.fewCloudsD
-                
+        
         XCTAssertEqual(sut.weatherCondition, expected)
     }
     
@@ -120,27 +123,27 @@ class ForecastViewModelTests: XCTestCase {
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.clouds
-                
+        
         XCTAssertEqual(sut.weatherCondition, expected)
     }
-
+    
     func test_initForecast_givenCoditions_thunderstorm_WeatherConditionWillBeThunderstorm() {
         // Given
         forecast = List(weather: createWeather(icon: "11d"), main: Main(temp: 20), dt_txt: "")
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.thunderstorm
-                
+        
         XCTAssertEqual(sut.weatherCondition, expected)
     }
-
+    
     func test_initForecast_givenCoditions_snow_WeatherConditionWillBeClearSnow() {
         // Given
         forecast = List(weather: createWeather(icon: "13d"), main: Main(temp: 20), dt_txt: "")
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.snow
-                
+        
         XCTAssertEqual(sut.weatherCondition, expected)
     }
     
@@ -150,11 +153,11 @@ class ForecastViewModelTests: XCTestCase {
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
         let expected = WeatherCondition.mist
-                
+        
         XCTAssertEqual(sut.weatherCondition, expected)
     }
-
-
+    
+    
     
     func test_initForecast_givenUnknownCondition_weatherConditionWillBeNone() {
         // Given
@@ -178,7 +181,7 @@ class ForecastViewModelTests: XCTestCase {
     func test_configureCell_setsTempMaxLabel() {
         // When
         whenConfigureForecastTableViewCell()
-
+        
         // Then
         XCTAssertEqual(cell.tempMaxLabel.text, sut.tempMax)
     }
@@ -186,9 +189,9 @@ class ForecastViewModelTests: XCTestCase {
     func test_configureCell_setsTempMinLabel() {
         // When
         whenConfigureForecastTableViewCell()
-
+        
         // Then
         XCTAssertEqual(cell.tempMinLabel.text, sut.tempMin)
     }
-
+    
 }

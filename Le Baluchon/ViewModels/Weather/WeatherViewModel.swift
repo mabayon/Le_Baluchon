@@ -67,19 +67,15 @@ class WeatherViewModel {
         return weather.weather.first?.description ?? ""
     }
         
-    func configure(imageView: UIImageView,
-                   cityLabel: UILabel,
-                   tempLabel: UILabel,
-                   descriptionLabel: UILabel,
-                   dayLabel: UILabel) {
+    func configure(_ cell: WeatherCollectionViewCell) {
         
         let image = weatherCondition.image
-        imageView.image = image
-        imageView.image = image.aspectFitImage(inRect: imageView.frame)
-        imageView.contentMode = .right
-        cityLabel.text = city
-        tempLabel.text = temp
-        descriptionLabel.text = description
-        dayLabel.text = day
+        cell.weatherImageView.image = image
+        cell.weatherImageView.image = image.aspectFitImage(inRect: cell.weatherImageView.frame)
+        cell.weatherImageView.contentMode = .right
+        cell.cityLabel.text = city
+        cell.tempLabel.text = temp
+        cell.weatherDescriptionLabel.text = description
+        cell.dayLabel.text = day
     }
 }

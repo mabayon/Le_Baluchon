@@ -24,7 +24,6 @@
 		5C156984249B6A0F0079AD1F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C156983249B6A0F0079AD1F /* TabBarViewController.swift */; };
 		5C156987249B72300079AD1F /* ShadowTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C156986249B72300079AD1F /* ShadowTabBar.swift */; };
 		5C156989249B758A0079AD1F /* Inter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C156988249B758A0079AD1F /* Inter-Bold.otf */; };
-		5C17FAAB24B5A43400013DDB /* WeatherViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEBF624AE4C110032B964 /* WeatherViewControllerOld.swift */; };
 		5C17FAAD24B5AD8100013DDB /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17FAAC24B5AD8100013DDB /* WeatherCollectionViewCell.swift */; };
 		5C17FAAF24B5C89000013DDB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17FAAE24B5C89000013DDB /* WeatherViewController.swift */; };
 		5C423DD124AA28530084427B /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C423DD024AA28530084427B /* ConverterTests.swift */; };
@@ -57,7 +56,6 @@
 		5CAAEBF224AE3B000032B964 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEBF124AE3B000032B964 /* APIKeys.swift */; };
 		5CAAEBF424AE46520032B964 /* OpenWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEBF324AE46520032B964 /* OpenWeather.swift */; };
 		5CAAEBF924AF24DC0032B964 /* UIImage+aspectFitImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEBF824AF24DC0032B964 /* UIImage+aspectFitImage.swift */; };
-		5CAAEBFC24AF56E10032B964 /* TodayWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEBFB24AF56E10032B964 /* TodayWeatherView.swift */; };
 		5CAAEBFF24AF5AE00032B964 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEBFE24AF5AE00032B964 /* WeatherViewModel.swift */; };
 		5CAAEC0224AFAFE90032B964 /* WeatherViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAAEC0124AFAFE90032B964 /* WeatherViewModelTests.swift */; };
 		5CAAEC0324AFB2880032B964 /* TodayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBD690224ADD36300F24A2C /* TodayWeather.swift */; };
@@ -846,7 +844,6 @@
 				5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */,
 				5C48A4BE24B1DE4F00E884C2 /* ForecastManager.swift in Sources */,
 				5CF4641F24ACA06E0043E6BA /* UIImage+GetImage.swift in Sources */,
-				5C17FAAB24B5A43400013DDB /* WeatherViewControllerOld.swift in Sources */,
 				5C156984249B6A0F0079AD1F /* TabBarViewController.swift in Sources */,
 				5C03321424B06D5C00F4D598 /* WeatherCondition.swift in Sources */,
 				5CA130AE24AE22FC00AAD98B /* APIService.swift in Sources */,
@@ -860,7 +857,6 @@
 				5C156987249B72300079AD1F /* ShadowTabBar.swift in Sources */,
 				5CC7AA7B24B478A000F5CD88 /* ForecastTableViewCell.swift in Sources */,
 				5C6C13CE24AFBABE004BE476 /* Date+GetDayString.swift in Sources */,
-				5CAAEBFC24AF56E10032B964 /* TodayWeatherView.swift in Sources */,
 				5CAED5DF249B91F200688729 /* UICollectionViewCell+Identifier.swift in Sources */,
 				5C15697D249B5B170079AD1F /* UIView+ApplyRoundedCorners.swift in Sources */,
 				5C423DD924AA60FF0084427B /* DeviseButton.swift in Sources */,

@@ -68,6 +68,8 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     let forecastTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.identifier)
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         return tableView
     }()
 
