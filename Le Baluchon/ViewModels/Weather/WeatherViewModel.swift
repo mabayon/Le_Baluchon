@@ -71,7 +71,8 @@ class WeatherViewModel {
         
         let image = weatherCondition.image
         cell.weatherImageView.image = image
-        cell.weatherImageView.image = image.aspectFitImage(inRect: cell.weatherImageView.frame)
+        cell.weatherImageView.image = image.aspectFitImage(inRect: CGRect(origin: .zero,
+                                                                          size: cell.tempLabel.intrinsicContentSize))
         cell.weatherImageView.contentMode = .right
         cell.cityLabel.text = city
         cell.tempLabel.text = temp

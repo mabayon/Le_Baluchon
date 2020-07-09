@@ -14,8 +14,8 @@ struct OpenWeather {
     static private let forecast = "forecast"
     static private let accessKey = "?appid=\(APIKeys.OpenWeather)"
     static private var parameters = "&lang=fr&units=metric"
-    static private var newYorkLatLon = "&lat=40.730610&lon=-73.935242"
-    static private var parisLatLon = "&lat=48.8534&lon=-2.3488"
+    static private var newYork = "&q=New%20York"
+    static private var paris = "&q=Paris"
   
     static var latitude = "" {
         didSet {
@@ -38,11 +38,11 @@ struct OpenWeather {
     }
     
     static var urlParisWeather: String {
-        return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters + parisLatLon
+        return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters + paris
     }
     
     static var urlNewYorkWeather: String {
-        return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters + newYorkLatLon
+        return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters + newYork
     }
 
 }

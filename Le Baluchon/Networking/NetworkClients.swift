@@ -91,8 +91,19 @@ extension NetworkClients {
                                                     session: URLSession.shared,
                                                     responseQueue: .main,
                                                     apiServices: .OpenWeatherForecast)
+    
+    static let openWeatherParis = NetworkClients(apiURL: OpenWeather.urlParisWeather,
+                                                 session: URLSession.shared,
+                                                 responseQueue: .main,
+                                                 apiServices: .OpenWeatherCurrent)
+    
+    static let openWeatherNewYork = NetworkClients(apiURL: OpenWeather.urlNewYorkWeather,
+                                                 session: URLSession.shared,
+                                                 responseQueue: .main,
+                                                 apiServices: .OpenWeatherCurrent)
+
 }
 
+// For testing purpose
 extension NetworkClients: NetworkClientsService {
-    
 }

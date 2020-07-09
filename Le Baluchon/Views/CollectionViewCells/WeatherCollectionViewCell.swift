@@ -91,7 +91,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+        
     private func setupLayout() {
         
         addSubview(currentWeatherView)
@@ -117,7 +117,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         currentForecastStackView.centerXAnchor.constraint(equalTo: currentWeatherView.centerXAnchor).isActive = true
         
         weatherImageView.translatesAutoresizingMaskIntoConstraints = false
-        weatherImageView.heightAnchor.constraint(equalTo: tempLabel.heightAnchor).isActive = true
+        weatherImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         currentWeatherView.addSubview(weatherDescriptionLabel)
         

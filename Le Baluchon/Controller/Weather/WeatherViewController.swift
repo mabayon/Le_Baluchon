@@ -14,11 +14,23 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var networkClient: NetworkClientsService?
+    var networkCurrentWeather: NetworkClientsService?
+    var networkParisWeather: NetworkClientsService?
+    var networkNewYorkWeather: NetworkClientsService?
+
+    var networkCurrentForecast: NetworkClientsService?
+
     var dataTaskCurrentWeather: URLSessionDataTask?
+    var dataTaskParisWeather: URLSessionDataTask?
+    var dataTaskNewYorkWeather: URLSessionDataTask?
+   
     var dataTaskForecast: URLSessionDataTask?
-    
-    var weatherViewModel: WeatherViewModel?
+
+    var currentWeatherViewModel: WeatherViewModel?
+    var parisWeatherViewModel: WeatherViewModel?
+    var newYorkWeatherViewModel: WeatherViewModel?
+
+
     var forecastViewModels: [ForecastViewModel] = []
     
     let locationManager = CLLocationManager()
@@ -29,6 +41,9 @@ class WeatherViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupCollectionView()
         setupLocationManager()
+        
+        refreshDataParisWeather()
+        refreshDataNewYorkWeather()
     }
     
     func setupLocationManager() {
@@ -51,28 +66,29 @@ class WeatherViewController: UIViewController {
         collectionView.backgroundColor = UIColor(red: 250/255, green: 165/255, blue: 98/255, alpha: 1)
     }
     
+    // MARK: Current Weather
     func refreshDataCurrentWeather() {
         guard dataTaskCurrentWeather == nil else { return }
         
-        networkClient = NetworkClients.openWeather
-        dataTaskCurrentWeather = networkClient?.getData(completion: { (weather, error) in
+        networkCurrentWeather = NetworkClients.openWeather
+        dataTaskCurrentWeather = networkCurrentWeather?.getData(completion: { (weather, error) in
             self.dataTaskCurrentWeather = nil
             
             guard let weather = weather as? TodayWeather else {
                 return
             }
             
-            self.weatherViewModel = WeatherViewModel(weather: weather)
-            self.collectionView.reloadData()
+            self.currentWeatherViewModel = WeatherViewModel(weather: weather)
+            self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
         })
     }
     
-    @objc func refreshDataForecast() {
+    func refreshDataCurrentForecast() {
         guard dataTaskForecast == nil else { return }
         
         forecastViewModels = []
-        networkClient = NetworkClients.openWeatherForecast
-        dataTaskForecast = networkClient?.getData(completion: { (forecast, error) in
+        networkCurrentForecast = NetworkClients.openWeatherForecast
+        dataTaskForecast = networkCurrentForecast?.getData(completion: { (forecast, error) in
             self.dataTaskForecast = nil
             
             guard let forecast = forecast as? ForecastWeather else { return }
@@ -85,9 +101,46 @@ class WeatherViewController: UIViewController {
                 let temps = tempMaxMin[i]
                 self.forecastViewModels.append(ForecastViewModel(forecast: forecast, temps: temps))
             }
-            self.collectionView.reloadData()
+            let cell = self.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? WeatherCollectionViewCell
+            cell?.forecastTableView.reloadData()
         })
     }
+    
+    // MARK: Paris Weather
+    func refreshDataParisWeather() {
+        guard dataTaskParisWeather == nil else { return }
+        
+        networkParisWeather = NetworkClients.openWeatherParis
+        dataTaskParisWeather = networkParisWeather?.getData(completion: { (weather, error) in
+            self.dataTaskParisWeather = nil
+            
+            guard let weather = weather as? TodayWeather else {
+                return
+            }
+            
+            self.parisWeatherViewModel = WeatherViewModel(weather: weather)
+            self.collectionView.reloadItems(at: [IndexPath(item: 1, section: 0)])
+        })
+    }
+    
+    // MARK: Paris Weather
+    func refreshDataNewYorkWeather() {
+        guard dataTaskNewYorkWeather == nil else { return }
+        
+        networkNewYorkWeather = NetworkClients.openWeatherNewYork
+        dataTaskNewYorkWeather = networkNewYorkWeather?.getData(completion: { (weather, error) in
+            self.dataTaskNewYorkWeather = nil
+            
+            guard let weather = weather as? TodayWeather else {
+                return
+            }
+            
+            self.newYorkWeatherViewModel = WeatherViewModel(weather: weather)
+            self.collectionView.reloadItems(at: [IndexPath(item: 2, section: 0)])
+        })
+    }
+
+    // MARK: PageControl
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = targetContentOffset.pointee.x
         
@@ -104,7 +157,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
             OpenWeather.latitude = String(location.coordinate.latitude)
             OpenWeather.longitude = String(location.coordinate.longitude)
             refreshDataCurrentWeather()
-            refreshDataForecast()
+            refreshDataCurrentForecast()
             locationManager.stopUpdatingLocation()
         }
     }
@@ -120,7 +173,16 @@ extension WeatherViewController: UICollectionViewDataSource {
                                                       for: indexPath) as! WeatherCollectionViewCell
         
         // Configure the cell
-        weatherViewModel?.configure(cell)
+        switch indexPath.row {
+        case 0:
+            currentWeatherViewModel?.configure(cell)
+        case 1:
+            parisWeatherViewModel?.configure(cell)
+        case 2:
+            newYorkWeatherViewModel?.configure(cell)
+        default:
+            break
+        }
         return cell
     }
 }
