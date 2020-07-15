@@ -54,7 +54,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="b0s-i0-MdI">
                                                         <rect key="frame" x="34.5" y="0.0" width="251" height="65"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtz-gJ-bkM" customClass="CurrencyButton" customModule="Le_Baluchon" customModuleProvider="target">
+                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtz-gJ-bkM" customClass="CurrencyButton" customModule="Le_Baluchon" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
@@ -75,7 +75,7 @@
                                                                     <action selector="swapTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rog-FQ-9Qh"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujK-JW-qks" customClass="CurrencyButton" customModule="Le_Baluchon" customModuleProvider="target">
+                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujK-JW-qks" customClass="CurrencyButton" customModule="Le_Baluchon" customModuleProvider="target">
                                                                 <rect key="frame" x="186" y="0.0" width="65" height="65"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>

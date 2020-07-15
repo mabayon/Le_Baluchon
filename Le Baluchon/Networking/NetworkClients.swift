@@ -77,6 +77,7 @@ class NetworkClients {
 }
 
 extension NetworkClients {
+        
     static let fixer = NetworkClients(apiURL: Fixer.url,
                                       session: URLSession.shared,
                                       responseQueue: .main,
@@ -86,12 +87,7 @@ extension NetworkClients {
                                             session: URLSession.shared,
                                             responseQueue: .main,
                                             apiServices: .OpenWeatherCurrent)
-    
-    static let openWeatherForecast = NetworkClients(apiURL: OpenWeather.urlForecast,
-                                                    session: URLSession.shared,
-                                                    responseQueue: .main,
-                                                    apiServices: .OpenWeatherForecast)
-    
+        
     static let openWeatherParis = NetworkClients(apiURL: OpenWeather.urlParisWeather,
                                                  session: URLSession.shared,
                                                  responseQueue: .main,
@@ -101,6 +97,21 @@ extension NetworkClients {
                                                  session: URLSession.shared,
                                                  responseQueue: .main,
                                                  apiServices: .OpenWeatherCurrent)
+
+    static let openWeatherForecast = NetworkClients(apiURL: OpenWeather.urlForecastCurrent,
+                                                    session: URLSession.shared,
+                                                    responseQueue: .main,
+                                                    apiServices: .OpenWeatherForecast)
+    
+    static let openWeatherForecastParis = NetworkClients(apiURL: OpenWeather.urlForecastParis,
+                                                         session: URLSession.shared,
+                                                         responseQueue: .main,
+                                                         apiServices: .OpenWeatherForecast)
+    
+    static let openWeatherForecastNewYork = NetworkClients(apiURL: OpenWeather.urlForecastNewYork,
+                                                         session: URLSession.shared,
+                                                         responseQueue: .main,
+                                                         apiServices: .OpenWeatherForecast)
 
 }
 

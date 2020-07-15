@@ -14,24 +14,23 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var networkCurrentWeather: NetworkClientsService?
-    var networkParisWeather: NetworkClientsService?
-    var networkNewYorkWeather: NetworkClientsService?
-
-    var networkCurrentForecast: NetworkClientsService?
-
+    var networkClient: NetworkClientsService?
+    
     var dataTaskCurrentWeather: URLSessionDataTask?
     var dataTaskParisWeather: URLSessionDataTask?
     var dataTaskNewYorkWeather: URLSessionDataTask?
-   
-    var dataTaskForecast: URLSessionDataTask?
-
+    
+    var dataTaskForecastCurrent: URLSessionDataTask?
+    var dataTaskForecastParis: URLSessionDataTask?
+    var dataTaskForecastNewYork: URLSessionDataTask?
+    
     var currentWeatherViewModel: WeatherViewModel?
     var parisWeatherViewModel: WeatherViewModel?
     var newYorkWeatherViewModel: WeatherViewModel?
-
-
+    
     var forecastViewModels: [ForecastViewModel] = []
+    var forecastParisViewModels: [ForecastViewModel] = []
+    var forecastNewYorkViewModels: [ForecastViewModel] = []
     
     let locationManager = CLLocationManager()
     
@@ -42,8 +41,21 @@ class WeatherViewController: UIViewController {
         setupCollectionView()
         setupLocationManager()
         
-        refreshDataParisWeather()
-        refreshDataNewYorkWeather()
+        dataTaskParisWeather = refreshDataCurrentWeather(dataTask: dataTaskParisWeather,
+                                                         networkClient: .openWeatherParis,
+                                                         for: .paris)
+        
+        dataTaskForecastParis = refreshDataForecast(dataTask: dataTaskForecastParis,
+                                                    networkClient: .openWeatherForecastParis,
+                                                    for: .paris)
+        
+        dataTaskNewYorkWeather = refreshDataCurrentWeather(dataTask: dataTaskNewYorkWeather,
+                                                           networkClient: .openWeatherNewYork,
+                                                           for: .newYork)
+        
+        dataTaskForecastNewYork = refreshDataForecast(dataTask: dataTaskForecastNewYork,
+                                                      networkClient: .openWeatherForecastNewYork,
+                                                      for: .newYork)
     }
     
     func setupLocationManager() {
@@ -66,80 +78,79 @@ class WeatherViewController: UIViewController {
         collectionView.backgroundColor = UIColor(red: 250/255, green: 165/255, blue: 98/255, alpha: 1)
     }
     
-    // MARK: Current Weather
-    func refreshDataCurrentWeather() {
-        guard dataTaskCurrentWeather == nil else { return }
+    enum Location {
+        case current, paris, newYork
+    }
+    
+    func refreshDataCurrentWeather(dataTask: URLSessionDataTask?,
+                                   networkClient: NetworkClients?,
+                                   for location: Location) -> URLSessionDataTask? {
         
-        networkCurrentWeather = NetworkClients.openWeather
-        dataTaskCurrentWeather = networkCurrentWeather?.getData(completion: { (weather, error) in
-            self.dataTaskCurrentWeather = nil
+        guard dataTask == nil else { return dataTask }
+        
+        return networkClient?.getData(completion: { (weather, error) in
             
-            guard let weather = weather as? TodayWeather else {
-                return
+            guard let weather = weather as? TodayWeather else { return }
+            
+            switch location {
+            case .current:
+                self.dataTaskCurrentWeather = nil
+                self.currentWeatherViewModel = WeatherViewModel(weather: weather)
+            case .paris:
+                self.dataTaskParisWeather = nil
+                self.parisWeatherViewModel = WeatherViewModel(weather: weather)
+            case .newYork:
+                self.dataTaskNewYorkWeather = nil
+                self.newYorkWeatherViewModel = WeatherViewModel(weather: weather)
             }
             
-            self.currentWeatherViewModel = WeatherViewModel(weather: weather)
-            self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+            self.collectionView.reloadData()
         })
     }
     
-    func refreshDataCurrentForecast() {
-        guard dataTaskForecast == nil else { return }
+    func refreshDataForecast(dataTask: URLSessionDataTask?,
+                             networkClient: NetworkClients?,
+                             for location: Location) -> URLSessionDataTask? {
+        
+        guard dataTask == nil else { return dataTask }
         
         forecastViewModels = []
-        networkCurrentForecast = NetworkClients.openWeatherForecast
-        dataTaskForecast = networkCurrentForecast?.getData(completion: { (forecast, error) in
-            self.dataTaskForecast = nil
+        return networkClient?.getData(completion: { (forecast, error) in
             
             guard let forecast = forecast as? ForecastWeather else { return }
             
-            let forecastManager = ForecastManager(list: forecast.list)
-            let lastForecasts = forecastManager.lastForecast
-            let tempMaxMin = forecastManager.temps
-            for i in 0...lastForecasts.count - 1 {
-                let forecast = lastForecasts[i]
-                let temps = tempMaxMin[i]
-                self.forecastViewModels.append(ForecastViewModel(forecast: forecast, temps: temps))
+            var cell: WeatherCollectionViewCell?
+            switch location {
+            case .current:
+                self.dataTaskForecastCurrent = nil
+                self.forecastViewModels = self.createForecastViewModels(forecast: forecast)
+                cell = self.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? WeatherCollectionViewCell
+            case .paris:
+                self.dataTaskForecastParis = nil
+                self.forecastParisViewModels = self.createForecastViewModels(forecast: forecast)
+                cell = self.collectionView.cellForItem(at: IndexPath(item: 1, section: 0)) as? WeatherCollectionViewCell
+            case .newYork:
+                self.dataTaskForecastNewYork = nil
+                self.forecastNewYorkViewModels = self.createForecastViewModels(forecast: forecast)
+                cell = self.collectionView.cellForItem(at: IndexPath(item: 2, section: 0)) as? WeatherCollectionViewCell
             }
-            let cell = self.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? WeatherCollectionViewCell
             cell?.forecastTableView.reloadData()
         })
     }
     
-    // MARK: Paris Weather
-    func refreshDataParisWeather() {
-        guard dataTaskParisWeather == nil else { return }
-        
-        networkParisWeather = NetworkClients.openWeatherParis
-        dataTaskParisWeather = networkParisWeather?.getData(completion: { (weather, error) in
-            self.dataTaskParisWeather = nil
-            
-            guard let weather = weather as? TodayWeather else {
-                return
-            }
-            
-            self.parisWeatherViewModel = WeatherViewModel(weather: weather)
-            self.collectionView.reloadItems(at: [IndexPath(item: 1, section: 0)])
-        })
+    func createForecastViewModels(forecast: ForecastWeather) -> [ForecastViewModel] {
+        var forecastViewModels: [ForecastViewModel] = []
+        let forecastManager = ForecastManager(list: forecast.list)
+        let lastForecasts = forecastManager.lastForecast
+        let tempMaxMin = forecastManager.temps
+        for i in 0...lastForecasts.count - 1 {
+            let forecast = lastForecasts[i]
+            let temps = tempMaxMin[i]
+            forecastViewModels.append(ForecastViewModel(forecast: forecast, temps: temps))
+        }
+        return forecastViewModels
     }
     
-    // MARK: Paris Weather
-    func refreshDataNewYorkWeather() {
-        guard dataTaskNewYorkWeather == nil else { return }
-        
-        networkNewYorkWeather = NetworkClients.openWeatherNewYork
-        dataTaskNewYorkWeather = networkNewYorkWeather?.getData(completion: { (weather, error) in
-            self.dataTaskNewYorkWeather = nil
-            
-            guard let weather = weather as? TodayWeather else {
-                return
-            }
-            
-            self.newYorkWeatherViewModel = WeatherViewModel(weather: weather)
-            self.collectionView.reloadItems(at: [IndexPath(item: 2, section: 0)])
-        })
-    }
-
     // MARK: PageControl
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = targetContentOffset.pointee.x
@@ -156,8 +167,12 @@ extension WeatherViewController: CLLocationManagerDelegate {
             location.horizontalAccuracy <= manager.desiredAccuracy {
             OpenWeather.latitude = String(location.coordinate.latitude)
             OpenWeather.longitude = String(location.coordinate.longitude)
-            refreshDataCurrentWeather()
-            refreshDataCurrentForecast()
+            dataTaskCurrentWeather = refreshDataCurrentWeather(dataTask: dataTaskCurrentWeather,
+                                                               networkClient: .openWeather,
+                                                               for: .current)
+            dataTaskForecastCurrent = refreshDataForecast(dataTask: dataTaskForecastCurrent,
+                                                          networkClient: .openWeatherForecast,
+                                                          for: .current)
             locationManager.stopUpdatingLocation()
         }
     }
@@ -215,8 +230,21 @@ extension WeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier) as! ForecastTableViewCell
         guard forecastViewModels.count > 0 else { return cell }
-        let viewModel = forecastViewModels[indexPath.row]
-        viewModel.configure(cell)
+        
+        switch tableView.superview?.superview {
+        case collectionView.cellForItem(at: IndexPath(row: 0, section: 0)):
+            let viewModel = forecastViewModels[indexPath.row]
+            viewModel.configure(cell)
+        case collectionView.cellForItem(at: IndexPath(row: 1, section: 0)):
+            let viewModel = forecastParisViewModels[indexPath.row]
+            viewModel.configure(cell)
+        case collectionView.cellForItem(at: IndexPath(row: 2, section: 0)):
+            let viewModel = forecastNewYorkViewModels[indexPath.row]
+            viewModel.configure(cell)
+            
+        default:
+            break
+        }
         return cell
     }
 }

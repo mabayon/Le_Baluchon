@@ -29,20 +29,29 @@ struct OpenWeather {
         }
     }
     
+    // MARK: Current Weather
     static var urlCurrentWeather: String {
         return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters
     }
-    
-    static var urlForecast: String {
-        return OpenWeather.baseURL + forecast + OpenWeather.accessKey + OpenWeather.parameters
-    }
-    
+        
     static var urlParisWeather: String {
         return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters + paris
     }
     
     static var urlNewYorkWeather: String {
         return OpenWeather.baseURL + currentWeather + OpenWeather.accessKey + OpenWeather.parameters + newYork
+    }
+    // MARK: Forecast
+    static var urlForecastCurrent: String {
+        return OpenWeather.baseURL + forecast + OpenWeather.accessKey + OpenWeather.parameters
+    }
+
+    static var urlForecastParis: String {
+        return OpenWeather.baseURL + forecast + OpenWeather.accessKey + OpenWeather.parameters + paris
+    }
+    
+    static var urlForecastNewYork: String {
+        return OpenWeather.baseURL + forecast + OpenWeather.accessKey + OpenWeather.parameters + newYork
     }
 
 }
