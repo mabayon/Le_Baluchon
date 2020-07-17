@@ -29,6 +29,14 @@ class NetworkClientsTests: XCTestCase {
     var getOpenWeatherURL: URL {
         return URL(string: OpenWeather.urlCurrentWeather)!
     }
+    
+    var getOpenWeatherForecastURL: URL {
+        return URL(string: OpenWeather.urlForecastCurrent)!
+    }
+    
+    var getGoogleTranslateURL: URL {
+        return URL(string: GoogleTranslate.url)!
+    }
 
     // MARK: - Test Lifecycle
     override func setUp() {
@@ -297,6 +305,52 @@ extension NetworkClientsTests {
         XCTAssertTrue(result.calledCompletion)
         XCTAssertNil(result.error)
         XCTAssertEqual((result.data as? TodayWeather), weather)
+    }
+
+}
+
+// MARK: - Forecast - Tests
+extension NetworkClientsTests {
+    
+    func test_getData_givenValidJSON_callsCompletionWithForecastWeather() throws {
+        // Given
+        OpenWeather.latitude = "48.8534"
+        OpenWeather.longitude = "2.3488"
+        apiServices = .OpenWeatherForecast
+        let data = try Data.fromJSON(fileName: "ForecastWeather")
+        
+        let decodoer = JSONDecoder()
+        let weather = try decodoer.decode(ForecastWeather.self, from: data)
+        
+        // When
+        let result = whenGetData(for: getOpenWeatherForecastURL, data: data)
+        
+        // Then
+        XCTAssertTrue(result.calledCompletion)
+        XCTAssertNil(result.error)
+        XCTAssertEqual((result.data as? ForecastWeather), weather)
+    }
+
+}
+
+// MARK: - Forecast - Tests
+extension NetworkClientsTests {
+    
+    func test_getData_givenValidJSON_callsCompletionWithTranslation() throws {
+        // Given
+        apiServices = .GoogleTranslate
+        let data = try Data.fromJSON(fileName: "Translation")
+        
+        let decodoer = JSONDecoder()
+        let weather = try decodoer.decode(Translation.self, from: data)
+        
+        // When
+        let result = whenGetData(for: getGoogleTranslateURL, data: data)
+        
+        // Then
+        XCTAssertTrue(result.calledCompletion)
+        XCTAssertNil(result.error)
+        XCTAssertEqual((result.data as? Translation), weather)
     }
 
 }

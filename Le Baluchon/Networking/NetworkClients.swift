@@ -17,7 +17,7 @@ class NetworkClients {
     let session: URLSession
     let apiService: APIService
     let responseQueue: DispatchQueue?
-        
+    
     init(apiURL: String,
          session: URLSession,
          responseQueue: DispatchQueue?,
@@ -54,7 +54,9 @@ class NetworkClients {
                     let forecast = try decoder.decode(ForecastWeather.self, from: data)
                     self.dispatchResult(models: forecast, completion: completion)
                 case .GoogleTranslate:
-                    break
+                    let translation = try decoder.decode(Translation.self, from: data)
+                    self.dispatchResult(models: translation, completion: completion)
+                    
                 }
             } catch {
                 self.dispatchResult(error: error, completion: completion)
@@ -78,7 +80,7 @@ class NetworkClients {
 }
 
 extension NetworkClients {
-        
+    
     static let fixer = NetworkClients(apiURL: Fixer.url,
                                       session: URLSession.shared,
                                       responseQueue: .main,
@@ -88,17 +90,17 @@ extension NetworkClients {
                                             session: URLSession.shared,
                                             responseQueue: .main,
                                             apiServices: .OpenWeatherCurrent)
-        
+    
     static let openWeatherParis = NetworkClients(apiURL: OpenWeather.urlParisWeather,
                                                  session: URLSession.shared,
                                                  responseQueue: .main,
                                                  apiServices: .OpenWeatherCurrent)
     
     static let openWeatherNewYork = NetworkClients(apiURL: OpenWeather.urlNewYorkWeather,
-                                                 session: URLSession.shared,
-                                                 responseQueue: .main,
-                                                 apiServices: .OpenWeatherCurrent)
-
+                                                   session: URLSession.shared,
+                                                   responseQueue: .main,
+                                                   apiServices: .OpenWeatherCurrent)
+    
     static let openWeatherForecast = NetworkClients(apiURL: OpenWeather.urlForecastCurrent,
                                                     session: URLSession.shared,
                                                     responseQueue: .main,
@@ -110,10 +112,10 @@ extension NetworkClients {
                                                          apiServices: .OpenWeatherForecast)
     
     static let openWeatherForecastNewYork = NetworkClients(apiURL: OpenWeather.urlForecastNewYork,
-                                                         session: URLSession.shared,
-                                                         responseQueue: .main,
-                                                         apiServices: .OpenWeatherForecast)
-
+                                                           session: URLSession.shared,
+                                                           responseQueue: .main,
+                                                           apiServices: .OpenWeatherForecast)
+    
     static let googleTranslate = NetworkClients(apiURL: GoogleTranslate.url,
                                                 session: URLSession.shared,
                                                 responseQueue: .main,
