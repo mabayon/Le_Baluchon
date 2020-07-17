@@ -9,5 +9,5 @@
 import Foundation
 
 enum APIService {
-    case Fixer, OpenWeatherCurrent, OpenWeatherForecast
+    case Fixer, OpenWeatherCurrent, OpenWeatherForecast, GoogleTranslate
 }

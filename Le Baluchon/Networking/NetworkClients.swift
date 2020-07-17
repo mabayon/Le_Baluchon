@@ -53,7 +53,8 @@ class NetworkClients {
                 case .OpenWeatherForecast:
                     let forecast = try decoder.decode(ForecastWeather.self, from: data)
                     self.dispatchResult(models: forecast, completion: completion)
-                    
+                case .GoogleTranslate:
+                    break
                 }
             } catch {
                 self.dispatchResult(error: error, completion: completion)
@@ -113,6 +114,10 @@ extension NetworkClients {
                                                          responseQueue: .main,
                                                          apiServices: .OpenWeatherForecast)
 
+    static let googleTranslate = NetworkClients(apiURL: GoogleTranslate.url,
+                                                session: URLSession.shared,
+                                                responseQueue: .main,
+                                                apiServices: .GoogleTranslate)
 }
 
 // For testing purpose
