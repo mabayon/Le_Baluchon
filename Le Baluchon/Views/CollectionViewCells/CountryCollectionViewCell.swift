@@ -22,30 +22,28 @@ class CountryCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
-        imageView.image = UIImage(named: "USD")
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont(name: "Inter-Regular", size: 15)
         label.contentMode = .center
-        label.text = "USD"
         return label
     }()
     
-    var name: String? {
-        didSet {
-            label.text = name
-            imageView.image = UIImage().getImage(for: name)
-        }
-    }
+//    var name: String? {
+//        didSet {
+//            label.text = name
+//            imageView.image = UIImage().getImage(for: name)
+//        }
+//    }
     
     var delegate: CountryCollectionViewCellDelegate?
     

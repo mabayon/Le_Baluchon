@@ -96,7 +96,8 @@ class ExchangeRatesViewModel {
     
     func configureCell(_ cell: CountryCollectionViewCell, for row: Int) {
         let arrayWithoutEUR = currencies.filter({ $0.name != "EUR" })
-        cell.name = arrayWithoutEUR[row].name
+        cell.label.text = arrayWithoutEUR[row].name
+        cell.imageView.image = UIImage().getImage(for: arrayWithoutEUR[row].name)
     }
 }
 
