@@ -31,16 +31,30 @@ class TranslatorView: UIView {
         }
     }
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var fromLangName: String = "Anglais" {
+        didSet {
+            let lang = TranslatedLang.languages.first(where: { $0.name == fromLangName })
+            translateFromLabel.text = "Traduire un text écrit en " + fromLangName.lowercased()
+            translateFromImageView.image = UIImage().getImage(for: lang?.imageName)
+        }
     }
-    */
-
+    
+    var toLangName: String = "Français" {
+        didSet {
+            let lang = TranslatedLang.languages.first(where: { $0.name == toLangName })
+            translateToLabel.text = "Traduire en " + toLangName.lowercased()
+            translateToImageView.image = UIImage().getImage(for: lang?.imageName)
+        }
+    }
+    
     override func awakeFromNib() {
         applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
         applyShadow()
+    }
+    
+    func swapLang() {
+        let fromLangNameTemp = fromLangName
+        fromLangName = toLangName
+        toLangName = fromLangNameTemp
     }
 }

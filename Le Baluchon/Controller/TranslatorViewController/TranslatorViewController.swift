@@ -15,13 +15,17 @@ class TranslatorViewController: UIViewController {
     var networkClient = NetworkClients.googleTranslate
     
     var dataTask: URLSessionDataTask?
+    
+    var isTranslatedFromFrench = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         translatorView.fromTextView.delegate = self
         createPlaceholder(for: translatorView.fromTextView)
-        
+        translatorView.fromLangName = "Anglais"
+        translatorView.toLangName = "Français"
+
         GoogleTranslate.sourceLang = "en"
         GoogleTranslate.targetLang = "fr"
     }
@@ -47,12 +51,14 @@ class TranslatorViewController: UIViewController {
     }
     
     @IBAction func swapTapped(_ sender: Any) {
+        translatorView.swapLang()
+        isTranslatedFromFrench = isTranslatedFromFrench == true ? false : true
     }
 }
 
 extension TranslatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TranslatedLang.languages.count
+        return TranslatedLang.languages.count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,6 +82,25 @@ extension TranslatorViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         let lineSpacing: CGFloat = 20.0
         return lineSpacing
+    }
+}
+
+extension TranslatorViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! CountryCollectionViewCell
+
+        changeLang(with: cell)
+    }
+    
+    func changeLang(with cell: CountryCollectionViewCell) {
+        
+        if isTranslatedFromFrench {
+            guard cell.imageView.image != translatorView.translateToImageView.image else { return }
+            translatorView.toLangName = cell.label.text ?? ""
+        } else {
+            guard cell.imageView.image != translatorView.translateFromImageView.image else { return }
+            translatorView.fromLangName = cell.label.text ?? ""
+        }
     }
 }
 
