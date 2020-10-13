@@ -11,27 +11,29 @@ import Foundation
 struct GoogleTranslate {
     static private let baseURL = "https://translation.googleapis.com/language/translate/v2"
     static private let accessKey = "?key=\(APIKeys.GoogleTranslate)"
-    static private let parameters = GoogleTranslate.source + GoogleTranslate.target + GoogleTranslate.text + GoogleTranslate.format
     static private var text = "&q="
     static private var source = "&fr"
     static private var target = "&en"
     static private let format = "&format=text"
     
-    var text: String {
+    static private var parameters: String { return GoogleTranslate.source + GoogleTranslate.target + GoogleTranslate.text + GoogleTranslate.format }
+
+    
+    static var textToTranslate = "" {
         didSet {
-            GoogleTranslate.text = "&q=" + text
+            text = "&q=" + textToTranslate
         }
     }
     
-    var source: String {
+    static var sourceLang = "" {
         didSet {
-            GoogleTranslate.source = "&" + source
+            source = "&source=" + sourceLang
         }
     }
     
-    var target: String {
+    static var targetLang = "" {
         didSet {
-            GoogleTranslate.target = "&" + target
+            target = "&target=" + targetLang
         }
     }
 

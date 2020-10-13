@@ -337,6 +337,9 @@
                                                     <constraint firstAttribute="width" secondItem="zRd-ZF-Sjh" secondAttribute="height" multiplier="53:62" id="Y9N-N1-QwI"/>
                                                 </constraints>
                                                 <state key="normal" image="icon_Swap_Up"/>
+                                                <connections>
+                                                    <action selector="swapTapped:" destination="ISf-fW-WvJ" eventType="touchUpInside" id="HXR-Nb-APM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -510,9 +513,9 @@
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <segue destination="ISf-fW-WvJ" kind="relationship" relationship="viewControllers" id="Gsb-El-qh6"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="2tA-8B-g4u"/>
                         <segue destination="CLU-Q7-9cg" kind="relationship" relationship="viewControllers" id="AcV-Lb-Avo"/>
-                        <segue destination="ISf-fW-WvJ" kind="relationship" relationship="viewControllers" id="Gsb-El-qh6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XB-MG-BaY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

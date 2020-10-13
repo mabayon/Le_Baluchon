@@ -333,7 +333,7 @@ extension NetworkClientsTests {
 
 }
 
-// MARK: - Forecast - Tests
+// MARK: - Google Translate - Tests
 extension NetworkClientsTests {
     
     func test_getData_givenValidJSON_callsCompletionWithTranslation() throws {

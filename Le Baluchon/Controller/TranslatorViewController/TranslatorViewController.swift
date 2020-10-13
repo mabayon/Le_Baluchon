@@ -12,11 +12,18 @@ class TranslatorViewController: UIViewController {
 
     @IBOutlet weak var translatorView: TranslatorView!
     
+    var networkClient = NetworkClients.googleTranslate
+    
+    var dataTask: URLSessionDataTask?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         translatorView.fromTextView.delegate = self
         createPlaceholder(for: translatorView.fromTextView)
+        
+        GoogleTranslate.sourceLang = "en"
+        GoogleTranslate.targetLang = "fr"
     }
     
     func createPlaceholder(for textView: UITextView) {
@@ -25,6 +32,21 @@ class TranslatorViewController: UIViewController {
 
         textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument,
                                                         to: textView.beginningOfDocument)
+    }
+    
+    func refreshData() {
+        guard dataTask == nil else { return }
+        
+        dataTask = networkClient.getData(completion: { (translation, error) in
+            self.dataTask = nil
+
+            guard let translation = translation as? Translation else { return }
+            
+            self.translatorView.toTextView.text = translation.data.map({ $0 }).first.map({ $0 })?.value.first?.translatedText
+        })
+    }
+    
+    @IBAction func swapTapped(_ sender: Any) {
     }
 }
 
@@ -58,6 +80,17 @@ extension TranslatorViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TranslatorViewController: UITextViewDelegate {
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        guard let textToTranslate = translatorView.fromTextView.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return
+        }
+        
+        GoogleTranslate.textToTranslate = textToTranslate
+        networkClient.reloadGoogleTranslate()
+        networkClient = NetworkClients.googleTranslate
+        refreshData()
+    }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 

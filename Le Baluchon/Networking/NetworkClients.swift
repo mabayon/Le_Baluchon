@@ -77,6 +77,13 @@ class NetworkClients {
             completion(models, error)
         }
     }
+    
+    func reloadGoogleTranslate() {
+        NetworkClients.googleTranslate = NetworkClients(apiURL: GoogleTranslate.url,
+                                         session: URLSession.shared,
+                                         responseQueue: .main,
+                                         apiServices: .GoogleTranslate)
+    }
 }
 
 extension NetworkClients {
@@ -116,7 +123,7 @@ extension NetworkClients {
                                                            responseQueue: .main,
                                                            apiServices: .OpenWeatherForecast)
     
-    static let googleTranslate = NetworkClients(apiURL: GoogleTranslate.url,
+    static var googleTranslate = NetworkClients(apiURL: GoogleTranslate.url,
                                                 session: URLSession.shared,
                                                 responseQueue: .main,
                                                 apiServices: .GoogleTranslate)
