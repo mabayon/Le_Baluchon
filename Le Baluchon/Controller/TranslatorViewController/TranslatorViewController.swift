@@ -9,33 +9,41 @@
 import UIKit
 
 class TranslatorViewController: UIViewController {
-
+    
     @IBOutlet weak var translatorView: TranslatorView!
+    @IBOutlet weak var mentionLabel: UILabel!
     
     var networkClient = NetworkClients.googleTranslate
     
     var dataTask: URLSessionDataTask?
     
-    var isTranslatedFromFrench = false
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        translatorView.fromTextView.delegate = self
-        createPlaceholder(for: translatorView.fromTextView)
-        translatorView.fromLangName = "Anglais"
-        translatorView.toLangName = "Français"
-
-        GoogleTranslate.sourceLang = "en"
-        GoogleTranslate.targetLang = "fr"
+    var translationFromLang = "" {
+        didSet {
+            guard let lang = TranslatedLang.languages.first(where: { $0.name == translationFromLang }) else { return }
+            translatorView.fromLangName = lang.name
+            translatorView.translateFromImageView.image = UIImage().getImage(for: lang.imageName)
+            GoogleTranslate.sourceLang = lang.code
+        }
     }
     
-    func createPlaceholder(for textView: UITextView) {
-        textView.text = "Saisis du texte…"
-        textView.textColor = UIColor.lightGray
-
-        textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument,
-                                                        to: textView.beginningOfDocument)
+    var translationToLang = "" {
+        didSet {
+            guard let lang = TranslatedLang.languages.first(where: { $0.name == translationToLang }) else { return }
+            translatorView.toLangName = lang.name
+            translatorView.translateToImageView.image = UIImage().getImage(for: lang.imageName)
+            GoogleTranslate.targetLang = lang.code
+        }
+    }
+    
+    var isTranslatedFromFrench = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        translatorView.fromTextView.delegate = self
+        createPlaceholder(for: translatorView.fromTextView)
+        translationFromLang = "Anglais"
+        translationToLang = "Français"
     }
     
     func refreshData() {
@@ -52,7 +60,15 @@ class TranslatorViewController: UIViewController {
     
     @IBAction func swapTapped(_ sender: Any) {
         translatorView.swapLang()
-        isTranslatedFromFrench = isTranslatedFromFrench == true ? false : true
+        translationFromLang = translatorView.fromLangName
+        translationToLang = translatorView.toLangName
+        if isTranslatedFromFrench {
+            isTranslatedFromFrench = false
+            mentionLabel.text = "Choisis ta langue à traduire en français"
+        } else {
+            isTranslatedFromFrench = true
+            mentionLabel.text = "Choisis ta langue à traduire du français"
+        }
     }
 }
 
@@ -88,7 +104,7 @@ extension TranslatorViewController: UICollectionViewDelegateFlowLayout {
 extension TranslatorViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CountryCollectionViewCell
-
+        
         changeLang(with: cell)
     }
     
@@ -97,18 +113,24 @@ extension TranslatorViewController: UICollectionViewDelegate {
         if isTranslatedFromFrench {
             guard cell.imageView.image != translatorView.translateToImageView.image else { return }
             translatorView.toLangName = cell.label.text ?? ""
+            translationToLang = translatorView.toLangName
         } else {
             guard cell.imageView.image != translatorView.translateFromImageView.image else { return }
             translatorView.fromLangName = cell.label.text ?? ""
+            translationFromLang = translatorView.fromLangName
         }
+        
+        translatorView.toTextView.text = ""
+        createPlaceholder(for: translatorView.fromTextView)
     }
 }
 
 extension TranslatorViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        guard let textToTranslate = translatorView.fromTextView.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-            return
+        guard translatorView.fromTextView.text != "Saisis du texte…",
+            let textToTranslate = translatorView.fromTextView.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+                return
         }
         
         GoogleTranslate.textToTranslate = textToTranslate
@@ -117,30 +139,38 @@ extension TranslatorViewController: UITextViewDelegate {
         refreshData()
     }
     
+    func createPlaceholder(for textView: UITextView) {
+        textView.text = "Saisis du texte…"
+        textView.textColor = UIColor.lightGray
+        
+        textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument,
+                                                        to: textView.beginningOfDocument)
+    }
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-
+        
         // Dismiss keyboard when return tapped
         if(text == "\n") {
             textView.resignFirstResponder()
             return false
         }
-
+        
         // Combine the textView text and the replacement text to
         // create the updated text string
         let currentText: String = textView.text
         let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
-
+        
         // If updated text view will be empty, add the placeholder
         // and set the cursor to the beginning of the text view
         if updatedText.isEmpty {
             createPlaceholder(for: textView)
         }
-
-        // Else if the text view's placeholder is showing and the
-        // length of the replacement string is greater than 0, set
-        // the text color to black then set its text to the
-        // replacement string
-         else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+            
+            // Else if the text view's placeholder is showing and the
+            // length of the replacement string is greater than 0, set
+            // the text color to black then set its text to the
+            // replacement string
+        else if textView.textColor == UIColor.lightGray && !text.isEmpty {
             textView.textColor = UIColor.black
             textView.text = ""
         }

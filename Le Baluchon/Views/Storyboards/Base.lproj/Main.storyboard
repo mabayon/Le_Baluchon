@@ -426,6 +426,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_Translator_Deselected" selectedImage="icon_Translator_Selected" id="dw6-K2-z9c"/>
                     <connections>
+                        <outlet property="mentionLabel" destination="6HI-Qt-prL" id="tkd-sJ-qbf"/>
                         <outlet property="translatorView" destination="A75-Cp-lj4" id="rGV-ei-mp7"/>
                     </connections>
                 </viewController>

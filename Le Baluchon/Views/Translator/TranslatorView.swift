@@ -56,5 +56,14 @@ class TranslatorView: UIView {
         let fromLangNameTemp = fromLangName
         fromLangName = toLangName
         toLangName = fromLangNameTemp
+        swapText()
+    }
+    
+    private func swapText() {
+        guard fromTextView.text != "Saisis du texte..." && !toTextView.text.isEmpty else { return }
+        
+        let textFromTextView = fromTextView.text
+        fromTextView.text = toTextView.text
+        toTextView.text = textFromTextView
     }
 }
