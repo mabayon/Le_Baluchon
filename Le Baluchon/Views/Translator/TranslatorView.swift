@@ -31,27 +31,26 @@ class TranslatorView: UIView {
         }
     }
     
-    var fromLangName: String = "Anglais" {
-        didSet {
-            let lang = TranslatedLang.languages.first(where: { $0.name == fromLangName })
-            translateFromLabel.text = "Traduire un text écrit en " + fromLangName.lowercased()
-            translateFromImageView.image = UIImage().getImage(for: lang?.imageName)
-        }
-    }
-    
-    var toLangName: String = "Français" {
-        didSet {
-            let lang = TranslatedLang.languages.first(where: { $0.name == toLangName })
-            translateToLabel.text = "Traduire en " + toLangName.lowercased()
-            translateToImageView.image = UIImage().getImage(for: lang?.imageName)
-        }
-    }
+    var fromLangName: String = "Anglais"
+    var toLangName: String = "Français"
     
     override func awakeFromNib() {
         applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
         applyShadow()
     }
     
+    func updateFrom(lang: Lang) {
+        fromLangName = lang.name
+        translateFromLabel.text = "Traduire un text écrit en " + lang.name.lowercased()
+        translateFromImageView.image = UIImage().getImage(for: lang.imageName)
+    }
+    
+    func updateTo(lang: Lang) {
+        toLangName = lang.name
+        translateToLabel.text = "Traduire un text écrit en " + lang.name.lowercased()
+        translateToImageView.image = UIImage().getImage(for: lang.imageName)
+    }
+
     func swapLang() {
         let fromLangNameTemp = fromLangName
         fromLangName = toLangName

@@ -10,8 +10,12 @@ import UIKit
 
 class TranslatorViewController: UIViewController {
     
+    // MARK: IBOutlet
+    
     @IBOutlet weak var translatorView: TranslatorView!
     @IBOutlet weak var mentionLabel: UILabel!
+    
+    // MARK: Properties
     
     var networkClient = NetworkClients.googleTranslate
     
@@ -19,9 +23,11 @@ class TranslatorViewController: UIViewController {
     
     var translationFromLang = "" {
         didSet {
+            // Get the lang from TranslatedLang
             guard let lang = TranslatedLang.languages.first(where: { $0.name == translationFromLang }) else { return }
-            translatorView.fromLangName = lang.name
-            translatorView.translateFromImageView.image = UIImage().getImage(for: lang.imageName)
+            // Update the view
+            translatorView.updateFrom(lang: lang)
+            // Update the source of GoogleTranslate
             GoogleTranslate.sourceLang = lang.code
         }
     }
@@ -29,14 +35,14 @@ class TranslatorViewController: UIViewController {
     var translationToLang = "" {
         didSet {
             guard let lang = TranslatedLang.languages.first(where: { $0.name == translationToLang }) else { return }
-            translatorView.toLangName = lang.name
-            translatorView.translateToImageView.image = UIImage().getImage(for: lang.imageName)
+            translatorView.updateTo(lang: lang)
             GoogleTranslate.targetLang = lang.code
         }
     }
     
     var isTranslatedFromFrench = false
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,18 +52,9 @@ class TranslatorViewController: UIViewController {
         translationToLang = "Français"
     }
     
-    func refreshData() {
-        guard dataTask == nil else { return }
-        
-        dataTask = networkClient.getData(completion: { (translation, error) in
-            self.dataTask = nil
-
-            guard let translation = translation as? Translation else { return }
-            
-            self.translatorView.toTextView.text = translation.data.map({ $0 }).first.map({ $0 })?.value.first?.translatedText
-        })
-    }
+    // MARK: IBAction
     
+    // Swap the lang when the user tapped the button
     @IBAction func swapTapped(_ sender: Any) {
         translatorView.swapLang()
         translationFromLang = translatorView.fromLangName
@@ -70,10 +67,26 @@ class TranslatorViewController: UIViewController {
             mentionLabel.text = "Choisis ta langue à traduire du français"
         }
     }
+    
+    // MARK: Networking
+    
+    func refreshData() {
+        guard dataTask == nil else { return }
+        
+        dataTask = networkClient.getData(completion: { (translation, error) in
+            self.dataTask = nil
+
+            guard let translation = translation as? Translation else { return }
+            // Get the translated Text
+            self.translatorView.toTextView.text = translation.data.map({ $0 }).first.map({ $0 })?.value.first?.translatedText
+        })
+    }
 }
 
+// MARK: CollectionView - DataSource
 extension TranslatorViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // Number of section minus French
         return TranslatedLang.languages.count - 1
     }
     
@@ -87,6 +100,7 @@ extension TranslatorViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: CollectionView - FlowLayout
 extension TranslatorViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width * 0.25
@@ -101,10 +115,10 @@ extension TranslatorViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: CollectionView - Delegate
 extension TranslatorViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CountryCollectionViewCell
-        
         changeLang(with: cell)
     }
     
@@ -112,19 +126,28 @@ extension TranslatorViewController: UICollectionViewDelegate {
         
         if isTranslatedFromFrench {
             guard cell.imageView.image != translatorView.translateToImageView.image else { return }
+            // Change the label above the second textView
             translatorView.toLangName = cell.label.text ?? ""
+            // Update the view and the target
             translationToLang = translatorView.toLangName
+            // Do a request
+            networkClient.reloadGoogleTranslate()
+            networkClient = NetworkClients.googleTranslate
+            refreshData()
         } else {
             guard cell.imageView.image != translatorView.translateFromImageView.image else { return }
+            // Change the label above the first textView
             translatorView.fromLangName = cell.label.text ?? ""
+            // Update the view and the source
             translationFromLang = translatorView.fromLangName
+            createPlaceholder(for: translatorView.fromTextView)
+            // Erase the toTextView
+            translatorView.toTextView.text = ""
         }
-        
-        translatorView.toTextView.text = ""
-        createPlaceholder(for: translatorView.fromTextView)
     }
 }
 
+// MARK: TextView - Delegate
 extension TranslatorViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -132,8 +155,9 @@ extension TranslatorViewController: UITextViewDelegate {
             let textToTranslate = translatorView.fromTextView.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
                 return
         }
-        
+        // Update the text to translate
         GoogleTranslate.textToTranslate = textToTranslate
+        // And make a request
         networkClient.reloadGoogleTranslate()
         networkClient = NetworkClients.googleTranslate
         refreshData()
