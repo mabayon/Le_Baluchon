@@ -66,8 +66,8 @@ class ExchangeRatesViewController: UIViewController {
     func convert(amount: String?) {
         
         guard let amountText = amount,
-            let amount = Double(amountText)
-            else { return }
+              let amount = Double(amountText)
+        else { return }
         
         let fromCurrencyName = converterView.fromCurrencyName
         let toCurrencyName = converterView.toCurrencyName
@@ -84,7 +84,7 @@ class ExchangeRatesViewController: UIViewController {
                                     self.converterView.fromCurrencySymbol = fromCurrency
                                     self.converterView.toCurrencyResult = toCurrency
                                 }
-        })
+                             })
     }
     
     // MARK: - Refresh
@@ -95,6 +95,11 @@ class ExchangeRatesViewController: UIViewController {
             self.dataTask = nil
             
             guard let rates = rates as? ExchangeRates else {
+                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true)
+                }))
+                self.present(alertController, animated: true)
                 return
             }
             

@@ -90,7 +90,14 @@ class WeatherViewController: UIViewController {
         
         return networkClient?.getData(completion: { (weather, error) in
             
-            guard let weather = weather as? TodayWeather else { return }
+            guard let weather = weather as? TodayWeather else {
+                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true)
+                }))
+                self.present(alertController, animated: true)
+                return
+            }
             
             switch location {
             case .current:
@@ -117,7 +124,14 @@ class WeatherViewController: UIViewController {
         forecastViewModels = []
         return networkClient?.getData(completion: { (forecast, error) in
             
-            guard let forecast = forecast as? ForecastWeather else { return }
+            guard let forecast = forecast as? ForecastWeather else {
+                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true)
+                }))
+                self.present(alertController, animated: true)
+                return
+            }
             
             var cell: WeatherCollectionViewCell?
             switch location {
@@ -164,7 +178,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locations.first,
-            location.horizontalAccuracy <= manager.desiredAccuracy {
+           location.horizontalAccuracy <= manager.desiredAccuracy {
             OpenWeather.latitude = String(location.coordinate.latitude)
             OpenWeather.longitude = String(location.coordinate.longitude)
             dataTaskCurrentWeather = refreshDataCurrentWeather(dataTask: dataTaskCurrentWeather,

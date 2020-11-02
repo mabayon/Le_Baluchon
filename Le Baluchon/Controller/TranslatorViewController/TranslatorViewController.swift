@@ -75,8 +75,15 @@ class TranslatorViewController: UIViewController {
         
         dataTask = networkClient.getData(completion: { (translation, error) in
             self.dataTask = nil
-
-            guard let translation = translation as? Translation else { return }
+            
+            guard let translation = translation as? Translation else {
+                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true)
+                }))
+                self.present(alertController, animated: true)
+                return
+            }
             // Get the translated Text
             self.translatorView.toTextView.text = translation.data.map({ $0 }).first.map({ $0 })?.value.first?.translatedText
         })
@@ -152,8 +159,8 @@ extension TranslatorViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         guard translatorView.fromTextView.text != "Saisis du texte…",
-            let textToTranslate = translatorView.fromTextView.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
-                return
+              let textToTranslate = translatorView.fromTextView.text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return
         }
         // Update the text to translate
         GoogleTranslate.textToTranslate = textToTranslate
@@ -189,11 +196,11 @@ extension TranslatorViewController: UITextViewDelegate {
         if updatedText.isEmpty {
             createPlaceholder(for: textView)
         }
-            
-            // Else if the text view's placeholder is showing and the
-            // length of the replacement string is greater than 0, set
-            // the text color to black then set its text to the
-            // replacement string
+        
+        // Else if the text view's placeholder is showing and the
+        // length of the replacement string is greater than 0, set
+        // the text color to black then set its text to the
+        // replacement string
         else if textView.textColor == UIColor.lightGray && !text.isEmpty {
             textView.textColor = UIColor.black
             textView.text = ""
