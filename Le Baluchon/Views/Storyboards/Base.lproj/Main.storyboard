@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dyz-RB-Y4T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dyz-RB-Y4T">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -96,7 +97,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="107" height="30.5"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zhi-HH-l57">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="107" height="28.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="107" height="26.5"/>
                                                                         <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="25"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                         <connections>
@@ -104,7 +105,7 @@
                                                                         </connections>
                                                                     </textField>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mli-hw-8ql">
-                                                                        <rect key="frame" x="0.0" y="28.5" width="107" height="2"/>
+                                                                        <rect key="frame" x="0.0" y="26.5" width="107" height="4"/>
                                                                     </progressView>
                                                                 </subviews>
                                                             </stackView>
@@ -208,6 +209,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="v2b-Eo-vU0"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="QPJ-b0-TgV" firstAttribute="top" secondItem="v2b-Eo-vU0" secondAttribute="top" id="MJs-oI-lSH"/>
@@ -218,7 +220,6 @@
                             <constraint firstItem="OG9-Xf-bxE" firstAttribute="leading" secondItem="v2b-Eo-vU0" secondAttribute="leading" id="b7e-Tk-DyX"/>
                             <constraint firstItem="v2b-Eo-vU0" firstAttribute="trailing" secondItem="QPJ-b0-TgV" secondAttribute="trailing" id="zsH-d7-gy2"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="v2b-Eo-vU0"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_ExchangeRates_Deselected" selectedImage="icon_ExchangeRates_Selected" springLoaded="YES" id="gAJ-KQ-BKU"/>
                     <connections>
@@ -229,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076.25" y="104.5774647887324"/>
+            <point key="canvasLocation" x="1046" y="106"/>
         </scene>
         <!--Translator View Controller-->
         <scene sceneID="oC8-bl-7lG">
@@ -300,12 +301,12 @@
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2j0-p7-awH">
                                                         <rect key="frame" x="5" y="5" width="294" height="111"/>
-                                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="2j0-p7-awH" secondAttribute="bottom" constant="5" id="4yh-Zv-cf0"/>
                                                     <constraint firstAttribute="trailing" secondItem="2j0-p7-awH" secondAttribute="trailing" constant="5" id="CZG-gd-LLT"/>
@@ -318,12 +319,12 @@
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7a-lN-e9g">
                                                         <rect key="frame" x="5" y="5" width="294" height="111.5"/>
-                                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="O7a-lN-e9g" secondAttribute="trailing" constant="5" id="8Eb-eD-OMX"/>
                                                     <constraint firstItem="O7a-lN-e9g" firstAttribute="leading" secondItem="crr-dE-4uK" secondAttribute="leading" constant="5" id="P1h-Ad-Tvj"/>
@@ -342,7 +343,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="crr-dE-4uK" secondAttribute="trailing" constant="8" id="94A-ws-u1I"/>
                                             <constraint firstItem="C22-GX-z77" firstAttribute="top" secondItem="G68-rK-1Us" secondAttribute="bottom" constant="8" id="Pve-Ow-TK0"/>
@@ -412,7 +413,8 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="I2N-cL-aci"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="JQe-p4-dQQ" firstAttribute="top" secondItem="I2N-cL-aci" secondAttribute="top" id="B3H-au-ep7"/>
                             <constraint firstItem="s4R-Hm-PlA" firstAttribute="leading" secondItem="I2N-cL-aci" secondAttribute="leading" id="Bdl-Ih-7Ne"/>
@@ -422,7 +424,6 @@
                             <constraint firstItem="JQe-p4-dQQ" firstAttribute="leading" secondItem="I2N-cL-aci" secondAttribute="leading" id="nmO-0z-hmA"/>
                             <constraint firstItem="s4R-Hm-PlA" firstAttribute="trailing" secondItem="I2N-cL-aci" secondAttribute="trailing" id="u3a-ph-qnJ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="I2N-cL-aci"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_Translator_Deselected" selectedImage="icon_Translator_Selected" id="dw6-K2-z9c"/>
                     <connections>
@@ -453,8 +454,8 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GGt-QS-Hqg">
-                                <rect key="frame" x="0.0" y="44" width="320" height="438"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="447.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cro-wh-Oax">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -473,12 +474,13 @@
                                 </cells>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ThJ-Rb-Dan">
-                                <rect key="frame" x="140.5" y="482" width="39" height="37"/>
+                                <rect key="frame" x="99" y="491.5" width="122.5" height="27.5"/>
                                 <color key="pageIndicatorTintColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="fcl-50-9Ry"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fcl-50-9Ry" firstAttribute="trailing" secondItem="GGt-QS-Hqg" secondAttribute="trailing" id="37x-B5-4sb"/>
                             <constraint firstItem="ThJ-Rb-Dan" firstAttribute="centerX" secondItem="2O6-Bq-Ieu" secondAttribute="centerX" id="4nY-3W-4iQ"/>
@@ -490,7 +492,6 @@
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="trailing" secondItem="fcl-50-9Ry" secondAttribute="trailing" id="xzI-Uv-Hyx"/>
                             <constraint firstItem="ThJ-Rb-Dan" firstAttribute="top" secondItem="GGt-QS-Hqg" secondAttribute="bottom" id="y7i-Zf-zFb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="fcl-50-9Ry"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_Weather_Deselected" selectedImage="icon_Weather_Selected" id="fjq-E8-zBn"/>
                     <connections>
@@ -514,8 +515,8 @@
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ISf-fW-WvJ" kind="relationship" relationship="viewControllers" id="Gsb-El-qh6"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="2tA-8B-g4u"/>
+                        <segue destination="ISf-fW-WvJ" kind="relationship" relationship="viewControllers" id="Gsb-El-qh6"/>
                         <segue destination="CLU-Q7-9cg" kind="relationship" relationship="viewControllers" id="AcV-Lb-Avo"/>
                     </connections>
                 </tabBarController>
@@ -537,5 +538,11 @@
         <image name="icon_Translator_Selected" width="25.5" height="25.5"/>
         <image name="icon_Weather_Deselected" width="25.5" height="20"/>
         <image name="icon_Weather_Selected" width="25.5" height="20"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -21,6 +21,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         label.text = "Paris"
         label.font = UIFont(name: "Inter-Bold", size: 30)
         label.textColor = .white
+        label.isHidden = true
         return label
     }()
     
@@ -46,6 +47,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 8
+        stackView.isHidden = true
         return stackView
     }()
     
@@ -54,6 +56,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         label.text = "Ensoleillé"
         label.font = UIFont(name: "Inter-Regular", size: 15)
         label.textColor = .white
+        label.isHidden = true
         return label
     }()
     
@@ -62,6 +65,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         label.text = "Mercredi"
         label.font = UIFont(name: "Inter-Bold", size: 25)
         label.textColor = .white
+        label.isHidden = true
         return label
     }()
     
@@ -148,6 +152,13 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         forecastTableView.leftAnchor.constraint(equalTo: forecastView.leftAnchor).isActive = true
         forecastTableView.rightAnchor.constraint(equalTo: forecastView.rightAnchor).isActive = true
         forecastTableView.bottomAnchor.constraint(equalTo: forecastView.bottomAnchor).isActive = true
+    }
+    
+    func printViews() {
+        cityLabel.isHidden = false
+        currentForecastStackView.isHidden = false
+        weatherDescriptionLabel.isHidden = false
+        dayLabel.isHidden = false
     }
 }
 

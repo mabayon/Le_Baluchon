@@ -28,6 +28,7 @@
 		5C156989249B758A0079AD1F /* Inter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C156988249B758A0079AD1F /* Inter-Bold.otf */; };
 		5C17FAAD24B5AD8100013DDB /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17FAAC24B5AD8100013DDB /* WeatherCollectionViewCell.swift */; };
 		5C17FAAF24B5C89000013DDB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17FAAE24B5C89000013DDB /* WeatherViewController.swift */; };
+		5C31A16F25545CC00056FC7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E598248A1C9500E31A2B /* Main.storyboard */; };
 		5C423DD124AA28530084427B /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C423DD024AA28530084427B /* ConverterTests.swift */; };
 		5C423DD424AA291F0084427B /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C423DD324AA291F0084427B /* Converter.swift */; };
 		5C423DD924AA60FF0084427B /* DeviseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C423DD824AA60FF0084427B /* DeviseButton.swift */; };
@@ -69,7 +70,6 @@
 		5CAED5DC249B91A000688729 /* CountryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAED5DB249B91A000688729 /* CountryCollectionViewCell.swift */; };
 		5CAED5DF249B91F200688729 /* UICollectionViewCell+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAED5DE249B91F200688729 /* UICollectionViewCell+Identifier.swift */; };
 		5CB7E593248A1C9500E31A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E592248A1C9500E31A2B /* AppDelegate.swift */; };
-		5CB7E59A248A1C9500E31A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E598248A1C9500E31A2B /* Main.storyboard */; };
 		5CB7E59C248A1C9600E31A2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E59B248A1C9600E31A2B /* Assets.xcassets */; };
 		5CB7E59F248A1C9600E31A2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E59D248A1C9600E31A2B /* LaunchScreen.storyboard */; };
 		5CB7E5BE248A483100E31A2B /* ExchangeRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7E5BD248A483100E31A2B /* ExchangeRatesViewController.swift */; };
@@ -861,10 +861,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CB7E59F248A1C9600E31A2B /* LaunchScreen.storyboard in Resources */,
+				5C31A16F25545CC00056FC7E /* Main.storyboard in Resources */,
 				5C156989249B758A0079AD1F /* Inter-Bold.otf in Resources */,
 				5C9363A124990CAA00F0B9D8 /* Inter-Regular.otf in Resources */,
 				5CB7E59C248A1C9600E31A2B /* Assets.xcassets in Resources */,
-				5CB7E59A248A1C9500E31A2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

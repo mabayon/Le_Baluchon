@@ -148,6 +148,7 @@ class WeatherViewController: UIViewController {
                 self.forecastNewYorkViewModels = self.createForecastViewModels(forecast: forecast)
                 cell = self.collectionView.cellForItem(at: IndexPath(item: 2, section: 0)) as? WeatherCollectionViewCell
             }
+            cell?.printViews()
             cell?.forecastTableView.reloadData()
         })
     }
