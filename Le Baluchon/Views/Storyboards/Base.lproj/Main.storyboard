@@ -239,6 +239,7 @@
                         <outlet property="collectionView" destination="SVH-G7-d9C" id="pYY-x0-Dz2"/>
                         <outlet property="converterView" destination="SBM-oI-aSh" id="qxv-65-7Ep"/>
                         <outlet property="ratesView" destination="M9k-Ov-u95" id="0PI-yr-o6I"/>
+                        <outlet property="scrollView" destination="mxc-Cu-BBP" id="Ni8-Bk-OTy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lw8-Aa-3ZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -18,10 +18,12 @@ class ExchangeRatesViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var converterView: ConverterView!
     
     // MARK: - Instance Properties
+    let refreshControl = UIRefreshControl()
     var countryCellImage: UIView?
     
     var networkClient: NetworkClientsService = NetworkClients.fixer
@@ -40,6 +42,9 @@ class ExchangeRatesViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        scrollView.addSubview(refreshControl)
+        scrollView.sendSubviewToBack(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,12 +93,13 @@ class ExchangeRatesViewController: UIViewController {
     }
     
     // MARK: - Refresh
-    func refreshData() {
+    @objc func refreshData() {
         guard dataTask == nil else { return }
-        
+        refreshControl.beginRefreshing()
         dataTask = networkClient.getData(completion: { (rates, error) in
             self.dataTask = nil
-            
+            self.refreshControl.endRefreshing()
+
             guard let rates = rates as? ExchangeRates else {
                 let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
