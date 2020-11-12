@@ -35,17 +35,17 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M9k-Ov-u95">
                                                 <rect key="frame" x="0.0" y="128.5" width="320" height="346.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Détails EUR/USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R1e-f9-xC4">
-                                                        <rect key="frame" x="78.5" y="8" width="163" height="24.5"/>
-                                                        <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="20"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBM-oI-aSh" customClass="ConverterView" customModule="Le_Baluchon" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="40.5" width="320" height="108.5"/>
+                                                        <rect key="frame" x="0.0" y="8" width="320" height="156.5"/>
                                                         <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Détails EUR/USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R1e-f9-xC4">
+                                                                <rect key="frame" x="78.5" y="0.0" width="163" height="24.5"/>
+                                                                <fontDescription key="fontDescription" name="Inter-Bold" family="Inter" pointSize="20"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="g0k-Nl-Mb8">
-                                                                <rect key="frame" x="34.5" y="0.0" width="251" height="65"/>
+                                                                <rect key="frame" x="34.5" y="48" width="251" height="65"/>
                                                                 <subviews>
                                                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KC-P7-wdZ" customClass="CurrencyButton" customModule="Le_Baluchon" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -83,7 +83,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAG-Zh-k4d">
-                                                                <rect key="frame" x="19.5" y="73" width="124" height="30.5"/>
+                                                                <rect key="frame" x="19.5" y="121" width="124" height="30.5"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yes-3O-qke">
                                                                         <rect key="frame" x="0.0" y="0.0" width="107" height="30.5"/>
@@ -110,7 +110,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsZ-dZ-ntD">
-                                                                <rect key="frame" x="245" y="73" width="16" height="30.5"/>
+                                                                <rect key="frame" x="245" y="121" width="16" height="30.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zLA-nn-XTl">
                                                                         <rect key="frame" x="0.0" y="0.0" width="16" height="30.5"/>
@@ -125,16 +125,19 @@
                                                         <constraints>
                                                             <constraint firstItem="gsZ-dZ-ntD" firstAttribute="centerX" secondItem="71r-tM-lTX" secondAttribute="centerX" id="32I-4O-Bx8"/>
                                                             <constraint firstItem="VAG-Zh-k4d" firstAttribute="top" secondItem="g0k-Nl-Mb8" secondAttribute="bottom" constant="8" id="EY9-Og-Rge"/>
-                                                            <constraint firstItem="g0k-Nl-Mb8" firstAttribute="top" secondItem="SBM-oI-aSh" secondAttribute="top" id="L3C-Ym-ujQ"/>
                                                             <constraint firstItem="VAG-Zh-k4d" firstAttribute="centerX" secondItem="7KC-P7-wdZ" secondAttribute="centerX" priority="750" id="MBU-jV-DTY"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gsZ-dZ-ntD" secondAttribute="trailing" constant="5" id="OaA-us-nFi"/>
+                                                            <constraint firstItem="R1e-f9-xC4" firstAttribute="centerX" secondItem="SBM-oI-aSh" secondAttribute="centerX" id="ZS0-oj-c3s"/>
                                                             <constraint firstItem="g0k-Nl-Mb8" firstAttribute="centerX" secondItem="SBM-oI-aSh" secondAttribute="centerX" id="aBu-9U-Lqi"/>
                                                             <constraint firstItem="gsZ-dZ-ntD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VAG-Zh-k4d" secondAttribute="trailing" constant="10" id="bUA-8K-3pf"/>
                                                             <constraint firstItem="gsZ-dZ-ntD" firstAttribute="top" secondItem="g0k-Nl-Mb8" secondAttribute="bottom" constant="8" id="crA-02-4Pj"/>
                                                             <constraint firstItem="VAG-Zh-k4d" firstAttribute="leading" secondItem="g0k-Nl-Mb8" secondAttribute="leading" constant="-15" id="iwW-8F-4Yh"/>
+                                                            <constraint firstItem="g0k-Nl-Mb8" firstAttribute="top" secondItem="R1e-f9-xC4" secondAttribute="bottom" constant="23.5" id="ty6-lU-oP5"/>
                                                             <constraint firstAttribute="bottom" secondItem="gsZ-dZ-ntD" secondAttribute="bottom" constant="5" id="xZh-xd-M8v"/>
+                                                            <constraint firstItem="R1e-f9-xC4" firstAttribute="top" secondItem="SBM-oI-aSh" secondAttribute="top" id="ymy-i3-Yj5"/>
                                                         </constraints>
                                                         <connections>
+                                                            <outlet property="detailsLabel" destination="R1e-f9-xC4" id="9n6-Nb-f1O"/>
                                                             <outlet property="fromCurrencyButton" destination="7KC-P7-wdZ" id="9Uo-vH-cmc"/>
                                                             <outlet property="fromCurrencyLabel" destination="tlH-6B-MpV" id="Fw3-Qk-hy9"/>
                                                             <outlet property="fromCurrencyTF" destination="EIE-lO-I8N" id="jMa-AB-4P7"/>
@@ -148,9 +151,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="SBM-oI-aSh" firstAttribute="leading" secondItem="M9k-Ov-u95" secondAttribute="leading" id="4eJ-Eb-lPF"/>
-                                                    <constraint firstItem="R1e-f9-xC4" firstAttribute="top" secondItem="M9k-Ov-u95" secondAttribute="top" constant="8" id="igy-X9-tLg"/>
-                                                    <constraint firstItem="SBM-oI-aSh" firstAttribute="top" secondItem="R1e-f9-xC4" secondAttribute="bottom" constant="8" id="nYu-zR-L13"/>
-                                                    <constraint firstItem="R1e-f9-xC4" firstAttribute="centerX" secondItem="M9k-Ov-u95" secondAttribute="centerX" id="pYk-Dd-Iqk"/>
+                                                    <constraint firstItem="SBM-oI-aSh" firstAttribute="top" secondItem="M9k-Ov-u95" secondAttribute="top" constant="8" id="akx-pR-Elh"/>
                                                     <constraint firstAttribute="trailing" secondItem="SBM-oI-aSh" secondAttribute="trailing" id="v7l-wL-QdR"/>
                                                 </constraints>
                                             </view>
@@ -244,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lw8-Aa-3ZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="971" y="106"/>
+            <point key="canvasLocation" x="969.375" y="105.63380281690141"/>
         </scene>
         <!--Translator View Controller-->
         <scene sceneID="oC8-bl-7lG">

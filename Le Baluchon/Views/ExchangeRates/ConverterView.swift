@@ -10,19 +10,21 @@ import UIKit
 
 class ConverterView: UIView {
     
+    @IBOutlet weak private var detailsLabel: UILabel!
     @IBOutlet weak private var fromCurrencyButton: CurrencyButton!
     @IBOutlet weak private var toCurrencyButton: CurrencyButton!
     @IBOutlet weak private var swapButton: UIButton!
     @IBOutlet weak private var fromCurrencyLabel: UILabel!
     @IBOutlet weak private var toCurrencyLabel: UILabel!
     @IBOutlet weak private var fromCurrencyWidthConstraint: NSLayoutConstraint!
-
+    
     @IBOutlet weak var fromCurrencyTF: UITextField!
-
+    
     var fromCurrencyName: String = "EUR" {
         didSet {
             fromCurrencyButton.name = fromCurrencyName
             fromCurrencyButton.imageView?.image = UIImage().getImage(for: fromCurrencyName)
+            detailsLabel.text = "Détails \(fromCurrencyName)/\(toCurrencyName)"
         }
     }
     
@@ -30,6 +32,7 @@ class ConverterView: UIView {
         didSet {
             toCurrencyButton.name = toCurrencyName
             toCurrencyButton.imageView?.image = UIImage().getImage(for: toCurrencyName)
+            detailsLabel.text = "Détails \(fromCurrencyName)/\(toCurrencyName)"
         }
     }
     
@@ -60,10 +63,10 @@ class ConverterView: UIView {
     }
     
     func swapButtons() {
-          let tempButtonName = fromCurrencyButton.name
+        let tempButtonName = fromCurrencyButton.name
         
-          fromCurrencyName = toCurrencyButton.name
-          toCurrencyName = tempButtonName
+        fromCurrencyName = toCurrencyButton.name
+        toCurrencyName = tempButtonName
     }
     
     func updateFromCurrencyWidth(constant: CGFloat) {
