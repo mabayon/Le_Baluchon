@@ -11,18 +11,51 @@ import CoreLocation
 
 class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    let refreshControl = UIRefreshControl()
+    
+    // Check if all the data task are completed
+    var canStopRefreshing: Bool {
+        return dataTaskForecastCurrent == nil && dataTaskForecastParis == nil && dataTaskForecastNewYork == nil && dataTaskForecastCurrent == nil && dataTaskForecastParis == nil && dataTaskForecastNewYork == nil
+    }
+    
     var networkClient: NetworkClientsService?
     
-    var dataTaskCurrentWeather: URLSessionDataTask?
-    var dataTaskParisWeather: URLSessionDataTask?
-    var dataTaskNewYorkWeather: URLSessionDataTask?
+    // When did set check that it can stop refreshing
+    var dataTaskCurrentWeather: URLSessionDataTask? {
+        didSet {
+            canStopRefreshing == true ? refreshControl.endRefreshing() : refreshControl.beginRefreshing()
+        }
+    }
+    var dataTaskParisWeather: URLSessionDataTask? {
+        didSet {
+            canStopRefreshing == true ? refreshControl.endRefreshing() : refreshControl.beginRefreshing()
+        }
+    }
+    var dataTaskNewYorkWeather: URLSessionDataTask? {
+        didSet {
+            canStopRefreshing == true ? refreshControl.endRefreshing() : refreshControl.beginRefreshing()
+        }
+    }
     
-    var dataTaskForecastCurrent: URLSessionDataTask?
-    var dataTaskForecastParis: URLSessionDataTask?
-    var dataTaskForecastNewYork: URLSessionDataTask?
+    var dataTaskForecastCurrent: URLSessionDataTask? {
+        didSet {
+            canStopRefreshing == true ? refreshControl.endRefreshing() : refreshControl.beginRefreshing()
+        }
+    }
+    var dataTaskForecastParis: URLSessionDataTask? {
+        didSet {
+            canStopRefreshing == true ? refreshControl.endRefreshing() : refreshControl.beginRefreshing()
+        }
+    }
+    var dataTaskForecastNewYork: URLSessionDataTask? {
+        didSet {
+            canStopRefreshing == true ? refreshControl.endRefreshing() : refreshControl.beginRefreshing()
+        }
+    }
     
     var currentWeatherViewModel: WeatherViewModel?
     var parisWeatherViewModel: WeatherViewModel?
@@ -34,28 +67,22 @@ class WeatherViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
+    var alertController: UIAlertController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        setupRefreshController()
         setupCollectionView()
         setupLocationManager()
-        
-        dataTaskParisWeather = refreshDataCurrentWeather(dataTask: dataTaskParisWeather,
-                                                         networkClient: .openWeatherParis,
-                                                         for: .paris)
-        
-        dataTaskForecastParis = refreshDataForecast(dataTask: dataTaskForecastParis,
-                                                    networkClient: .openWeatherForecastParis,
-                                                    for: .paris)
-        
-        dataTaskNewYorkWeather = refreshDataCurrentWeather(dataTask: dataTaskNewYorkWeather,
-                                                           networkClient: .openWeatherNewYork,
-                                                           for: .newYork)
-        
-        dataTaskForecastNewYork = refreshDataForecast(dataTask: dataTaskForecastNewYork,
-                                                      networkClient: .openWeatherForecastNewYork,
-                                                      for: .newYork)
+
+        refreshData()
+    }
+    
+    func setupRefreshController() {
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        scrollView.addSubview(refreshControl)
+        scrollView.sendSubviewToBack(refreshControl)
     }
     
     func setupLocationManager() {
@@ -64,7 +91,6 @@ class WeatherViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
     }
     
     func setupCollectionView() {
@@ -82,6 +108,48 @@ class WeatherViewController: UIViewController {
         case current, paris, newYork
     }
     
+    @objc func refreshData() {
+        locationManager.startUpdatingLocation()
+
+        dataTaskParisWeather = refreshDataCurrentWeather(dataTask: dataTaskParisWeather,
+                                                         networkClient: .openWeatherParis,
+                                                         for: .paris)
+        
+        dataTaskForecastParis = refreshDataForecast(dataTask: dataTaskForecastParis,
+                                                    networkClient: .openWeatherForecastParis,
+                                                    for: .paris)
+        
+        dataTaskNewYorkWeather = refreshDataCurrentWeather(dataTask: dataTaskNewYorkWeather,
+                                                           networkClient: .openWeatherNewYork,
+                                                           for: .newYork)
+        
+        dataTaskForecastNewYork = refreshDataForecast(dataTask: dataTaskForecastNewYork,
+                                                      networkClient: .openWeatherForecastNewYork,                                for: .newYork)
+    }
+    
+    func presentAlert(message: String?) {
+        guard alertController == nil else { return }
+        
+        alertController = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
+        alertController?.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            self.alertController = nil
+            self.dismiss(animated: true)
+        }))
+        self.present(alertController!, animated: true)
+    }
+    
+    func cancelDataTask(for location: Location, forWeather: Bool) {
+        switch location {
+        case .current:
+            forWeather == true ? (dataTaskCurrentWeather = nil) : (dataTaskForecastCurrent = nil)
+        case .paris:
+            forWeather == true ? (dataTaskParisWeather = nil) : (dataTaskForecastParis = nil)
+        case .newYork:
+            forWeather == true ? (dataTaskNewYorkWeather = nil) : (dataTaskForecastNewYork = nil)
+        }
+    }
+    
+    // Download data for current weather (current location, Paris or NY)
     func refreshDataCurrentWeather(dataTask: URLSessionDataTask?,
                                    networkClient: NetworkClients?,
                                    for location: Location) -> URLSessionDataTask? {
@@ -91,17 +159,16 @@ class WeatherViewController: UIViewController {
         return networkClient?.getData(completion: { (weather, error) in
             
             guard let weather = weather as? TodayWeather else {
-                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                    self.dismiss(animated: true)
-                }))
-                self.present(alertController, animated: true)
+                // If there is an error
+                self.presentAlert(message: error?.localizedDescription)
+                self.cancelDataTask(for: location, forWeather: true)
                 return
             }
             
             switch location {
             case .current:
                 self.dataTaskCurrentWeather = nil
+                // Parse data in the view model
                 self.currentWeatherViewModel = WeatherViewModel(weather: weather)
             case .paris:
                 self.dataTaskParisWeather = nil
@@ -110,7 +177,6 @@ class WeatherViewController: UIViewController {
                 self.dataTaskNewYorkWeather = nil
                 self.newYorkWeatherViewModel = WeatherViewModel(weather: weather)
             }
-            
             self.collectionView.reloadData()
         })
     }
@@ -125,11 +191,9 @@ class WeatherViewController: UIViewController {
         return networkClient?.getData(completion: { (forecast, error) in
             
             guard let forecast = forecast as? ForecastWeather else {
-                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                    self.dismiss(animated: true)
-                }))
-                self.present(alertController, animated: true)
+                // If there is an error
+                self.presentAlert(message: error?.localizedDescription)
+                self.cancelDataTask(for: location, forWeather: false)
                 return
             }
             
@@ -137,18 +201,21 @@ class WeatherViewController: UIViewController {
             switch location {
             case .current:
                 self.dataTaskForecastCurrent = nil
+                // Parse data in the view model
                 self.forecastViewModels = self.createForecastViewModels(forecast: forecast)
                 cell = self.collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? WeatherCollectionViewCell
+                
             case .paris:
                 self.dataTaskForecastParis = nil
                 self.forecastParisViewModels = self.createForecastViewModels(forecast: forecast)
                 cell = self.collectionView.cellForItem(at: IndexPath(item: 1, section: 0)) as? WeatherCollectionViewCell
+                
             case .newYork:
                 self.dataTaskForecastNewYork = nil
                 self.forecastNewYorkViewModels = self.createForecastViewModels(forecast: forecast)
                 cell = self.collectionView.cellForItem(at: IndexPath(item: 2, section: 0)) as? WeatherCollectionViewCell
+                
             }
-            cell?.printViews()
             cell?.forecastTableView.reloadData()
         })
     }

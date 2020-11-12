@@ -78,5 +78,7 @@ class WeatherViewModel {
         cell.tempLabel.text = temp
         cell.weatherDescriptionLabel.text = description
         cell.dayLabel.text = day
+        
+        cell.printViews()
     }
 }

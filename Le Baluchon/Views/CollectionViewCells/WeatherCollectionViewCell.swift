@@ -81,6 +81,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.identifier)
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
+        tableView.isScrollEnabled = false
         tableView.applyRounded(at: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
         tableView.layer.masksToBounds = true
         return tableView

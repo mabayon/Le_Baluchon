@@ -467,55 +467,73 @@
                                     <navigationItem title="Météo" id="VnT-cV-Gm1"/>
                                 </items>
                             </navigationBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GGt-QS-Hqg">
-                                <rect key="frame" x="0.0" y="44" width="320" height="447.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cro-wh-Oax">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeatherCollectionViewCell" id="dt1-ZH-pQg">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Jya-Ok-SA2">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ThJ-Rb-Dan">
-                                <rect key="frame" x="99" y="491.5" width="122.5" height="27.5"/>
-                                <color key="pageIndicatorTintColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </pageControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQ4-7u-7gn">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="h0j-iz-yJr">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="448.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hmE-Pi-oe9">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeatherCollectionViewCell" id="9Zg-xE-6Lc">
+                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1jt-yf-zVC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </collectionViewCellContentView>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="CLU-Q7-9cg" id="wj5-qe-TLo"/>
+                                            <outlet property="delegate" destination="CLU-Q7-9cg" id="PGr-eI-R5G"/>
+                                        </connections>
+                                    </collectionView>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="aOO-Zt-Pch">
+                                        <rect key="frame" x="99" y="448.5" width="122.5" height="27.5"/>
+                                        <color key="pageIndicatorTintColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="currentPageIndicatorTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </pageControl>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="aOO-Zt-Pch" secondAttribute="bottom" id="5uU-Av-vYz"/>
+                                    <constraint firstItem="h0j-iz-yJr" firstAttribute="top" secondItem="EQ4-7u-7gn" secondAttribute="top" id="dxf-WL-Yai"/>
+                                    <constraint firstItem="aOO-Zt-Pch" firstAttribute="top" secondItem="h0j-iz-yJr" secondAttribute="bottom" id="m6r-6R-mm4"/>
+                                    <constraint firstItem="h0j-iz-yJr" firstAttribute="leading" secondItem="EQ4-7u-7gn" secondAttribute="leading" id="qhb-B4-jY3"/>
+                                    <constraint firstAttribute="trailing" secondItem="h0j-iz-yJr" secondAttribute="trailing" id="rMx-PP-jf5"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fcl-50-9Ry"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fcl-50-9Ry" firstAttribute="trailing" secondItem="GGt-QS-Hqg" secondAttribute="trailing" id="37x-B5-4sb"/>
-                            <constraint firstItem="ThJ-Rb-Dan" firstAttribute="centerX" secondItem="2O6-Bq-Ieu" secondAttribute="centerX" id="4nY-3W-4iQ"/>
+                            <constraint firstItem="aOO-Zt-Pch" firstAttribute="centerX" secondItem="fcl-50-9Ry" secondAttribute="centerX" id="6bJ-FE-ABK"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="top" secondItem="fcl-50-9Ry" secondAttribute="top" id="D2l-SR-tlk"/>
-                            <constraint firstItem="GGt-QS-Hqg" firstAttribute="top" secondItem="Uvw-7d-q98" secondAttribute="bottom" id="SZE-8h-Tn0"/>
+                            <constraint firstItem="h0j-iz-yJr" firstAttribute="height" secondItem="2O6-Bq-Ieu" secondAttribute="height" multiplier="0.79" id="Jm8-bg-TZd"/>
+                            <constraint firstItem="fcl-50-9Ry" firstAttribute="trailing" secondItem="EQ4-7u-7gn" secondAttribute="trailing" id="ZFe-GH-S7T"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="c4r-jk-xjO"/>
-                            <constraint firstItem="GGt-QS-Hqg" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="jfE-80-mMe"/>
-                            <constraint firstItem="ThJ-Rb-Dan" firstAttribute="bottom" secondItem="fcl-50-9Ry" secondAttribute="bottom" id="ql5-NR-vcU"/>
+                            <constraint firstItem="EQ4-7u-7gn" firstAttribute="leading" secondItem="fcl-50-9Ry" secondAttribute="leading" id="hVQ-Se-y0K"/>
+                            <constraint firstItem="EQ4-7u-7gn" firstAttribute="top" secondItem="Uvw-7d-q98" secondAttribute="bottom" id="mbX-Vx-fZ1"/>
+                            <constraint firstItem="h0j-iz-yJr" firstAttribute="width" secondItem="2O6-Bq-Ieu" secondAttribute="width" id="qjd-aV-cBr"/>
+                            <constraint firstItem="fcl-50-9Ry" firstAttribute="bottom" secondItem="EQ4-7u-7gn" secondAttribute="bottom" id="uGu-hW-xZU"/>
                             <constraint firstItem="Uvw-7d-q98" firstAttribute="trailing" secondItem="fcl-50-9Ry" secondAttribute="trailing" id="xzI-Uv-Hyx"/>
-                            <constraint firstItem="ThJ-Rb-Dan" firstAttribute="top" secondItem="GGt-QS-Hqg" secondAttribute="bottom" id="y7i-Zf-zFb"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_Weather_Deselected" selectedImage="icon_Weather_Selected" id="fjq-E8-zBn"/>
                     <connections>
-                        <outlet property="collectionView" destination="GGt-QS-Hqg" id="wvR-Xk-1cg"/>
-                        <outlet property="pageControl" destination="ThJ-Rb-Dan" id="VtT-mW-zgm"/>
+                        <outlet property="collectionView" destination="h0j-iz-yJr" id="qAX-3B-Fvm"/>
+                        <outlet property="pageControl" destination="aOO-Zt-Pch" id="uGD-86-RgW"/>
+                        <outlet property="scrollView" destination="EQ4-7u-7gn" id="lYj-F1-8PF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9v-7Z-279" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-215.625" y="894.71830985915494"/>
+            <point key="canvasLocation" x="-142.5" y="931.69014084507046"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="8TR-vf-yH7">
