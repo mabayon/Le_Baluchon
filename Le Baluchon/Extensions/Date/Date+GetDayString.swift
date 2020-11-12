@@ -10,13 +10,14 @@ import Foundation
 
 extension Date {
     
+    // Get day in string from a date
     static func getDayString(for date: Date = Date()) -> String {
         let formatter = DateFormatter()
 
         formatter.dateFormat = "yyyy.MM.dd"
-        let today = formatter.string(from: date)
+        let dateString = formatter.string(from: date)
         
-        switch getDayOfWeek(today: today, formatter: formatter) {
+        switch getDayOfWeek(date: dateString, formatter: formatter) {
         case 1:
             return "Dimanche"
         case 2:
@@ -36,10 +37,10 @@ extension Date {
         }
         return ""
     }
-    
-    private static func getDayOfWeek(today: String, formatter: DateFormatter) -> Int? {
+    // Get the day in int
+    private static func getDayOfWeek(date: String, formatter: DateFormatter) -> Int? {
 
-        if let todayDate = formatter.date(from: today) {
+        if let todayDate = formatter.date(from: date) {
             let myCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
             let myComponents = myCalendar.components(.weekday, from: todayDate)
             let weekDay = myComponents.weekday

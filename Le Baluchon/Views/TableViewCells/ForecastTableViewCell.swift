@@ -54,6 +54,7 @@ class ForecastTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupLayout()
+        backgroundColor = .white
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

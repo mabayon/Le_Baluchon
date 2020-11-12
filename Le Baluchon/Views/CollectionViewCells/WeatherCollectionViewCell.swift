@@ -79,6 +79,7 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     let forecastTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.identifier)
+        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.isScrollEnabled = false

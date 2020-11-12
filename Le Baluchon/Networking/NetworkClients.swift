@@ -88,6 +88,8 @@ class NetworkClients {
 
 extension NetworkClients {
     
+    // MARK: Shared Instance
+    
     static let fixer = NetworkClients(apiURL: Fixer.url,
                                       session: URLSession.shared,
                                       responseQueue: .main,

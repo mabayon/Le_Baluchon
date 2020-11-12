@@ -11,6 +11,7 @@ import UIKit
 
 extension UIImage {
 
+    // Align to the right, left… an image in the imageView and fit the image
     func aspectFitImage(inRect rect: CGRect) -> UIImage? {
         let width = self.size.width
         let height = self.size.height

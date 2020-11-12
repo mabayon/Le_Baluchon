@@ -37,14 +37,7 @@ class CountryCollectionViewCell: UICollectionViewCell {
         label.contentMode = .center
         return label
     }()
-    
-//    var name: String? {
-//        didSet {
-//            label.text = name
-//            imageView.image = UIImage().getImage(for: name)
-//        }
-//    }
-    
+        
     var delegate: CountryCollectionViewCellDelegate?
     
     override func setNeedsDisplay() {

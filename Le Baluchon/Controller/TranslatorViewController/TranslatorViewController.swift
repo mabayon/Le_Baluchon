@@ -15,7 +15,7 @@ class TranslatorViewController: UIViewController {
     @IBOutlet weak var translatorView: TranslatorView!
     @IBOutlet weak var mentionLabel: UILabel!
     
-    // MARK: Properties
+    // MARK: Instance Properties
     
     var networkClient = NetworkClients.googleTranslate
     

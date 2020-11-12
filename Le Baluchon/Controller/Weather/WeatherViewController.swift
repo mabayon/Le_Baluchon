@@ -10,11 +10,13 @@ import UIKit
 import CoreLocation
 
 class WeatherViewController: UIViewController {
-    
+
+    // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
+    // MARK: - Instance Properties
     let refreshControl = UIRefreshControl()
     
     // Check if all the data task are completed
@@ -69,6 +71,7 @@ class WeatherViewController: UIViewController {
     
     var alertController: UIAlertController?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,6 +82,7 @@ class WeatherViewController: UIViewController {
         refreshData()
     }
     
+    // MARK: Setup
     func setupRefreshController() {
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         scrollView.addSubview(refreshControl)
@@ -104,6 +108,7 @@ class WeatherViewController: UIViewController {
         collectionView.backgroundColor = UIColor(red: 250/255, green: 165/255, blue: 98/255, alpha: 1)
     }
     
+    // MARK: Refresh Data
     enum Location {
         case current, paris, newYork
     }
@@ -126,29 +131,7 @@ class WeatherViewController: UIViewController {
         dataTaskForecastNewYork = refreshDataForecast(dataTask: dataTaskForecastNewYork,
                                                       networkClient: .openWeatherForecastNewYork,                                for: .newYork)
     }
-    
-    func presentAlert(message: String?) {
-        guard alertController == nil else { return }
         
-        alertController = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
-        alertController?.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-            self.alertController = nil
-            self.dismiss(animated: true)
-        }))
-        self.present(alertController!, animated: true)
-    }
-    
-    func cancelDataTask(for location: Location, forWeather: Bool) {
-        switch location {
-        case .current:
-            forWeather == true ? (dataTaskCurrentWeather = nil) : (dataTaskForecastCurrent = nil)
-        case .paris:
-            forWeather == true ? (dataTaskParisWeather = nil) : (dataTaskForecastParis = nil)
-        case .newYork:
-            forWeather == true ? (dataTaskNewYorkWeather = nil) : (dataTaskForecastNewYork = nil)
-        }
-    }
-    
     // Download data for current weather (current location, Paris or NY)
     func refreshDataCurrentWeather(dataTask: URLSessionDataTask?,
                                    networkClient: NetworkClients?,
@@ -220,6 +203,31 @@ class WeatherViewController: UIViewController {
         })
     }
     
+    // MARK: Helper
+    
+    func presentAlert(message: String?) {
+        guard alertController == nil else { return }
+        
+        alertController = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
+        alertController?.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            self.alertController = nil
+            self.dismiss(animated: true)
+        }))
+        self.present(alertController!, animated: true)
+    }
+    
+    func cancelDataTask(for location: Location, forWeather: Bool) {
+        switch location {
+        case .current:
+            forWeather == true ? (dataTaskCurrentWeather = nil) : (dataTaskForecastCurrent = nil)
+        case .paris:
+            forWeather == true ? (dataTaskParisWeather = nil) : (dataTaskForecastParis = nil)
+        case .newYork:
+            forWeather == true ? (dataTaskNewYorkWeather = nil) : (dataTaskForecastNewYork = nil)
+        }
+    }
+
+    
     func createForecastViewModels(forecast: ForecastWeather) -> [ForecastViewModel] {
         var forecastViewModels: [ForecastViewModel] = []
         let forecastManager = ForecastManager(list: forecast.list)
@@ -242,6 +250,7 @@ class WeatherViewController: UIViewController {
     
 }
 
+// MARK: CLLocation - Delegate
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -260,6 +269,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - CollectionView - DataSource
 extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
@@ -284,6 +294,7 @@ extension WeatherViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - CollectionView - DelegateFlowLayout
 extension WeatherViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -294,6 +305,7 @@ extension WeatherViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - CollectionView - DelegateFlowLayout
 extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
@@ -304,6 +316,7 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: TableView - DataSource
 extension WeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return forecastViewModels.count 
@@ -332,5 +345,4 @@ extension WeatherViewController: UITableViewDataSource {
 }
 
 extension WeatherViewController: UITableViewDelegate {
-    
 }
