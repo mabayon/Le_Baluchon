@@ -34,9 +34,9 @@ class ForecastViewModel {
         for weather in forecast.weather {
             switch weather.icon {
             case "01d", "01n":
-                return .clearSkyD
+                return .clearSky
             case "02d", "02n":
-                return .fewCloudsD
+                return .fewClouds
             case "03d", "03n", "04d", "04n":
                 return .clouds
             case "09d", "09n", "10d", "10n":

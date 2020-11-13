@@ -87,6 +87,14 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         tableView.layer.masksToBounds = true
         return tableView
     }()
+    
+    var isDay = true {
+        didSet {
+            isDay == true ?
+                (currentWeatherView.backgroundColor = UIColor(red: 250/255, green: 165/255, blue: 98/255, alpha: 1)) :
+                (currentWeatherView.backgroundColor = UIColor(red: 45/255, green: 49/255, blue: 66/255, alpha: 1))
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,11 +114,12 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         currentWeatherView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         currentWeatherView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         currentWeatherView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        
+        currentWeatherView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
         currentWeatherView.addSubview(cityLabel)
         
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.topAnchor.constraint(equalTo: currentWeatherView.topAnchor).isActive = true
+        cityLabel.topAnchor.constraint(equalTo: currentWeatherView.topAnchor, constant: 10).isActive = true
         cityLabel.centerXAnchor.constraint(equalTo: currentWeatherView.centerXAnchor).isActive = true
         
         currentWeatherView.addSubview(currentForecastStackView)
@@ -136,12 +145,11 @@ class WeatherCollectionViewCell: UICollectionViewCell {
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.topAnchor.constraint(equalTo: weatherDescriptionLabel.bottomAnchor, constant: 20).isActive = true
         dayLabel.leftAnchor.constraint(equalTo: currentWeatherView.leftAnchor, constant: 20).isActive = true
-        dayLabel.bottomAnchor.constraint(equalTo: currentWeatherView.bottomAnchor, constant: -10).isActive = true
         
         addSubview(forecastView)
         
         forecastView.translatesAutoresizingMaskIntoConstraints = false
-        forecastView.topAnchor.constraint(equalTo: currentWeatherView.bottomAnchor).isActive = true
+        forecastView.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 10).isActive = true
         forecastView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         forecastView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         forecastView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

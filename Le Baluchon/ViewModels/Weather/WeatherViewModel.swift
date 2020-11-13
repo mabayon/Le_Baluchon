@@ -39,23 +39,33 @@ class WeatherViewModel {
         for conditions in weather.weather {
             switch conditions.icon {
             case "01d":
-                return .clearSkyD
+                return .clearSky
             case "01n":
                 return .clearSkyN
             case "02d":
-                return .fewCloudsD
+                return .fewClouds
             case "02n":
                 return.fewCloudsN
-            case "03d", "03n", "04d", "04n":
+            case "03d", "04d":
                 return .clouds
-            case "09d", "09n", "10d", "10n":
+            case "03n", "04n":
+                return .cloudsN
+            case "09d", "10d":
                 return .rain
-            case "11d", "11n":
+            case "09n", "10n":
+                return .rainN
+            case "11d":
                 return .thunderstorm
-            case "13d", "13n":
+            case "11n":
+                return .thunderstormN
+            case "13d":
                 return .snow
-            case "50d", "50n":
+            case "13n":
+                return .snowN
+            case "50d":
                 return .mist
+            case "50n":
+                return .mistN
             default:
                 break
             }
@@ -69,7 +79,14 @@ class WeatherViewModel {
         
     func configure(_ cell: WeatherCollectionViewCell) {
         
-        let image = weatherCondition.image
+        let image = weatherCondition.imageWhite
+        
+        switch weatherCondition {
+        case .clearSky, .clouds, .fewClouds, .mist, .rain, .snow, .thunderstorm, .none:
+            cell.isDay = true
+        case .clearSkyN, .cloudsN, .fewCloudsN, .mistN, .rainN, .snowN, .thunderstormN:
+            cell.isDay = false
+        }
         cell.weatherImageView.image = image
         cell.weatherImageView.image = image.aspectFitImage(inRect: CGRect(origin: .zero,
                                                                           size: cell.tempLabel.intrinsicContentSize))
@@ -81,4 +98,6 @@ class WeatherViewModel {
         
         cell.printViews()
     }
+    
+    
 }

@@ -45,10 +45,7 @@ class ExchangeRatesViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         scrollView.addSubview(refreshControl)
         scrollView.sendSubviewToBack(refreshControl)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+      
         refreshData()
     }
     

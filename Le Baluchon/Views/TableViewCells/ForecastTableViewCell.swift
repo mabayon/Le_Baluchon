@@ -25,18 +25,10 @@ class ForecastTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    var tempsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.axis = .horizontal
-        stackView.spacing = 16
-        return stackView
-    }()
-    
     var tempMaxLabel: UILabel = {
         let label = UILabel()
         label.text = "18"
+        label.textAlignment = .right
         label.font = UIFont(name: "Inter-Regular", size: 23)
         label.textColor = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
         return label
@@ -45,6 +37,7 @@ class ForecastTableViewCell: UITableViewCell {
     var tempMinLabel: UILabel = {
         let label = UILabel()
         label.text = "13"
+        label.textAlignment = .right
         label.font = UIFont(name: "Inter-Regular", size: 23)
         label.textColor = UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
         return label
@@ -76,12 +69,17 @@ class ForecastTableViewCell: UITableViewCell {
         weatherImage.widthAnchor.constraint(equalToConstant: 44).isActive = true
         weatherImage.heightAnchor.constraint(equalTo: weatherImage.widthAnchor).isActive = true
         
-        addSubview(tempsStackView)
+        addSubview(tempMinLabel)
         
-        tempsStackView.addArrangedSubview(tempMaxLabel)
-        tempsStackView.addArrangedSubview(tempMinLabel)
-        tempsStackView.translatesAutoresizingMaskIntoConstraints = false
-        tempsStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-        tempsStackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        tempMinLabel.translatesAutoresizingMaskIntoConstraints = false
+        tempMinLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        tempMinLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        tempMinLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        addSubview(tempMaxLabel)
+        tempMaxLabel.translatesAutoresizingMaskIntoConstraints = false
+        tempMaxLabel.rightAnchor.constraint(equalTo: tempMinLabel.leftAnchor, constant: -8).isActive = true
+        tempMaxLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        tempMaxLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }
