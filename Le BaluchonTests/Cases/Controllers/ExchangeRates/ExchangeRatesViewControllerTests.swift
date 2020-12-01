@@ -18,7 +18,7 @@ class ExchangeRatesViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sut = ExchangeRatesViewController.instanceFromStoryboard()
-        sut.loadViewIfNeeded()
+        sut.loadView()
     }
     
     override func tearDown() {
@@ -108,6 +108,33 @@ class ExchangeRatesViewControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.viewModel, viewModel)
     }
+    
+    // MARK: Refresh Control - Tests
+    
+    func test_refreshData_beginsRefreshing() {
+      // given
+      givenMockNetworkClient()
+
+      // when
+      sut.refreshData()
+
+      // then
+      XCTAssertTrue(sut.refreshControl.isRefreshing)
+    }
+
+    func test_refreshData_givenDogsResponse_endsRefreshing() {
+      // given
+      givenMockNetworkClient()
+      let rates = givenRates()
+
+      // when
+      sut.refreshData()
+      mockNetworkClient.getRatesCompletion(rates, nil)
+
+      // then
+      XCTAssertFalse(sut.refreshControl.isRefreshing)
+    }
+
     
     // MARK: UICollectionViewDataSource - Tests
     func test_collectionView_numberOfRowsInSection_returns0() {

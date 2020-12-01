@@ -146,15 +146,7 @@ class NetworkClientsTests: XCTestCase {
         // Then
         _ = service.getData { _, _ in }
     }
-    // MARK: - Shared - Tests
-    func test_shared_sets_BaseURL() {
-        // Given
-        let apiURL = "http://data.fixer.io/api/latest?access_key=f5131e4adab602e9918159f221aab859&symbols=USD,GBP,JPY,CNY,CAD"
-        
-        // Then
-        XCTAssertEqual(NetworkClients.fixer.apiURL, apiURL)
-    }
-    
+    // MARK: - Shared - Tests    
     func test_shared_sets_Session() {
         // Given
         let session = URLSession.shared

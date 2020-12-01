@@ -86,7 +86,7 @@ class WeatherViewModelTests: XCTestCase {
                                                              description: "clear sky",
                                                              icon: "01d")])
         
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.clearSkyD)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.clearSky)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_clear_sky_d"))
     }
     
@@ -104,7 +104,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Clouds",
                                                              description: "few clouds",
                                                              icon: "02d")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.fewCloudsD)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.fewClouds)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_few_clouds_d"))
     }
 
@@ -131,7 +131,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Clouds",
                                                              description: "scattered clouds",
                                                              icon: "03n")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.clouds)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.cloudsN)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_clouds"))
     }
     
@@ -149,7 +149,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Clouds",
                                                              description: "broken clouds",
                                                              icon: "04n")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.clouds)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.cloudsN)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_clouds"))
     }
 
@@ -167,7 +167,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Rain",
                                                              description: "shower rain",
                                                              icon: "09n")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.rain)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.rainN)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_rain"))
 
     }
@@ -186,7 +186,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Rain",
                                                              description: "rain",
                                                              icon: "10n")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.rain)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.rainN)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_rain"))
     }
 
@@ -204,7 +204,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Thunderstorm",
                                                              description: "thunderstorm",
                                                              icon: "11n")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.thunderstorm)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.thunderstormN)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_thunderstorm"))
     }
 
@@ -222,7 +222,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Snow",
                                                              description: "snow",
                                                              icon: "13n")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.snow)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.snowN)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_snow"))
     }
 
@@ -240,7 +240,7 @@ class WeatherViewModelTests: XCTestCase {
         todayWeather =  createTodayWeather(weather: [Weather(main: "Mist",
                                                              description: "mist",
                                                              icon: "50n")])
-        XCTAssertEqual(sut.weatherCondition, WeatherCondition.mist)
+        XCTAssertEqual(sut.weatherCondition, WeatherCondition.mistN)
         XCTAssertEqual(sut.weatherCondition.image, UIImage(named: "weather_mist"))
     }
 

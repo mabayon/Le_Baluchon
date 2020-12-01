@@ -101,7 +101,7 @@ class ForecastViewModelTests: XCTestCase {
         forecast = List(weather: createWeather(icon: "01d"), main: Main(temp: 20), dt_txt: "")
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
-        let expected = WeatherCondition.clearSkyD
+        let expected = WeatherCondition.clearSky
         
         XCTAssertEqual(sut.weatherCondition, expected)
     }
@@ -112,7 +112,7 @@ class ForecastViewModelTests: XCTestCase {
         forecast = List(weather: createWeather(icon: "02d"), main: Main(temp: 20), dt_txt: "")
         sut = ForecastViewModel(forecast: forecast, temps: temp)
         
-        let expected = WeatherCondition.fewCloudsD
+        let expected = WeatherCondition.fewClouds
         
         XCTAssertEqual(sut.weatherCondition, expected)
     }
