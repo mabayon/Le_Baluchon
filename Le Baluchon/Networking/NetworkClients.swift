@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol NetworkClientsService {
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask
+    func getRatesWithAlamofire(completion: @escaping (Any?, Error?) -> Void)
 }
 class NetworkClients {
     
@@ -27,6 +29,22 @@ class NetworkClients {
         self.session = session
         self.responseQueue = responseQueue
         self.apiService = apiServices
+    }
+    
+    func getRatesWithAlamofire(completion: @escaping (Any?, Error?) -> Void) {
+        let request = Alamofire.request(Fixer.url)
+        
+        request.responseJSON { (data) in
+            guard let data = data.data else { return }
+            
+            let decoder = JSONDecoder()
+            do {
+                let rates = try decoder.decode(ExchangeRates.self, from: data)
+                self.dispatchResult(models: rates, completion: completion)
+            } catch {
+                self.dispatchResult(error: error, completion: completion)
+            }
+        }
     }
     
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {

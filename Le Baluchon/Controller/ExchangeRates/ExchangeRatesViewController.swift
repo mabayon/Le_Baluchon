@@ -90,12 +90,11 @@ class ExchangeRatesViewController: UIViewController {
     
     // MARK: - Refresh
     @objc func refreshData() {
-        guard dataTask == nil else { return }
+        
         refreshControl.beginRefreshing()
-        dataTask = networkClient.getData(completion: { (rates, error) in
-            self.dataTask = nil
+        networkClient.getRatesWithAlamofire { (rates, error) in
             self.refreshControl.endRefreshing()
-
+            
             guard let rates = rates as? ExchangeRates else {
                 let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
@@ -110,7 +109,7 @@ class ExchangeRatesViewController: UIViewController {
             self.converterView.fromCurrencyTF.text = "1"
             self.convert(amount: self.converterView.fromCurrencyTF.text)
             self.collectionView.reloadData()
-        })
+        }
     }
 }
 

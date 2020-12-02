@@ -1,0 +1,6 @@
+framework module Pods_Le_Baluchon {
+  umbrella header "Pods-Le Baluchon-umbrella.h"
+
+  export *
+  module * { export * }
+}
