@@ -8,10 +8,11 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 protocol NetworkClientsService {
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask
-    func getRatesWithAlamofire(completion: @escaping (Any?, Error?) -> Void)
+    func getRatesWithAlamofire(subject: PublishSubject<ExchangeRates>)
 }
 class NetworkClients {
     
@@ -31,15 +32,15 @@ class NetworkClients {
         self.apiService = apiServices
     }
     
-    func getRatesWithAlamofire(completion: @escaping (Any?, Error?) -> Void) {
+    func getRatesWithAlamofire(subject: PublishSubject<ExchangeRates>) {
         AF.request(Fixer.url)
             .validate()
             .responseDecodable(of: ExchangeRates.self) { (response) in
                 guard let rates = response.value else {
-                    self.dispatchResult(error: response.error, completion: completion)
+                    subject.onError(response.error!)
                     return
                 }
-                self.dispatchResult(models: rates, completion: completion)
+                subject.onNext(rates)
             }
     }
     

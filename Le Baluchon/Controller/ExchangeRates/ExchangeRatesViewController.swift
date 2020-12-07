@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ExchangeRatesViewController: UIViewController {
     
@@ -39,6 +40,10 @@ class ExchangeRatesViewController: UIViewController {
     
     var timer: Timer?
     
+    // MARK: Observable
+    var ratesDownloaded = PublishSubject<ExchangeRates>()
+    let bag = DisposeBag()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +51,7 @@ class ExchangeRatesViewController: UIViewController {
         scrollView.addSubview(refreshControl)
         scrollView.sendSubviewToBack(refreshControl)
         refreshData()
+        subscribe()
     }
     
     // MARK: - IBActions
@@ -54,6 +60,29 @@ class ExchangeRatesViewController: UIViewController {
     }
     
     // MARK: - Observer
+    
+    func subscribe() {
+        ratesDownloaded = PublishSubject<ExchangeRates>()
+        
+        ratesDownloaded
+            .subscribe(onNext: { rates in
+                self.refreshControl.endRefreshing()
+                self.viewModel = ExchangeRatesViewModel(exchangeRates: rates)
+                self.converter = Converter(rates: rates.rates)
+                self.converterView.fromCurrencyTF.text = "1"
+                self.convert(amount: self.converterView.fromCurrencyTF.text)
+                self.collectionView.reloadData()
+            },
+            onError: { error in
+                self.refreshControl.endRefreshing()
+                let alertController = UIAlertController(title: "Erreur", message: error.localizedDescription, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true)
+                }))
+                self.present(alertController, animated: true)
+            }).disposed(by: bag)
+    }
+    
     func observeStateChange() {
         converter?.stateChangedCallback = {
             DispatchQueue.main.async {
@@ -90,26 +119,9 @@ class ExchangeRatesViewController: UIViewController {
     
     // MARK: - Refresh
     @objc func refreshData() {
-        
         refreshControl.beginRefreshing()
-        networkClient.getRatesWithAlamofire { (rates, error) in
-            self.refreshControl.endRefreshing()
-            
-            guard let rates = rates as? ExchangeRates else {
-                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                    self.dismiss(animated: true)
-                }))
-                self.present(alertController, animated: true)
-                return
-            }
-            
-            self.viewModel = ExchangeRatesViewModel(exchangeRates: rates)
-            self.converter = Converter(rates: rates.rates)
-            self.converterView.fromCurrencyTF.text = "1"
-            self.convert(amount: self.converterView.fromCurrencyTF.text)
-            self.collectionView.reloadData()
-        }
+        subscribe()
+        networkClient.getRatesWithAlamofire(subject: ratesDownloaded)
     }
 }
 
