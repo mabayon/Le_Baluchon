@@ -12,7 +12,7 @@ struct OpenWeather {
     static private let baseURL = "http://api.openweathermap.org/data/2.5/"
     static private let currentWeather = "weather"
     static private let forecast = "forecast"
-    static private let accessKey = "?appid=\(APIKeys.OpenWeather)"
+    static private let accessKey = "?appid=\(APIKeys.OpenWeather.rawValue)"
     static private var parameters = "&lang=fr&units=metric"
     static private var newYork = "&q=New%20York"
     static private var paris = "&q=Paris"

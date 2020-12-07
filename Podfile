@@ -5,8 +5,8 @@ target 'Le Baluchon' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Le Baluchon
-  pod 'Alamofire'
+  # Pods for Le BaluchonTests
+  pod 'Alamofire', '~> 5.2'
   pod 'RxSwift', '6.0.0-rc.2'
   pod 'RxCocoa', '6.0.0-rc.2'
 

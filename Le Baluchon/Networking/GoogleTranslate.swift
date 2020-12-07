@@ -10,7 +10,7 @@ import Foundation
 
 struct GoogleTranslate {
     static private let baseURL = "https://translation.googleapis.com/language/translate/v2"
-    static private let accessKey = "?key=\(APIKeys.GoogleTranslate)"
+    static private let accessKey = "?key=\(APIKeys.GoogleTranslate.rawValue)"
     static private var text = "&q="
     static private var source = "&fr"
     static private var target = "&en"

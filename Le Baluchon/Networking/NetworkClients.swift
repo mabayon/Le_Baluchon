@@ -32,19 +32,15 @@ class NetworkClients {
     }
     
     func getRatesWithAlamofire(completion: @escaping (Any?, Error?) -> Void) {
-        let request = Alamofire.request(Fixer.url)
-        
-        request.responseJSON { (data) in
-            guard let data = data.data else { return }
-            
-            let decoder = JSONDecoder()
-            do {
-                let rates = try decoder.decode(ExchangeRates.self, from: data)
+        AF.request(Fixer.url)
+            .validate()
+            .responseDecodable(of: ExchangeRates.self) { (response) in
+                guard let rates = response.value else {
+                    self.dispatchResult(error: response.error, completion: completion)
+                    return
+                }
                 self.dispatchResult(models: rates, completion: completion)
-            } catch {
-                self.dispatchResult(error: error, completion: completion)
             }
-        }
     }
     
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
@@ -53,11 +49,11 @@ class NetworkClients {
             guard let self = self else { return }
             
             guard let response = response as? HTTPURLResponse,
-                response.statusCode == 200,
-                error == nil,
-                let data = data else {
-                    self.dispatchResult(error: error, completion: completion)
-                    return
+                  response.statusCode == 200,
+                  error == nil,
+                  let data = data else {
+                self.dispatchResult(error: error, completion: completion)
+                return
             }
             let decoder = JSONDecoder()
             do {
@@ -98,9 +94,9 @@ class NetworkClients {
     
     func reloadGoogleTranslate() {
         NetworkClients.googleTranslate = NetworkClients(apiURL: GoogleTranslate.url,
-                                         session: URLSession.shared,
-                                         responseQueue: .main,
-                                         apiServices: .GoogleTranslate)
+                                                        session: URLSession.shared,
+                                                        responseQueue: .main,
+                                                        apiServices: .GoogleTranslate)
     }
 }
 
