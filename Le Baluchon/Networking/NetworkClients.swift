@@ -12,7 +12,7 @@ import RxSwift
 
 protocol NetworkClientsService {
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask
-    func getRatesWithAlamofire(subject: PublishSubject<ExchangeRates>)
+    func getRatesWithAlamofire() -> Single<ExchangeRates> 
 }
 class NetworkClients {
     
@@ -32,16 +32,21 @@ class NetworkClients {
         self.apiService = apiServices
     }
     
-    func getRatesWithAlamofire(subject: PublishSubject<ExchangeRates>) {
-        AF.request(Fixer.url)
-            .validate()
-            .responseDecodable(of: ExchangeRates.self) { (response) in
-                guard let rates = response.value else {
-                    subject.onError(response.error!)
-                    return
+    func getRatesWithAlamofire() -> Single<ExchangeRates> {
+        
+        return Single<ExchangeRates>.create { single in
+            AF.request(Fixer.url)
+                .validate()
+                .responseDecodable(of: ExchangeRates.self) { (response) in
+                    guard let rates = response.value else {
+                        guard let error = response.error else { return }
+                        single(.failure(error))
+                        return
+                    }
+                    single(.success(rates))
                 }
-                subject.onNext(rates)
-            }
+            return Disposables.create()
+        }
     }
     
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {

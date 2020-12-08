@@ -29,7 +29,7 @@ class ExchangeRatesViewController: UIViewController {
     
     var networkClient: NetworkClientsService = NetworkClients.fixer
     
-    var viewModel: ExchangeRatesViewModel?
+    var viewModel = ExchangeRatesViewModel()
     var dataTask: URLSessionDataTask?
     
     var converter: Converter? {
@@ -41,7 +41,6 @@ class ExchangeRatesViewController: UIViewController {
     var timer: Timer?
     
     // MARK: Observable
-    var ratesDownloaded = PublishSubject<ExchangeRates>()
     let bag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -51,7 +50,6 @@ class ExchangeRatesViewController: UIViewController {
         scrollView.addSubview(refreshControl)
         scrollView.sendSubviewToBack(refreshControl)
         refreshData()
-        subscribe()
     }
     
     // MARK: - IBActions
@@ -60,29 +58,7 @@ class ExchangeRatesViewController: UIViewController {
     }
     
     // MARK: - Observer
-    
-    func subscribe() {
-        ratesDownloaded = PublishSubject<ExchangeRates>()
         
-        ratesDownloaded
-            .subscribe(onNext: { rates in
-                self.refreshControl.endRefreshing()
-                self.viewModel = ExchangeRatesViewModel(exchangeRates: rates)
-                self.converter = Converter(rates: rates.rates)
-                self.converterView.fromCurrencyTF.text = "1"
-                self.convert(amount: self.converterView.fromCurrencyTF.text)
-                self.collectionView.reloadData()
-            },
-            onError: { error in
-                self.refreshControl.endRefreshing()
-                let alertController = UIAlertController(title: "Erreur", message: error.localizedDescription, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                    self.dismiss(animated: true)
-                }))
-                self.present(alertController, animated: true)
-            }).disposed(by: bag)
-    }
-    
     func observeStateChange() {
         converter?.stateChangedCallback = {
             DispatchQueue.main.async {
@@ -91,7 +67,7 @@ class ExchangeRatesViewController: UIViewController {
             }
         }
     }
-    
+        
     // MARK: - Convert
     func convert(amount: String?) {
         
@@ -105,9 +81,9 @@ class ExchangeRatesViewController: UIViewController {
         converter?.calculRates(for: amount, fromCurrency: fromCurrencyName, toCurrency: toCurrencyName)
         
         let result = String(converter?.result ?? 0)
-        _ = viewModel?.currencies.filter({ $0.name == toCurrencyName }).map {$0.value = result }
+        _ = viewModel.currencies.filter({ $0.name == toCurrencyName }).map {$0.value = result }
         
-        viewModel?.configure(fromCurrency: fromCurrencyName,
+        viewModel.configure(fromCurrency: fromCurrencyName,
                              toCurrency: toCurrencyName,
                              completion: { (fromCurrency, toCurrency) in
                                 DispatchQueue.main.async {
@@ -120,17 +96,32 @@ class ExchangeRatesViewController: UIViewController {
     // MARK: - Refresh
     @objc func refreshData() {
         refreshControl.beginRefreshing()
-        subscribe()
-        networkClient.getRatesWithAlamofire(subject: ratesDownloaded)
+        viewModel.getRates()
+            .subscribe ({ event in
+                self.refreshControl.endRefreshing()
+                switch event {
+                case .success(let rates):
+                    self.converter = Converter(rates: rates.exchangeRates)
+                    self.converterView.fromCurrencyTF.text = "1"
+                    self.convert(amount: self.converterView.fromCurrencyTF.text)
+                    self.collectionView.reloadData()
+
+                case .failure(let error):
+                    let alertController = UIAlertController(title: "Erreur", message: error.localizedDescription, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                        self.dismiss(animated: true)
+                    }))
+                    self.present(alertController, animated: true)
+                    
+                }
+            }).disposed(by: bag)
     }
 }
 
 // MARK: - CollectionView DataSource
 extension ExchangeRatesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count = viewModel?.currencies.count else { return 0 }
-        
-        return count - 1
+        return viewModel.currencies.count == 0 ? 0 : viewModel.currencies.count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -138,7 +129,7 @@ extension ExchangeRatesViewController: UICollectionViewDataSource {
         
         cell.applyShadow()
         cell.delegate = self
-        viewModel?.configureCell(cell, for: indexPath.row)
+        viewModel.configureCell(cell, for: indexPath.row)
         return cell
     }
 }
@@ -150,9 +141,7 @@ extension ExchangeRatesViewController: UICollectionViewDelegate {
     }
     
     func swapCurrency(indexPath: IndexPath) {
-        guard let name = viewModel?.currencies[indexPath.row].name else {
-            return
-        }
+        let name = viewModel.currencies[indexPath.row].name
         
         switch converter?.state {
         case .fromEUR:

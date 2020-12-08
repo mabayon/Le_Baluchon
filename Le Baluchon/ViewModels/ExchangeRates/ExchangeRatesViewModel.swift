@@ -8,27 +8,46 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class ExchangeRatesViewModel {
     
     // MARK: - Instance Properties
-    let exchangeRates: ExchangeRates
+    private let networkClient: NetworkClientsService = NetworkClients.fixer
+
+    let bag = DisposeBag()
     
-    let date: String
-    var currencies: [Currency] 
+    var exchangeRates: [String: Double] = [:]
+    var date: String = ""
+    var currencies: [Currency] = []
     
     // MARK: - Object Lifecycle
-    init(exchangeRates: ExchangeRates) {
-        self.exchangeRates = exchangeRates
-        self.date = exchangeRates.date
-        self.currencies = ExchangeRatesViewModel.parseRates(from: exchangeRates)
-      
-        let currenciesEUR = Currency(name: "EUR",
-                               value: "1",
-                               symbol: ExchangeRatesViewModel.selectSymbol(for: "EUR"))
-        
-        self.currencies.append(currenciesEUR)
-        self.currencies = ExchangeRatesViewModel.sortCurrency(currencies)
+    
+    func getRates() -> Single<ExchangeRatesViewModel> {
+        return Single<ExchangeRatesViewModel>.create { single in
+            self.networkClient
+                .getRatesWithAlamofire()
+                .subscribe { event in
+                    
+                    switch event {
+                    case .success(let rates):
+                        self.exchangeRates = rates.rates
+                        self.date = rates.date
+                        self.currencies = ExchangeRatesViewModel.parseRates(from: rates)
+                      
+                        let currenciesEUR = Currency(name: "EUR",
+                                               value: "1",
+                                               symbol: ExchangeRatesViewModel.selectSymbol(for: "EUR"))
+                        
+                        self.currencies.append(currenciesEUR)
+                        self.currencies = ExchangeRatesViewModel.sortCurrency(self.currencies)
+                        single(.success(self))
+                    case .failure(let error):
+                        single(.failure(error))
+                    }
+                }.disposed(by: self.bag)
+            return Disposables.create()
+        }
     }
     
     private enum Symbol: String {
@@ -101,8 +120,8 @@ class ExchangeRatesViewModel {
     }
 }
 
-extension ExchangeRatesViewModel: Equatable {
-    static func == (lhs: ExchangeRatesViewModel, rhs: ExchangeRatesViewModel) -> Bool {
-        return lhs.exchangeRates == rhs.exchangeRates
-    }
-}
+//extension ExchangeRatesViewModel: Equatable {
+//    static func == (lhs: ExchangeRatesViewModel, rhs: ExchangeRatesViewModel) -> Bool {
+//        return lhs.exchangeRates == rhs.exchangeRates
+//    }
+//}
