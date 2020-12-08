@@ -13,7 +13,16 @@ enum Router: URLRequestConvertible {
     case getExchangeRates
     
     var url: URL {
-        return URL(string: Fixer.url)!
+        return URL(string: Fixer.baseURL)!
+    }
+    
+    var urlComponents: URLComponents {
+        guard var urlComponents = URLComponents(string: url.absoluteString) else { return URLComponents() }
+        urlComponents.queryItems = [
+            URLQueryItem(name: "access_key", value: APIKeys.Fixer.rawValue),
+            URLQueryItem(name: "symbols", value: "USD,GBP,JPY,CNY,CAD")
+        ]
+        return urlComponents
     }
     
     var method: HTTPMethod {
@@ -23,7 +32,7 @@ enum Router: URLRequestConvertible {
     }
     
     func asURLRequest() throws -> URLRequest {
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: try urlComponents.asURL())
         request.method = method
                 
         return request
