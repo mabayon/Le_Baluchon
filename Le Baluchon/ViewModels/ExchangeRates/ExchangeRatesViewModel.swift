@@ -14,7 +14,7 @@ class ExchangeRatesViewModel {
     
     // MARK: - Instance Properties
     private let networkClient: NetworkClientsService = NetworkClients.fixer
-
+    
     let bag = DisposeBag()
     
     var exchangeRates: [String: Double] = [:]
@@ -23,31 +23,32 @@ class ExchangeRatesViewModel {
     
     // MARK: - Object Lifecycle
     
-    func getRates() -> Single<ExchangeRatesViewModel> {
-        return Single<ExchangeRatesViewModel>.create { single in
-            self.networkClient
-                .getRatesWithAlamofire()
-                .subscribe { event in
+    func getRates() -> Completable {
+        return Completable.create { completable in
+            self.networkClient.getRatesWithAlamofire().subscribe { event in
+                switch event {
+                case .success(let rates):
+                    self.exchangeRates = rates.rates
+                    self.date = rates.date
+                    self.currencies = ExchangeRatesViewModel.parseRates(from: rates)
                     
-                    switch event {
-                    case .success(let rates):
-                        self.exchangeRates = rates.rates
-                        self.date = rates.date
-                        self.currencies = ExchangeRatesViewModel.parseRates(from: rates)
-                      
-                        let currenciesEUR = Currency(name: "EUR",
-                                               value: "1",
-                                               symbol: ExchangeRatesViewModel.selectSymbol(for: "EUR"))
-                        
-                        self.currencies.append(currenciesEUR)
-                        self.currencies = ExchangeRatesViewModel.sortCurrency(self.currencies)
-                        single(.success(self))
-                    case .failure(let error):
-                        single(.failure(error))
-                    }
-                }.disposed(by: self.bag)
-            return Disposables.create()
+                    let currenciesEUR = Currency(name: "EUR",
+                                                 value: "1",
+                                                 symbol: ExchangeRatesViewModel.selectSymbol(for: "EUR"))
+                    
+                    self.currencies.append(currenciesEUR)
+                    self.currencies = ExchangeRatesViewModel.sortCurrency(self.currencies)
+                    completable(.completed)
+                case .failure(let error):
+                    completable(.error(error))
+                }
+            }.disposed(by: self.bag)
+            return Disposables.create {}
         }
+    }
+    
+    func getNumberOfCurrencies() -> Int {
+        return currencies.count == 0 ? 0 : currencies.count - 1
     }
     
     private enum Symbol: String {
@@ -61,12 +62,12 @@ class ExchangeRatesViewModel {
         var currencies: [Currency] = []
         for (key, value) in exchangeRates.rates {
             currencies.append(Currency(name: key,
-                                  value: String(value),
-                                  symbol: selectSymbol(for: key)))
+                                       value: String(value),
+                                       symbol: selectSymbol(for: key)))
         }
         return currencies
     }
-        
+    
     private static func selectSymbol(for name: String) -> String {
         switch name {
         case "EUR":
@@ -95,7 +96,7 @@ class ExchangeRatesViewModel {
         }
         return sortedCurrency
     }
-        
+    
     private func getValue(for currency: String) -> String {
         guard let value = currencies.filter({ $0.name == currency }).first?.value else {
             return ""

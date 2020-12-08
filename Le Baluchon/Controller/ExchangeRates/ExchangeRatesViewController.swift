@@ -97,16 +97,16 @@ class ExchangeRatesViewController: UIViewController {
     @objc func refreshData() {
         refreshControl.beginRefreshing()
         viewModel.getRates()
-            .subscribe ({ event in
+            .subscribe ({ completable in
                 self.refreshControl.endRefreshing()
-                switch event {
-                case .success(let rates):
-                    self.converter = Converter(rates: rates.exchangeRates)
+                switch completable {
+                case .completed:
+                    self.converter = Converter(rates: self.viewModel.exchangeRates)
                     self.converterView.fromCurrencyTF.text = "1"
                     self.convert(amount: self.converterView.fromCurrencyTF.text)
                     self.collectionView.reloadData()
 
-                case .failure(let error):
+                case .error(let error):
                     let alertController = UIAlertController(title: "Erreur", message: error.localizedDescription, preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
                         self.dismiss(animated: true)
@@ -121,7 +121,7 @@ class ExchangeRatesViewController: UIViewController {
 // MARK: - CollectionView DataSource
 extension ExchangeRatesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.currencies.count == 0 ? 0 : viewModel.currencies.count - 1
+        return viewModel.getNumberOfCurrencies()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
