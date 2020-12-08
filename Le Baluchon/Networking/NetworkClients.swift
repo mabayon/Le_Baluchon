@@ -35,7 +35,7 @@ class NetworkClients {
     func getRatesWithAlamofire() -> Single<ExchangeRates> {
         
         return Single<ExchangeRates>.create { single in
-            AF.request(Fixer.url)
+            AF.request(Router.getExchangeRates)
                 .validate()
                 .responseDecodable(of: ExchangeRates.self) { (response) in
                     guard let rates = response.value else {
@@ -48,6 +48,24 @@ class NetworkClients {
             return Disposables.create()
         }
     }
+
+    
+//    func getRatesWithAlamofire() -> Single<ExchangeRates> {
+//
+//        return Single<ExchangeRates>.create { single in
+//            AF.request(Fixer.url)
+//                .validate()
+//                .responseDecodable(of: ExchangeRates.self) { (response) in
+//                    guard let rates = response.value else {
+//                        guard let error = response.error else { return }
+//                        single(.failure(error))
+//                        return
+//                    }
+//                    single(.success(rates))
+//                }
+//            return Disposables.create()
+//        }
+//    }
     
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
         let url = URL(string: apiURL)!
