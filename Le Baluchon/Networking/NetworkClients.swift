@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import Alamofire
+import RxSwift
 
 protocol NetworkClientsService {
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask
+    func getRatesWithAlamofire() -> Single<ExchangeRates> 
 }
 class NetworkClients {
     
@@ -29,17 +32,34 @@ class NetworkClients {
         self.apiService = apiServices
     }
     
+    func getRatesWithAlamofire() -> Single<ExchangeRates> {
+        
+        return Single<ExchangeRates>.create { single in
+            AF.request(Fixer.url)
+                .validate()
+                .responseDecodable(of: ExchangeRates.self) { (response) in
+                    guard let rates = response.value else {
+                        guard let error = response.error else { return }
+                        single(.failure(error))
+                        return
+                    }
+                    single(.success(rates))
+                }
+            return Disposables.create()
+        }
+    }
+    
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
         let url = URL(string: apiURL)!
         let task = session.dataTask(with: url) { [weak self] (data, response, error) in
             guard let self = self else { return }
             
             guard let response = response as? HTTPURLResponse,
-                response.statusCode == 200,
-                error == nil,
-                let data = data else {
-                    self.dispatchResult(error: error, completion: completion)
-                    return
+                  response.statusCode == 200,
+                  error == nil,
+                  let data = data else {
+                self.dispatchResult(error: error, completion: completion)
+                return
             }
             let decoder = JSONDecoder()
             do {
@@ -80,9 +100,9 @@ class NetworkClients {
     
     func reloadGoogleTranslate() {
         NetworkClients.googleTranslate = NetworkClients(apiURL: GoogleTranslate.url,
-                                         session: URLSession.shared,
-                                         responseQueue: .main,
-                                         apiServices: .GoogleTranslate)
+                                                        session: URLSession.shared,
+                                                        responseQueue: .main,
+                                                        apiServices: .GoogleTranslate)
     }
 }
 

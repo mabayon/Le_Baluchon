@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ExchangeRatesViewController: UIViewController {
     
@@ -28,7 +29,7 @@ class ExchangeRatesViewController: UIViewController {
     
     var networkClient: NetworkClientsService = NetworkClients.fixer
     
-    var viewModel: ExchangeRatesViewModel?
+    var viewModel = ExchangeRatesViewModel()
     var dataTask: URLSessionDataTask?
     
     var converter: Converter? {
@@ -38,6 +39,9 @@ class ExchangeRatesViewController: UIViewController {
     }
     
     var timer: Timer?
+    
+    // MARK: Observable
+    let bag = DisposeBag()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -54,6 +58,7 @@ class ExchangeRatesViewController: UIViewController {
     }
     
     // MARK: - Observer
+        
     func observeStateChange() {
         converter?.stateChangedCallback = {
             DispatchQueue.main.async {
@@ -62,7 +67,7 @@ class ExchangeRatesViewController: UIViewController {
             }
         }
     }
-    
+        
     // MARK: - Convert
     func convert(amount: String?) {
         
@@ -76,9 +81,9 @@ class ExchangeRatesViewController: UIViewController {
         converter?.calculRates(for: amount, fromCurrency: fromCurrencyName, toCurrency: toCurrencyName)
         
         let result = String(converter?.result ?? 0)
-        _ = viewModel?.currencies.filter({ $0.name == toCurrencyName }).map {$0.value = result }
+        _ = viewModel.currencies.filter({ $0.name == toCurrencyName }).map {$0.value = result }
         
-        viewModel?.configure(fromCurrency: fromCurrencyName,
+        viewModel.configure(fromCurrency: fromCurrencyName,
                              toCurrency: toCurrencyName,
                              completion: { (fromCurrency, toCurrency) in
                                 DispatchQueue.main.async {
@@ -90,36 +95,33 @@ class ExchangeRatesViewController: UIViewController {
     
     // MARK: - Refresh
     @objc func refreshData() {
-        guard dataTask == nil else { return }
         refreshControl.beginRefreshing()
-        dataTask = networkClient.getData(completion: { (rates, error) in
-            self.dataTask = nil
-            self.refreshControl.endRefreshing()
+        viewModel.getRates()
+            .subscribe ({ completable in
+                self.refreshControl.endRefreshing()
+                switch completable {
+                case .completed:
+                    self.converter = Converter(rates: self.viewModel.exchangeRates)
+                    self.converterView.fromCurrencyTF.text = "1"
+                    self.convert(amount: self.converterView.fromCurrencyTF.text)
+                    self.collectionView.reloadData()
 
-            guard let rates = rates as? ExchangeRates else {
-                let alertController = UIAlertController(title: "Erreur", message: error?.localizedDescription, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                    self.dismiss(animated: true)
-                }))
-                self.present(alertController, animated: true)
-                return
-            }
-            
-            self.viewModel = ExchangeRatesViewModel(exchangeRates: rates)
-            self.converter = Converter(rates: rates.rates)
-            self.converterView.fromCurrencyTF.text = "1"
-            self.convert(amount: self.converterView.fromCurrencyTF.text)
-            self.collectionView.reloadData()
-        })
+                case .error(let error):
+                    let alertController = UIAlertController(title: "Erreur", message: error.localizedDescription, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                        self.dismiss(animated: true)
+                    }))
+                    self.present(alertController, animated: true)
+                    
+                }
+            }).disposed(by: bag)
     }
 }
 
 // MARK: - CollectionView DataSource
 extension ExchangeRatesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count = viewModel?.currencies.count else { return 0 }
-        
-        return count - 1
+        return viewModel.getNumberOfCurrencies()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -127,7 +129,7 @@ extension ExchangeRatesViewController: UICollectionViewDataSource {
         
         cell.applyShadow()
         cell.delegate = self
-        viewModel?.configureCell(cell, for: indexPath.row)
+        viewModel.configureCell(cell, for: indexPath.row)
         return cell
     }
 }
@@ -139,9 +141,7 @@ extension ExchangeRatesViewController: UICollectionViewDelegate {
     }
     
     func swapCurrency(indexPath: IndexPath) {
-        guard let name = viewModel?.currencies[indexPath.row].name else {
-            return
-        }
+        let name = viewModel.currencies[indexPath.row].name
         
         switch converter?.state {
         case .fromEUR:
