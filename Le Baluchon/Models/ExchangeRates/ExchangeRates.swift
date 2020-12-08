@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ExchangeRates: Codable, Equatable {
+struct ExchangeRates: Decodable, Equatable {
     
     // MARK: - Instance Properties
     let base: String
