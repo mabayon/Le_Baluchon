@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import Alamofire
 import RxSwift
+import Moya
 
 protocol NetworkClientsService {
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask
-    func getRatesWithAlamofire() -> Single<ExchangeRates> 
+    func getRatesWithMoya() -> Single<ExchangeRates>
 }
 class NetworkClients {
     
@@ -32,23 +32,29 @@ class NetworkClients {
         self.apiService = apiServices
     }
     
-    func getRatesWithAlamofire() -> Single<ExchangeRates> {
-        
+    func getRatesWithMoya() -> Single<ExchangeRates> {
         return Single<ExchangeRates>.create { single in
-            AF.request(Router.getExchangeRates)
-                .validate()
-                .responseDecodable(of: ExchangeRates.self) { (response) in
-                    guard let rates = response.value else {
-                        guard let error = response.error else { return }
+         
+            let provider = MoyaProvider<MoyaRouter>()
+            provider.request(.fixer()) { (result) in
+                switch result {
+                case .success(let response):
+                    do {
+                        let filteredResponse = try response.filterSuccessfulStatusCodes()
+                        let rates = try filteredResponse.map(ExchangeRates.self)
+                        single(.success(rates))
+                    } catch let error {
                         single(.failure(error))
-                        return
                     }
-                    single(.success(rates))
+                    
+                case .failure(let error):
+                    single(.failure(error))
                 }
+            }
             return Disposables.create()
         }
     }
-    
+        
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
         let url = URL(string: apiURL)!
         let task = session.dataTask(with: url) { [weak self] (data, response, error) in

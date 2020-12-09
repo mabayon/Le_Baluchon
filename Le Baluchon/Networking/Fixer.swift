@@ -9,7 +9,7 @@
 import Foundation
 
 struct Fixer {
-    static let baseURL = "http://data.fixer.io/api/latest"
+    static let baseURL = "http://data.fixer.io/api"
     static let accessKey = "?access_key=\(APIKeys.Fixer.rawValue)"
     static let parameters = "&symbols=USD,GBP,JPY,CNY,CAD"
     

@@ -50,6 +50,7 @@
 		5C8877CD2493BDD6004E2A3A /* UIViewController+StoryboardCreatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877CC2493BDD6004E2A3A /* UIViewController+StoryboardCreatableTests.swift */; };
 		5C8877D02493BE3D004E2A3A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877CF2493BE3D004E2A3A /* TestViewController.swift */; };
 		5C8877DA2493BEF1004E2A3A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8877D92493BEF1004E2A3A /* TestView.swift */; };
+		5C8D07FC2580DECE007BEAD1 /* Moya+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8D07FB2580DECE007BEAD1 /* Moya+Router.swift */; };
 		5C9363A124990CAA00F0B9D8 /* Inter-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C9363A024990C9D00F0B9D8 /* Inter-Regular.otf */; };
 		5C9556D124C03B8000779D52 /* GoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9556D024C03B8000779D52 /* GoogleTranslate.swift */; };
 		5C9556D524C03F1500779D52 /* TranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9556D424C03F1500779D52 /* TranslationTests.swift */; };
@@ -152,6 +153,7 @@
 		5C8877DC2493C03D004E2A3A /* UIViewController+NibCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+NibCreatable.swift"; path = "Le Baluchon/Extensions/NibCreatable/UIViewController+NibCreatable.swift"; sourceTree = SOURCE_ROOT; };
 		5C8877DE2493C053004E2A3A /* UIView+NibCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+NibCreatable.swift"; path = "Le Baluchon/Extensions/NibCreatable/UIView+NibCreatable.swift"; sourceTree = SOURCE_ROOT; };
 		5C8877E02493C066004E2A3A /* NibCreatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NibCreatable.swift; path = "Le Baluchon/Extensions/NibCreatable/NibCreatable.swift"; sourceTree = SOURCE_ROOT; };
+		5C8D07FB2580DECE007BEAD1 /* Moya+Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+Router.swift"; sourceTree = "<group>"; };
 		5C9363A024990C9D00F0B9D8 /* Inter-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.otf"; sourceTree = "<group>"; };
 		5C9556D024C03B8000779D52 /* GoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTranslate.swift; sourceTree = "<group>"; };
 		5C9556D424C03F1500779D52 /* TranslationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTests.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				5CAAEBF324AE46520032B964 /* OpenWeather.swift */,
 				5C9556D024C03B8000779D52 /* GoogleTranslate.swift */,
 				5C190977257FA01000561F5A /* Router.swift */,
+				5C8D07FB2580DECE007BEAD1 /* Moya+Router.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1003,6 +1006,7 @@
 				5C6C13CE24AFBABE004BE476 /* Date+GetDayString.swift in Sources */,
 				5CAED5DF249B91F200688729 /* UICollectionViewCell+Identifier.swift in Sources */,
 				5C15697D249B5B170079AD1F /* UIView+ApplyRoundedCorners.swift in Sources */,
+				5C8D07FC2580DECE007BEAD1 /* Moya+Router.swift in Sources */,
 				5C423DD924AA60FF0084427B /* DeviseButton.swift in Sources */,
 				5CAAEC0324AFB2880032B964 /* TodayWeather.swift in Sources */,
 				5CEC03B524AB605B00C569AD /* ConverterView.swift in Sources */,
