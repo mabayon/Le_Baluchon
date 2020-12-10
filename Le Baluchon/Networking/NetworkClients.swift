@@ -33,35 +33,28 @@ class NetworkClients {
     }
     
     func getRatesWithMoya() -> Single<ExchangeRates> {
-        
-        let provider = MoyaProvider<MoyaRouter>()
-        
-        return provider.rx.request(.fixer())
-            .filterSuccessfulStatusCodes()
-            .map(ExchangeRates.self)
+        return Single<ExchangeRates>.create { single in
+         
+            let provider = MoyaProvider<MoyaRouter>()
+            provider.request(.fixer()) { (result) in
+                switch result {
+                case .success(let response):
+                    do {
+                        let filteredResponse = try response.filterSuccessfulStatusCodes()
+                        let rates = try filteredResponse.map(ExchangeRates.self)
+                        single(.success(rates))
+                    } catch let error {
+                        single(.failure(error))
+                    }
+                    
+                case .failure(let error):
+                    single(.failure(error))
+                }
+            }
+            return Disposables.create()
+        }
     }
-    
-//    func getRatesWithMoya() -> Single<ExchangeRates> {
-//        return Single<ExchangeRates>.create { single in
-//            
-//            let provider = MoyaProvider<MoyaRouter>()
-//            let bag = DisposeBag()
-//            provider.rx.request(.fixer())
-//                .filterSuccessfulStatusCodes()
-//                .map(ExchangeRates.self)
-//                .subscribe { event in
-//                    switch event {
-//                    case .success(let rates):
-//                        single(.success(rates))
-//                        
-//                    case .error(let error):
-//                        single(.error(error))
-//                    }
-//                }.disposed(by: bag)
-//            return Disposables.create()
-//        }
-//    }
-    
+        
     func getData(completion: @escaping (Any?, Error?) -> Void) -> URLSessionDataTask {
         let url = URL(string: apiURL)!
         let task = session.dataTask(with: url) { [weak self] (data, response, error) in

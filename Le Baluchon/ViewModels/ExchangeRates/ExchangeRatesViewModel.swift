@@ -24,9 +24,8 @@ class ExchangeRatesViewModel {
     // MARK: - Object Lifecycle
     
     func getRates() -> Completable {
-        return .create { completable in
-            self.networkClient.getRatesWithMoya()
-                .subscribe { event in
+        return Completable.create { completable in
+            self.networkClient.getRatesWithMoya().subscribe { event in
                 switch event {
                 case .success(let rates):
                     self.exchangeRates = rates.rates
@@ -40,7 +39,7 @@ class ExchangeRatesViewModel {
                     self.currencies.append(currenciesEUR)
                     self.currencies = ExchangeRatesViewModel.sortCurrency(self.currencies)
                     completable(.completed)
-                case .error(let error):
+                case .failure(let error):
                     completable(.error(error))
                 }
             }.disposed(by: self.bag)
