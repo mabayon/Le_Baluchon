@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,7 @@
 		5C156989249B758A0079AD1F /* Inter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C156988249B758A0079AD1F /* Inter-Bold.otf */; };
 		5C17FAAD24B5AD8100013DDB /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17FAAC24B5AD8100013DDB /* WeatherCollectionViewCell.swift */; };
 		5C17FAAF24B5C89000013DDB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17FAAE24B5C89000013DDB /* WeatherViewController.swift */; };
+		5C190978257FA01000561F5A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C190977257FA01000561F5A /* Router.swift */; };
 		5C31A16F25545CC00056FC7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7E598248A1C9500E31A2B /* Main.storyboard */; };
 		5C423DD124AA28530084427B /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C423DD024AA28530084427B /* ConverterTests.swift */; };
 		5C423DD424AA291F0084427B /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C423DD324AA291F0084427B /* Converter.swift */; };
@@ -125,6 +126,7 @@
 		5C156988249B758A0079AD1F /* Inter-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.otf"; sourceTree = "<group>"; };
 		5C17FAAC24B5AD8100013DDB /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C17FAAE24B5C89000013DDB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		5C190977257FA01000561F5A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		5C423DD024AA28530084427B /* ConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTests.swift; sourceTree = "<group>"; };
 		5C423DD324AA291F0084427B /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		5C423DD824AA60FF0084427B /* DeviseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviseButton.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				5CA130AB24AE21DD00AAD98B /* NetworkClients.swift */,
 				5CAAEBF324AE46520032B964 /* OpenWeather.swift */,
 				5C9556D024C03B8000779D52 /* GoogleTranslate.swift */,
+				5C190977257FA01000561F5A /* Router.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -979,6 +982,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C190978257FA01000561F5A /* Router.swift in Sources */,
 				5C8877C92493BD6E004E2A3A /* StoryboardCreatable.swift in Sources */,
 				5CCCA0DA248F7A450089178B /* ExchangeRatesViewModel.swift in Sources */,
 				5C48A4BE24B1DE4F00E884C2 /* ForecastManager.swift in Sources */,
