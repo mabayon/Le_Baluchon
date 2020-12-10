@@ -25,7 +25,7 @@ class ExchangeRatesViewModel {
     
     func getRates() -> Completable {
         return Completable.create { completable in
-            self.networkClient.getRatesWithAlamofire().subscribe { event in
+            self.networkClient.getRatesWithMoya().subscribe { event in
                 switch event {
                 case .success(let rates):
                     self.exchangeRates = rates.rates
